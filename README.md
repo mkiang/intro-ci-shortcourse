@@ -38,6 +38,8 @@ Alright guys, here's the game plan.
   8. Study design
 
 ### TODO
+See also [Issues](https://github.com/mkiang/intro-ci-shortcourse/issues).
+
 - [x] Add Zhe, Monica, and Adolfo to github
 - [ ] Need to finalize title of the class
 - [ ] Sort out if we can even go over all these topics in 8 hours.
