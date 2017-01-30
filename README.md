@@ -10,6 +10,7 @@
 Alright guys, here's the game plan. 
 
 - We are going to use [xaringan](https://github.com/yihui/xaringan) which is based on [remarkjs](https://remarkjs.com/#1) so there's a tiny learning curve, but not much. 
+  - Note: The wiki pages for each of these is **much** more useful than the slideshow. Use the wiki page. You can also just `view source` on any remarkjs website and you'll be able to see the unrendered markdown.
 - We will assign sections. Each section should be its own branch. Once assigned, you're only expected to produce a very rough draft. The rest can be filled out by the others. Just get a structure down.
 - Submit pull request when you're ready for the other two people to review slides. Discuss changes, etc on PR and merge when ready.
 - Github pages are active so you can look at a live version on the master: For example: [`https://mkiang.github.io/intro-ci-shortcourse/slides/part-01-intro/`](https://mkiang.github.io/intro-ci-shortcourse/slides/part-01-intro/#1)
