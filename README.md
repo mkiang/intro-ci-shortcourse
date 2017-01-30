@@ -41,3 +41,4 @@ Alright guys, here's the game plan.
 - [x] Add Zhe, Monica, and Adolfo to github
 - [ ] Need to finalize title of the class
 - [ ] Sort out if we can even go over all these topics in 8 hours.
+- [ ] Zhe link to personal page?
