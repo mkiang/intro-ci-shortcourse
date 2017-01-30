@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Causal Inference for Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="date" content="2017-03-13" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Causal Inference for Data Science
+## ITAM Short Workshop
+### Mathew Kiang, Zhe Zhang, Monica Alexander
+### March 13, 2017
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+
+
+---
+
+# Roadmap
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+### For the workshop
+]
+.right-column[
+- **Rubin causal model.** Establish a rigorous framework for evaluating and understanding causality
+]
+--
+.right-column[
+- **Experimental designs.** Within this framework, discuss the **ideal** situation for inferring causality, randomized control trials
+]
+--
+.right-column[
+- **Confounding and selection.** Ways non-experimental designs can be biased
+]
+--
+.right-column[
+- **Methods and application.** Finally, go over methods that mimic experiments in order to infer causality in real-world settings
+]
+
+---
+.left-column[
+  ## Roadmap
+  ### For the workshop
+  ### For today
+]
+.right-column[
+- **Motivation.** Why do we care about causal inference at all?
+]
+--
+.right-column[
+- **Definition.** What is causal inference? 
+]
+--
+.right-column[
+- **Rubin causal model.** A framework for evaluating causality
+]
+
+---
+template: inverse
+
+## Motivation
+### Why do we care about causal inference at all?
+
+---
+.left-column[
+  ## Motivation
+  ### Example 1
+]
+.right-column[
+Text here.
+
+- Bullet points
+
+- An example
+]
+
+---
+.left-column[
+  ## Motivation
+  ### Example 1
+  ### Example 2
+]
+.right-column[
+Text here.
+
+- Bullet points
+
+- An example again
+]
+
+---
+.left-column[
+  ## Motivation
+  ### Example 1
+  ### Example 2
+  ### Example 3
+]
+.right-column[
+Last one.
+
+- Bullet points with more
+- Bullet points
+
+- Last example
+]
+
+---
+template: inverse
+
+## Definition
+### What is causal inference?
+
+---
+template: inverse
+
+## Rubin causal model
+### A framework for evaluating causality
+
+---
+.left-column[
+  ## What is it?
+  ## Why use it?
+]
+.right-column[
+As the slideshow is expressed using Markdown, you may:
+
+- Focus on the content, expressing yourself in next to plain text not worrying what flashy graphics and disturbing effects to put where
+
+As the slideshow is actually an HTML document, you may:
+
+- Display it in any decent browser
+
+- Style it using regular CSS, just like any other HTML content
+
+- Use it offline!
+
+As the slideshow is contained in a plain file, you may:
+
+- Store it wherever you like; on your computer, hosted from your Dropbox, hosted on Github Pages alongside the stuff you're presenting...
+
+- Easily collaborate with others, keeping track of changes using your favourite SCM tool, like Git or Mercurial
+]
+---
+template: inverse
+
+## How does it work, then?
+---
+name: how
+
+.left-column[
+  ## How does it work?
+### - Markdown
+]
+.right-column[
+A Markdown-formatted chunk of text is transformed into individual slides by JavaScript running in the browser:
+
+```remark
+# Slide 1
+This is slide 1
+
+---
+
+# Slide 2
+This is slide 2
+```
+
+.slides[
+  .first[
+  ### Slide 1
+  This is slide 1
+  ]
+  .second[
+  ### Slide 2
+  This is slide 2
+  ]
+]
+
+Regular Markdown rules apply with only a single exception:
+
+  - A line containing three dashes constitutes a new slide
+  (not a horizontal rule, `&amp;lt;hr /&amp;gt;`)
+
+Have a look at the [Markdown website](http://daringfireball.net/projects/markdown/) if you're not familiar with Markdown formatting.
+]
+---
+.left-column[
+  ## How does it work?
+  ### - Markdown
+  ### - Inside HTML
+]
+.right-column[
+A simple HTML document is needed for hosting the styles, Markdown and the generated slides themselves:
+
+```xml
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;style type="text/css"&gt;
+      /* Slideshow styles */
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+*    &lt;textarea id="source"&gt;
+      &lt;!-- Slideshow Markdown --&gt;
+    &amp;lt;/textarea&amp;gt;
+*    &lt;script src="remark.js"&gt;
+    &lt;/script&gt;
+    &lt;script&gt;
+*      var slideshow = remark.create();
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+```
+
+You may download remark to have your slideshow not depend on any online resources, or reference the [latest version](http://remarkjs.com/downloads/remark-latest.min.js) online directly.
+]
+
+---
+template: inverse
+## Of course, Markdown can only go so far.
+
+
+---
+class: center, middle
+# Thanks!
+
+---
+# Sources
+
+---
+# Additional Reading
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+  </body>
+</html>
