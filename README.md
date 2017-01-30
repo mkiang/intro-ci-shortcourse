@@ -90,6 +90,7 @@ Alright guys, here's the game plan.
     - simultaneous equation modeling
     - structural modeling
     - emphasizing that finding the right data is most of the battle
+    - adding various diagnostics to the end of various sections?
 
 ### TODO
 See also [Issues](https://github.com/mkiang/intro-ci-shortcourse/issues).
