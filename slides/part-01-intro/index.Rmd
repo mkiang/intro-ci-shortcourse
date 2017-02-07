@@ -24,7 +24,13 @@ class: center, middle, inverse
 options(htmltools.dir.version = FALSE)
 ```
 
+---
+
+# Hi
+
 ???
+
+Introduce ourselves. Thanks for opportunity. Talk about our backgrounds and different approachs to causal inference
 
 ---
 
@@ -164,6 +170,7 @@ layout: false
 <br><br>
 ## eBay example
 Does an increase in spending on keyword advertisements increase my return?
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 ]
 --
 .right-column[
@@ -184,6 +191,7 @@ layout: false
 <br><br>
 ## eBay example
 Causal question: **Compared to not increasing ad revenue**, how much does an increase in ad revenue affect my return?
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 ]
 --
 .right-column[
@@ -222,6 +230,29 @@ template: inverse
 
 ## Rubin causal model
 ### A framework for evaluating causality
+---
+.left-column[
+  ## Rubin causal model
+  ### Example 1
+  ### Example 2
+  ### Caveat
+]
+.right-column[
+## There is a lot of debate
+]
+--
+.right-column[
+Despite how it will feel when reading the literature, this is not the **only** framework of causal inference. 
+]
+--
+.right-column[
+It is a useful, but very limited, framework -- especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
+]
+--
+.right-column[
+For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
+]
+
 
 ---
 class: center, middle
@@ -231,8 +262,9 @@ class: center, middle
 # Sources
 
 - [Wired Article](https://www.wired.com/2008/06/pb-theory/): https://www.wired.com/2008/06/pb-theory/
+- [eBay example](http://onlinelibrary.wiley.com/doi/10.3982/ECTA12423/abstract) - Blake, T., Nosko, C. and Tadelis, S. (2015), Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment. Econometrica, 83: 155–174. doi:10.3982/ECTA12423
 - [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
 
 ---
 # Additional Reading
-- [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf): (doi:10.1017/S1049096514001784)
+- [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
