@@ -368,20 +368,19 @@ Here, treatment `\(X\)` is what *actually* happened and outcome `\(Y\)` is the o
 ]
 --
 .right-column[
-If we knew this, we could just take `\(\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})\)` to get the average treatment effect
+If we magically had these data, we could just take `\(\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})\)` to get the average causal effect
 ]
 ---
 layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
+  ### Fundamental problem
 ]
 .right-column[
-# What is a causal effect?
+# Fundamental Problem of Causal Inference
 ]
 .right-column[
-But instead our data look like this:
-
 | Name | Treatment (`\(X\)`) | Outcome (`\(Y\)`) |
 |------|:--------------:|:-------------:|
 | Matt  | 1             | 1           |
@@ -391,11 +390,30 @@ But instead our data look like this:
 ]
 --
 .right-column[
-That is, we only observe one of the two potential outcomes.
+We only observe one potential outcome.
 ]
 --
 .right-column[
-Of course, this is impossible.
+So causal inference is often described as a **missing data** problem.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+  ### Fundamental problem
+  ### Definition
+]
+.right-column[
+&lt;br&gt;&lt;br&gt;
+## Causal inference is the process of estimating a comparison of potential outcomes under different treatment conditions on the same set of units.
+]
+.right-column[
+
+]
+--
+.right-column[
+We only observe one potential outcome.
 ]
 --
 .right-column[
