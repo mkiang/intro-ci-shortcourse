@@ -27,7 +27,7 @@ class: center, middle, inverse
 
 ---
 
-# Hi
+# Introductions
 
 ???
 
@@ -95,7 +95,7 @@ Third, we'll talk about different obstacles to estimating causal effects. In the
 And then we'll introduce a method to overcome some of these obstacles called instrumental variables and talk about how it attempts to mimic an RCT.
 --
 .right-column[
-- **Estimating Causal Effects.** Within this framework, how do we estimate a "causal effect" in the ideal case -- a randomized control trial.
+- **Estimating Causal Effects.** Within this framework, how do we estimate a "causal effect" in the ideal case — a randomized control trial.
 ]
 --
 .right-column[
@@ -120,7 +120,7 @@ layout: false
 ]
 --
 .right-column[
-- **Definition.** What is causal inference? 
+- **Definition.** What is a causal effect? What is causal inference? 
 ]
 --
 .right-column[
@@ -132,15 +132,30 @@ template: inverse
 
 ## Motivation
 ### Why do we care about causal inference at all?
-
 ???
 So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? 
 
+---
+# Almost all questions we are interested in are *causal*
+
+???
 Well, the simple answer is that most of the questions we are interested in are causal questions. Does X cause Y? Does getting my Masters from ITAM increase my earning potential? 
 
-Yes, our tools are correlation based.
+Yet our tools are correlation based.
 
-This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
+--
+
+1. What is the effect of Drug B on the population?
+
+1. How will increasing minimum wage affect the employment rate?
+
+1. Do unconditional cash transfer programs help relieve poverty?
+
+1. Will stricter gun laws reduce gun-related homocide?
+
+--
+
+# Yet almost all our tools for to answer these questions are based on *correlation* 
 
 ---
 layout: false
@@ -149,11 +164,12 @@ layout: false
 
 "Scientists are trained to recognize that correlation is not causation, that no conclusions should be drawn simply on the basis of correlation between X and Y (it could just be a coincidence)."
 ]
-
 .right-column[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 ![Wired Article](./assets/wired_article.png)
 ]
+???
+This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
 
 ---
 layout: false
@@ -260,12 +276,24 @@ layout: false
 We need one good example here.
 ]
 
+
 ---
 template: inverse
 
 ## Definition
 ### What is causal inference?
 
+---
+layout: false
+.left-column[
+  ## Definitions
+  ### What is causal inference?
+]
+.right-column[
+&lt;br&gt;&lt;br&gt;
+## TODO
+Text here.
+]
 ---
 layout: false
 .left-column[
@@ -278,7 +306,6 @@ layout: false
 ## TODO
 Text here.
 ]
-
 ---
 template: inverse
 
@@ -296,15 +323,15 @@ template: inverse
 ]
 --
 .right-column[
-Despite how it will feel when reading the literature, this is not the **only** framework of causal inference. 
+Despite how it will feel when reading the literature, this is **not the only framework** of causal inference. 
 ]
 --
 .right-column[
-It is a useful, but very limited, framework -- especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
+It is a very useful framework. But also limited — especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
 ]
 --
 .right-column[
-For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
+Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
 ]
 
 
