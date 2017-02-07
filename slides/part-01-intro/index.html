@@ -134,7 +134,13 @@ template: inverse
 ### Why do we care about causal inference at all?
 
 ???
-So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
+So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? 
+
+Well, the simple answer is that most of the questions we are interested in are causal questions. Does X cause Y? Does getting my Masters from ITAM increase my earning potential? 
+
+Yes, our tools are correlation based.
+
+This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
 
 ---
 layout: false
@@ -162,6 +168,8 @@ layout: false
 
 ---
 layout: false
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
+
 .left-column[
   ## Motivation
   ### Causal Inference Gone Bad
@@ -171,7 +179,6 @@ layout: false
 &lt;br&gt;&lt;br&gt;
 ## eBay example
 Does an increase in spending on keyword advertisements increase my return?
-.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 ]
 --
 .right-column[
@@ -184,6 +191,7 @@ Predictive models indicate ad clicks translates to increased success
 
 ---
 layout: false
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 .left-column[
   ## Motivation
   ### Causal Inference Gone Bad
@@ -192,7 +200,6 @@ layout: false
 &lt;br&gt;&lt;br&gt;
 ## eBay example
 Causal question: **Compared to not increasing ad revenue**, how much does an increase in ad revenue affect my return?
-.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 ]
 --
 .right-column[
@@ -202,22 +209,57 @@ Design: Stop advertising on two search engines, but continue on one.
 .right-column[
 Results: Almost everybody found the site through unpaid search traffic. (Other studies show the returns to be *negative*)
 ]
---
-
 ---
+layout: false
+.footnote[e.g., Hernán et al. Epidemiology (2008)]
 .left-column[
   ## Motivation
-  ### Example 1
-  ### Example 2
-  ### Example 3
+  ### Causal Inference Gone Bad
 ]
 .right-column[
-Last one.
-
-- Bullet points with more
-- Bullet points
-
-- Last example
+&lt;br&gt;&lt;br&gt;
+## Hormone replacement therapy
+By 1990's, HRT was incredily popular medication for women.
+]
+--
+.right-column[
+All observation studies, including Nurses' Health Study, indicated HRT lowered risk of CVD by about 35-45%.
+]
+--
+.right-column[
+Then, two RCTs (HERS and WHI) found HRT actually **increased** risk of CVD.
+]
+---
+layout: false
+.footnote[e.g., Hernán et al. Epidemiology (2008)]
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+]
+.right-column[
+&lt;br&gt;&lt;br&gt;
+## Hormone replacement therapy
+Increased risk by about 25%, putting lots of lives at risk. 
+]
+--
+.right-column[
+In retrospect, lots of errors and biases that were unaccounted in observational studies. Caused a large (and often vitriolic) debate in public health.
+]
+--
+.right-column[
+On the plus side, see Hernan et al. 2008 for how sophisticated analyses (and domain-specific knowledge) would have resulted in correct conclusions.
+]
+---
+layout: false
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+  ### Causal Inference Done Right
+]
+.right-column[
+&lt;br&gt;&lt;br&gt;
+## TODO
+We need one good example here.
 ]
 
 ---
@@ -265,10 +307,13 @@ class: center, middle
 - [Wired Article](https://www.wired.com/2008/06/pb-theory/): https://www.wired.com/2008/06/pb-theory/
 - [eBay example](http://onlinelibrary.wiley.com/doi/10.3982/ECTA12423/abstract) - Blake, T., Nosko, C. and Tadelis, S. (2015), Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment. Econometrica, 83: 155–174. doi:10.3982/ECTA12423
 - [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
+- [Hormone replacement therapy](https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2014/11/Authors__Response_Part_I__Observational_Studies.6.pdf) - Hernán MA, Alonso A, Logan R, Grodstein F, Michels KB, Willett WC, Manson JE, Robins JM. Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease (with discussion). Epidemiology 2008; 19:766-779
 
 ---
 # Additional Reading
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
+- [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
+- [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
