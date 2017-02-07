@@ -33,13 +33,13 @@ class: center, middle, inverse
 
 ???
 
-Introduce ourselves. Thanks for opportunity. Quickly talk about the structure (2 days, 8 topics, about 50 minutes for each topic and then 10 minutes for a break / questions.)
+Introduce ourselves. Thanks for opportunity. Quickly talk about the structure (2 days, 8 topics, 4 topics per day, about 50-55 minutes for each topic and then 5-10 minutes for a break / questions.)
 
 ---
 layout: false
 .left-column[
   ## Roadmap
-### For the workshop
+  ### Workshop
 ]
 .right-column[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
@@ -47,13 +47,13 @@ layout: false
 ]
 ???
 
-Causal inference is this huge field with lots of different approaches and we can't cover it all, but for the workshop we want to hit the main points. First, the Rubin causal model or the counterfactual model, which is by far the most popular causal framework in social science. 
+So this is kind of the roadmap. First, for the workshop. Causal inference is this huge field with lots of different approaches and we can't cover it all, but we want to hit the main points. First, the Rubin causal model or the **counterfactual model**, which is by far the most popular causal framework in social science. **NEXT SLIDE**
 
-Then, within this framework, what is the ideal situation. Like all frameworks, there are fundamental assumptions. So first we'll go over situations when all these assumptions are guaranteed to be met.
+Then, within this framework, what is the ideal situation. Like all frameworks, there are fundamental assumptions. So first we'll go over situations when these assumptions are guaranteed to be met. **NEXT SLIDE**
 
-Then we'll start to chip away at the assumptions and loosen them up a bit. So what are all the ways we won't meet this ideal situations?
+Then we'll start to chip away at the assumptions and loosen them up a bit. So what are all the ways we won't meet this ideal situations? **NEXT SLIDE**
 
-Finally, we'll spend most of tomorrow going over ways we can mimic the ideal situation using different analytic methods.
+Finally, we'll spend a little bit today and all of tomorrow going over ways we can address these biases using analytical methods. (NOTE: We could address many of these using design-based methods, but we likely won't have time to go over that and it's not often you get to design studies as a data scientist.)
 
 --
 .right-column[
@@ -69,21 +69,22 @@ Finally, we'll spend most of tomorrow going over ways we can mimic the ideal sit
 ]
 
 ---
+layout: false
 .left-column[
   ## Roadmap
-  ### For the workshop
-  ### For today
+  ### Workshop
+  ### Today
 ]
 .right-column[
 &lt;br&gt;&lt;br&gt;
 - **Introduciton to Causal Inference**. Establish a framework we can all use.
 ]
 ???
-So for today, we're going to do four talks. First, we're going to make sure we are all on the same page about what causal inference is.
+So for today, we're going to do four talks. First, we're going to make sure we are all on the same page about what causal inference is. **NEXT SLIDE**
 
-Second, within this framework, let's talk about estimating a causal effect in a best case scenario.
+Second, within this framework, let's talk about estimating a causal effect in a best case scenario. **NEXT SLIDE**
 
-Third, we'll talk about different obstacles to estimating causal effects. In the real world setting a randomized control trial is often not feasible or ethical so what can we do to ensure we aren't breaking the assumptions of our framework?
+Third, we'll talk about different obstacles to estimating causal effects. In the real world setting a randomized control trial is often not feasible or ethical so what can we do to ensure we aren't breaking the assumptions of our framework? **NEXT SLIDE**
 
 And then we'll introduce a method to overcome some of these obstacles called instrumental variables and talk about how it attempts to mimic an RCT.
 --
@@ -100,11 +101,12 @@ And then we'll introduce a method to overcome some of these obstacles called ins
 ]
 
 ---
+layout: false
 .left-column[
   ## Roadmap
-  ### For the workshop
-  ### For today
-  ### For this talk
+  ### Workshop
+  ### Today
+  ### Now
 ]
 .right-column[
 &lt;br&gt;&lt;br&gt;
@@ -125,31 +127,74 @@ template: inverse
 ## Motivation
 ### Why do we care about causal inference at all?
 
+???
+So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
+
 ---
+layout: false
 .left-column[
   ## Motivation
+
+"Scientists are trained to recognize that correlation is not causation, that no conclusions should be drawn simply on the basis of correlation between X and Y (it could just be a coincidence)."
+]
+
+.right-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+![Wired Article](./assets/wired_article.png)
+]
+
+---
+layout: false
+.left-column[
+  ## Motivation
+"There is now a better way. Petabytes allow us to say: 'Correlation is enough.'"
 ]
 .right-column[
 &lt;br&gt;&lt;br&gt;&lt;br&gt;
 ![Wired Article](./assets/wired_article.png)
 ]
 
-???
-So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
-
 ---
+layout: false
 .left-column[
   ## Motivation
-  ### Example 1
-  ### Example 2
+  ### Causal Inference Gone Bad
+]
+--
+.right-column[
+&lt;br&gt;&lt;br&gt;
+## eBay example
+Does an increase in spending on keyword advertisements increase my return?
+]
+--
+.right-column[
+Prior: Targeted internet advertising is highly effective (you get people who are interested in your product)
+]
+--
+.right-column[
+Predictive models indicate ad clicks translates to increased success
+]
+
+---
+layout: false
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
 ]
 .right-column[
-Text here.
-
-- Bullet points
-
-- An example again
+&lt;br&gt;&lt;br&gt;
+## eBay example
+Causal question: **Compared to not increasing ad revenue**, how much does an increase in ad revenue affect my return?
 ]
+--
+.right-column[
+Design: Stop advertising on two search engines, but continue on one.
+]
+--
+.right-column[
+Results: Almost everybody found the site through unpaid search traffic. (Other studies show the returns to be *negative*)
+]
+--
 
 ---
 .left-column[
@@ -186,8 +231,12 @@ class: center, middle
 ---
 # Sources
 
+- [Wired Article](https://www.wired.com/2008/06/pb-theory/): https://www.wired.com/2008/06/pb-theory/
+- [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
+
 ---
 # Additional Reading
+- [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf): (doi:10.1017/S1049096514001784)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
