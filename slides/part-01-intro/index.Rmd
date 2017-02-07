@@ -24,9 +24,15 @@ class: center, middle, inverse
 options(htmltools.dir.version = FALSE)
 ```
 
+???
+
 ---
 
 # Roadmap
+
+???
+
+Introduce ourselves. Thanks for opportunity. Quickly talk about the structure (2 days, 8 topics, about 50 minutes for each topic and then 10 minutes for a break / questions.)
 
 ---
 layout: false
@@ -35,11 +41,22 @@ layout: false
 ### For the workshop
 ]
 .right-column[
+<br><br><br>
 - **Rubin causal model.** Establish a rigorous framework for evaluating and understanding causality
 ]
+???
+
+Causal inference is this huge field with lots of different approaches and we can't cover it all, but for the workshop we want to hit the main points. First, the Rubin causal model or the counterfactual model, which is by far the most popular causal framework in social science. 
+
+Then, within this framework, what is the ideal situation. Like all frameworks, there are fundamental assumptions. So first we'll go over situations when all these assumptions are guaranteed to be met.
+
+Then we'll start to chip away at the assumptions and loosen them up a bit. So what are all the ways we won't meet this ideal situations?
+
+Finally, we'll spend most of tomorrow going over ways we can mimic the ideal situation using different analytic methods.
+
 --
 .right-column[
-- **Experimental designs.** Within this framework, discuss the **ideal** situation for inferring causality, randomized control trials
+- **Experimental designs.** Within this framework, discuss the *ideal* situation for inferring causality, randomized control trials
 ]
 --
 .right-column[
@@ -57,6 +74,27 @@ layout: false
   ### For today
 ]
 .right-column[
+<br><br>
+- **Intro to RCM**. 
+]
+--
+.right-column[
+- **Definition.** What is causal inference? 
+]
+--
+.right-column[
+- **Rubin causal model.** A framework for evaluating causality
+]
+
+---
+.left-column[
+  ## Roadmap
+  ### For the workshop
+  ### For today
+  ### For this talk
+]
+.right-column[
+<br><br>
 - **Motivation.** Why do we care about causal inference at all?
 ]
 --
@@ -77,15 +115,14 @@ template: inverse
 ---
 .left-column[
   ## Motivation
-  ### Example 1
 ]
 .right-column[
-Text here.
-
-- Bullet points
-
-- An example
+<br><br><br>
+![Wired Article](./assets/wired_article.png)
 ]
+
+???
+So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now.
 
 ---
 .left-column[
