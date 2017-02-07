@@ -138,7 +138,7 @@ So why do we even care about causal inference? Obviously, you guys care because 
 # Almost all questions we are interested in are *causal*
 
 ???
-Well, the simple answer is that most of the questions we are interested in are causal questions. Does X cause Y? Does getting my Masters from ITAM increase my earning potential? 
+Well, the simple answer is that most of the questions we are interested in are causal questions. 
 
 Yet our tools are correlation based.
 
@@ -154,7 +154,9 @@ Yet our tools are correlation based.
 
 --
 
-# Yet almost all our tools for to answer these questions are based on *correlation* 
+# Yet almost all our tools for to answer these questions are based on *correlation*..red[*]
+
+.footnote[.red[*]Big data does not fix this.]
 
 ---
 layout: false
@@ -180,6 +182,8 @@ layout: false
 <br><br><br>
 ![Wired Article](./assets/wired_article.png)
 ]
+???
+Obviously, we disagree. Hopefully, you do too and that's why you're here.
 
 ---
 layout: false
@@ -285,20 +289,124 @@ template: inverse
 ---
 layout: false
 .left-column[
-  ## Definitions
-  ### What is causal inference?
+  ## Causal Inference
+  ### Causal effect
 ]
 .right-column[
-<br><br>
-## TODO
-Text here.
+# What is a causal effect?
+]
+--
+.right-column[
+If I take Drug B and get a headache, did Drug B *cause* my headache?
+]
+
+???
+What do we mean when we say something *caused* something else? We intuitively understand but what do we mean explicitly? 
+
+Let's pretend I take a Drug and I get a headache. Did the Drug cause my headache?
+
+It only caused my headache if we knew I wouldn't have gotten the headache, had I not taken the drug.
+--
+.right-column[
+Implicitly, Drug B only caused the headache if I would *not* have received the headache if I had not taken Drug B.
+]
+--
+.right-column[
+So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units).
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+]
+.right-column[
+# What is a causal effect?
+]
+.right-column[
+So, we define $Y_0$ as my outcome (headache) if I had *not* taken the drug and $Y_1$ as my outcome if I *had* taken the drug
+]
+???
+So let's formalize this with a little bit of notation.
+--
+.right-column[
+Then $Y_0$ and $Y_1$ are my *potential outcomes* or *counterfactuals*.
+]
+--
+.right-column[
+And $\tau=Y_1 - Y_0$ is the *individual causal effect* of Drug B.
+]
+--
+.right-column[
+Of course, this is impossible.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+]
+.right-column[
+# What is a causal effect?
+]
+--
+.right-column[
+If we knew every outcome, our data would look like this:
+
+| Name | Treatment ($X$) | Outcome ($Y$) | $Y_0$ | $Y_1$ |
+|------|:--------------:|:-------------:|:-----:|:-----:|
+| Matt  | 1             | 1           | 1   | 1   |
+| Marla | 1             | 0           | 1   | 0   |
+| ...   | ...           | ...         | ... | ... |
+| Tyler | 0             | 1           | 1   | 0   |
+]
+
+--
+.right-column[
+Here, treatment $X$ is what *actually* happened and outcome $Y$ is the outcome under what actually happened. 
+]
+--
+.right-column[
+If we knew this, we could just take $\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})$ to get the average treatment effect
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+]
+.right-column[
+# What is a causal effect?
+]
+.right-column[
+But instead our data look like this:
+
+| Name | Treatment ($X$) | Outcome ($Y$) |
+|------|:--------------:|:-------------:|
+| Matt  | 1             | 1           |
+| Marla | 1             | 0           |
+| ...   | ...           | ...         |
+| Tyler | 0             | 1           |
+]
+--
+.right-column[
+That is, we only observe one of the two potential outcomes.
+]
+--
+.right-column[
+Of course, this is impossible.
+]
+--
+.right-column[
+<div style="text-align:center" markdown="1">
+<img src="./assets/basic_dag.jpg" alt="X to Y" style="width: 30%;"/>
+</div>
 ]
 ---
 layout: false
 .left-column[
   ## Definitions
   ### What is causal inference?
-  ### What is a causal effect?
 ]
 .right-column[
 <br><br>
@@ -333,6 +441,14 @@ It is a very useful framework. But also limited — especially when evaluating t
 Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
 ]
 
+---
+# Conclusion
+
+## Data science needs causal inference 
+
+## Likewise, as we enter an era of "big data", causal inference needs data science
+
+## Big data can be very helpful — but it can also make the problem worse with inappropriate methods, violated assumptions, and poor design
 
 ---
 class: center, middle
@@ -345,9 +461,11 @@ class: center, middle
 - [eBay example](http://onlinelibrary.wiley.com/doi/10.3982/ECTA12423/abstract) - Blake, T., Nosko, C. and Tadelis, S. (2015), Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment. Econometrica, 83: 155–174. doi:10.3982/ECTA12423
 - [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
 - [Hormone replacement therapy](https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2014/11/Authors__Response_Part_I__Observational_Studies.6.pdf) - Hernán MA, Alonso A, Logan R, Grodstein F, Michels KB, Willett WC, Manson JE, Robins JM. Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease (with discussion). Epidemiology 2008; 19:766-779
+- [Causality chapter](http://www.ics.uci.edu/~sternh/courses/265/imbensrubin1.pdf) by Imbens and Rubin
 
 ---
 # Additional Reading
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
 - [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
+- [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
