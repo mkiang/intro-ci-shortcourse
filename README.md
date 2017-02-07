@@ -99,8 +99,4 @@ Alright guys, here's the game plan.
         - a spectrum?
 
 ### TODO
-See also [Issues](https://github.com/mkiang/intro-ci-shortcourse/issues).
-
-- [ ] Need to finalize title of the class
-- [ ] Sort out if we can even go over all these topics in 8 hours.
-- [ ] Zhe improve his [personal page](https://sites.google.com/view/zhezhang)
+See [Issues](https://github.com/mkiang/intro-ci-shortcourse/issues).
