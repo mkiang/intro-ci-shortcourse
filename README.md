@@ -2,8 +2,12 @@
 
 ### Authors:
 - [Mathew Kiang](https://mathewkiang.com) ([GitHub](https://github.com/mkiang))
-- Zhe Zhang ([GitHub](https://github.com/writezhe))
+- [Zhe Zhang](https://sites.google.com/view/zhezhang) ([GitHub](https://github.com/writezhe))
 - [Monica Alexander](http://monicaalexander.com) ([GitHub](https://github.com/MJAlexander))
+
+### Requirements (R packages):
+- `xaringan`
+- `shiny`
 
 ### Game plan:
 
@@ -97,7 +101,6 @@ Alright guys, here's the game plan.
 ### TODO
 See also [Issues](https://github.com/mkiang/intro-ci-shortcourse/issues).
 
-- [x] Add Zhe, Monica, and Adolfo to github
 - [ ] Need to finalize title of the class
 - [ ] Sort out if we can even go over all these topics in 8 hours.
 - [ ] Zhe improve his [personal page](https://sites.google.com/view/zhezhang)
