@@ -168,12 +168,10 @@ layout: false
 ---
 layout: false
 .footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
-
 .left-column[
   ## Motivation
   ### Causal Inference Gone Bad
 ]
---
 .right-column[
 <br><br>
 ## eBay example
@@ -266,6 +264,19 @@ template: inverse
 
 ## Definition
 ### What is causal inference?
+
+---
+layout: false
+.left-column[
+  ## Definitions
+  ### What is causal inference?
+  ### What is a causal effect?
+]
+.right-column[
+<br><br>
+## TODO
+Text here.
+]
 
 ---
 template: inverse
