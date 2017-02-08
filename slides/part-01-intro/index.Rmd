@@ -285,7 +285,9 @@ template: inverse
 
 ## Definition
 ### What is causal inference?
-
+---
+class: center, middle
+# Causal inference is the process of estimating a comparison of potential outcomes under different treatment conditions on the same set of units.
 ---
 layout: false
 .left-column[
@@ -326,8 +328,9 @@ layout: false
 ]
 .right-column[
 So, we define our counterfactuals: 
+- Let $A$ be a binary treatment with $1$ indicating the drug is taken and $0$ otherwise
 - $Y^{a=0}$ is the outcome if Eddie had *not* taken the drug 
-- $Y^{a=1}$ is the outcome if Eddie *had* taken the drug. 
+- $Y^{a=1}$ is the outcome if Eddie *had* taken the drug
 ]
 ???
 So let's formalize this with a little bit of notation.
@@ -349,7 +352,7 @@ layout: false
   ### Rubin causal model
 ]
 .right-column[
-# Data we want:
+# Data we **_want_**
 ### "God's Data"
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ |
@@ -360,6 +363,10 @@ layout: false
 | ...   |     ...   |     ...   |
 | Tyler |       1   |       0   |
 ]
+--
+.right-column[
+This is not possible in reality. For example, even if we use the same person but at different times, we cannot consider it to be the same unit.
+]
 ---
 layout: false
 .left-column[
@@ -368,16 +375,16 @@ layout: false
   ### Rubin causal model
 ]
 .right-column[
-# Data we have:
+# Data we **_have_**
 ### The Fundamental Problem of Causal Inference
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ |
 |-------|:---------:|:---------:|
-| Eddie |    ?      |       1   |
-| Marla |     ?     |       0   |
-| Bob   |       0   |       ?   |
+| Eddie |    _?_    |       1   |
+| Marla |    _?_    |       0   |
+| Bob   |       0   |     _?_   |
 | ...   |     ...   |     ...   |
-| Tyler |       1   |   ?       |
+| Tyler |       1   |   _?_     |
 ]
 --
 .right-column[
@@ -394,126 +401,128 @@ layout: false
   ### Rubin causal model
 ]
 .right-column[
-# Randomized Control Trials
+### The Fundamental Problem of Causal Inference
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
-| Eddie |     ?    |       1    |  1  |  1  |
-| Marla |     ?    |       0    |  1  |  0  |
-| Bob   |       0   |   ?       |  0  |  0  |
+| Eddie |    _?_    |       1   |  1  |  1  |
+| Marla |    _?_    |       0   |  1  |  0  |
+| Bob   |       0   |   _?_     |  0  |  0  |
 | ...   |     ...   |     ...   | ... | ... |
-| Tyler |       1   |   ?       |  0  |  1  |
+| Tyler |       1   |   _?_     |  0  |  1  |
 ]
 --
 .right-column[
-If we had "God's Data", the average causal effect would be $ATE=E[Y^{a=1}]-E[Y^{a=0}]$
+If we had "God's Data", the _**average treatment effect**_ would be $ATE=Pr(Y^{a=1})-Pr(Y^{a=0})$
 ]
 --
 .right-column[
-Under what conditions does $ATE=E[Y|A=1]-E[Y|A=0]$
-]
----
-.right-column[
-If we magically had these data, we could just take $\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})$ to get the *average causal effect*
+Under what conditions do the data we have properly estimate the data we want? That is, when does $Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$
 ]
 ---
 layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
-  ### Fundamental problem
+  ### Rubin causal model
 ]
 .right-column[
-# Fundamental Problem of Causal Inference
-]
-.right-column[
-| Name | Treatment ($X$) | Outcome ($Y$) |
-|------|:--------------:|:-------------:|
-| Matt  | 1             | 1           |
-| Marla | 1             | 0           |
-| ...   | ...           | ...         |
-| Tyler | 0             | 1           |
+## Assumptions
+
+- **Exchangeability**. $Y^a \perp A$ for all values of $a$. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
 ]
 --
 .right-column[
-We only observe one potential outcome.
+- **Positivity**. Every unit has a positive probability of having any value of $a$.
 ]
 --
 .right-column[
-So causal inference is often described as a **missing data** problem.
+- **Stable unit treatment value assumption (SUTVA)**. Two things. First, treatment and control are stable — there's only one form of each. Second, the assignment of one unit does not affect the outcome of another.
 ]
 ---
 layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
-  ### Fundamental problem
-  ### Definition
+  ### Rubin causal model
 ]
 .right-column[
-<br><br>
-## Causal inference is the process of estimating a comparison of potential outcomes under different treatment conditions on the same set of units.
-]
-.right-column[
+## Exchangeability 
 
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie |    _?_    |       1   |  1  |  1  |
+| Marla |    _?_    |       0   |  1  |  0  |
+| Bob   |       0   |   _?_     |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   |   _?_     |  0  |  1  |
+
+- If each person's assignment $A$ is independent of their observed outcome $Y$, then we call the groups $A=1$ and $A=0$ "exchangeable". 
 ]
 --
 .right-column[
-We only observe one potential outcome.
-]
---
-.right-column[
-<div style="text-align:center" markdown="1">
-<img src="./assets/basic_dag.jpg" alt="X to Y" style="width: 30%;"/>
-</div>
+- This is **only** ensured when the mechanism of assignment $A$ is random. Otherwise, we try to make this as reasonable as possible, but can never confirm it to be true. 
 ]
 ---
 layout: false
 .left-column[
-  ## Definitions
-  ### What is causal inference?
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-<br><br>
-## TODO
-Text here.
+## Positivity 
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie |    _?_    |       1   |  1  |  1  |
+| Marla |    _?_    |       0   |  1  |  0  |
+| Bob   |       0   |   _?_     |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   |   _?_     |  0  |  1  |
+
+- Every person has to have a non-zero probability of being in any level of $A$.
+]
+--
+.right-column[
+- If we treated everybody ($A=1$), we would not be able to estimate a causal effect.
 ]
 ---
-template: inverse
-
-## Rubin causal model
-### A framework for evaluating causality
----
+layout: false
 .left-column[
-  ## Rubin causal model
-  ### Example 1
-  ### Example 2
-  ### Caveat
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-## There is a lot of debate
-]
---
-.right-column[
-Despite how it will feel when reading the literature, this is **not the only framework** of causal inference. 
-]
---
-.right-column[
-It is a very useful framework. But also limited — especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
-]
---
-.right-column[
-Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
-]
+## Stability (SUTVA) 
 
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie |    _?_    |       1   |  1  |  1  |
+| Marla |    _?_    |       0   |  1  |  0  |
+| Bob   |       0   |   _?_     |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   |   _?_     |  0  |  1  |
+
+- We need a stable treatment (150mg of Advil) and stable control (no Advil). We cannot estimate a causal effect if we have varying doses of Advil within levels of $A$.
+]
+--
+.right-column[
+- One person taking Advil should not affect the outcome of another person.
+]
 ---
-# Conclusion
+# Caveat about Rubin Causal Model
 
-## Data science needs causal inference 
+- Despite how it will feel when reading the literature, this is **not the only framework** of causal inference. 
 
-## Likewise, as we enter an era of "big data", causal inference needs data science
+--
 
-## Big data can be very helpful — but it can also make the problem worse with inappropriate methods, violated assumptions, and poor design
+- It is a very useful framework. But also limited — especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
+
+--
+
+- Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
 
 ---
 class: center, middle
@@ -526,11 +535,11 @@ class: center, middle
 - [eBay example](http://onlinelibrary.wiley.com/doi/10.3982/ECTA12423/abstract) - Blake, T., Nosko, C. and Tadelis, S. (2015), Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment. Econometrica, 83: 155–174. doi:10.3982/ECTA12423
 - [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
 - [Hormone replacement therapy](https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2014/11/Authors__Response_Part_I__Observational_Studies.6.pdf) - Hernán MA, Alonso A, Logan R, Grodstein F, Michels KB, Willett WC, Manson JE, Robins JM. Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease (with discussion). Epidemiology 2008; 19:766-779
+- [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
 - [Causality chapter](http://www.ics.uci.edu/~sternh/courses/265/imbensrubin1.pdf) by Imbens and Rubin
 
 ---
 # Additional Reading
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
-- [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
 - [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
