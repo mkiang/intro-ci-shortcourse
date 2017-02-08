@@ -320,9 +320,10 @@ layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-# What is a causal effect?
+# Counterfactuals
 ]
 .right-column[
 So, we define our counterfactuals: 
@@ -346,10 +347,11 @@ layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-# What is a causal effect?
-### Data we *want:*
+# Data we want:
+### "God's Data"
 
 | Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` |
 |-------|:---------:|:---------:|
@@ -364,10 +366,11 @@ layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-# What is a causal effect?
-### Data we *have:*
+# Data we have:
+### The Fundamental Problem of Causal Inference
 
 | Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` |
 |-------|:---------:|:---------:|
@@ -379,9 +382,7 @@ layout: false
 ]
 --
 .right-column[
-### Fundamental Problem of Causal Inference
-
-We only observe one of the potential outcomes — thus, individual causal effects cannot be estimated
+For each individual, we only observe one of the potential outcomes — thus, individual causal effects cannot be estimated
 ]
 ---
 class: center, middle
@@ -391,10 +392,10 @@ layout: false
 .left-column[
   ## Causal Inference
   ### Causal effect
+  ### Rubin causal model
 ]
 .right-column[
-# What is a causal effect?
-### Data we *have:*
+# Randomized Control Trials
 
 | Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` | `\(A\)` | `\(Y\)` |
 |-------|:---------:|:---------:|:---:|:---:|
@@ -406,7 +407,11 @@ layout: false
 ]
 --
 .right-column[
-If we had "God's Data", the average causal effect would be `$$ATE=E[Y^{a=0}]-E[Y^{a=1}]$$`
+If we had "God's Data", the average causal effect would be `\(ATE=E[Y^{a=1}]-E[Y^{a=0}]\)`
+]
+--
+.right-column[
+Under what conditions does `\(ATE=E[Y|A=1]-E[Y|A=0]\)`
 ]
 ---
 .right-column[
