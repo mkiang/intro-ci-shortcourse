@@ -298,7 +298,7 @@ layout: false
 ]
 --
 .right-column[
-If I take Drug B and get a headache, did Drug B *cause* my headache?
+If Edward takes Drug B and get a headache, did Drug B *cause* his headache?
 ]
 
 ???
@@ -309,11 +309,11 @@ Let's pretend I take a Drug and I get a headache. Did the Drug cause my headache
 It only caused my headache if we knew I wouldn't have gotten the headache, had I not taken the drug.
 --
 .right-column[
-Implicitly, Drug B only caused the headache if I would *not* have received the headache if I had not taken Drug B.
+Implicitly, Drug B only caused the headache if Eddie would *not* have received the headache if Eddie had not taken Drug B.
 ]
 --
 .right-column[
-So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units).
+So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units). Importantly, we only observe **one** outcome so all comparisons are hypothetical. 
 ]
 ---
 layout: false
@@ -325,21 +325,21 @@ layout: false
 # What is a causal effect?
 ]
 .right-column[
-So, we define `\(Y_0\)` as my outcome (headache) if I had *not* taken the drug and `\(Y_1\)` as my outcome if I *had* taken the drug
+So, we define our counterfactuals: 
+- `\(Y^{a=0}\)` is the outcome if Eddie had *not* taken the drug 
+- `\(Y^{a=1}\)` is the outcome if Eddie *had* taken the drug. 
 ]
 ???
 So let's formalize this with a little bit of notation.
+
+Some people prefer **potential outcomes** to emphasize that two different outcomes could potentially be observed depending on the treatment while others prefer **counterfactuals** to emphasize that each outcome represents situations that may not actually occur.
 --
 .right-column[
-Then `\(Y_0\)` and `\(Y_1\)` are my *potential outcomes* or *counterfactuals*.
+Then, Drug B has a causal effect if and only if `\(Y^{a=0}\neq Y^{a=1}\)`
 ]
 --
 .right-column[
-And `\(\tau=Y_1 - Y_0\)` is the *individual causal effect* of Drug B.
-]
---
-.right-column[
-Of course, this is impossible.
+The *__individual__ causal effect* of Drug B then is `\(ICE=Y^{a=1} - Y^{a=0}\)`
 ]
 ---
 layout: false
@@ -349,26 +349,68 @@ layout: false
 ]
 .right-column[
 # What is a causal effect?
-]
---
-.right-column[
-If we knew every outcome, our data would look like this:
+### Data we *want:*
 
-| Name | Treatment (`\(X\)`) | Outcome (`\(Y\)`) | `\(Y_0\)` | `\(Y_1\)` |
-|------|:--------------:|:-------------:|:-----:|:-----:|
-| Matt  | 1             | 1           | 1   | 1   |
-| Marla | 1             | 0           | 1   | 0   |
-| ...   | ...           | ...         | ... | ... |
-| Tyler | 0             | 1           | 1   | 0   |
+| Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` |
+|-------|:---------:|:---------:|
+| Eddie |       1   |       1   |
+| Marla |       1   |       0   |
+| Bob   |       0   |       0   |
+| ...   |     ...   |     ...   |
+| Tyler |       1   |       0   |
 ]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+]
+.right-column[
+# What is a causal effect?
+### Data we *have:*
 
---
-.right-column[
-Here, treatment `\(X\)` is what *actually* happened and outcome `\(Y\)` is the outcome under what actually happened. 
+| Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` |
+|-------|:---------:|:---------:|
+| Eddie |    ?      |       1   |
+| Marla |     ?     |       0   |
+| Bob   |       0   |       ?   |
+| ...   |     ...   |     ...   |
+| Tyler |       1   |   ?       |
 ]
 --
 .right-column[
-If we magically had these data, we could just take `\(\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})\)` to get the average causal effect
+### Fundamental Problem of Causal Inference
+
+We only observe one of the potential outcomes — thus, individual causal effects cannot be estimated
+]
+---
+class: center, middle
+# Causal inference is a missing data problem
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+]
+.right-column[
+# What is a causal effect?
+### Data we *have:*
+
+| Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` | `\(A\)` | `\(Y\)` |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie |     ?    |       1    |  1  |  1  |
+| Marla |     ?    |       0    |  1  |  0  |
+| Bob   |       0   |   ?       |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   |   ?       |  0  |  1  |
+]
+--
+.right-column[
+If we had "God's Data", the average causal effect would be `$$ATE=E[Y^{a=0}]-E[Y^{a=1}]$$`
+]
+---
+.right-column[
+If we magically had these data, we could just take `\(\bar\tau=\frac{1}{n}\sum(Y_{i1}-Y_{i0})\)` to get the *average causal effect*
 ]
 ---
 layout: false
