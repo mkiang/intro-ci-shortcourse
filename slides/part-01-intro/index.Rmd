@@ -82,7 +82,7 @@ layout: false
 ]
 .right-column[
 <br><br>
-- **Introduciton to Causal Inference**. Establish a framework we can all use.
+- **Introduction to Causal Inference**. Establish a framework we can all use.
 ]
 ???
 So for today, we're going to do four talks. First, we're going to make sure we are all on the same page about what causal inference is. **NEXT SLIDE**
