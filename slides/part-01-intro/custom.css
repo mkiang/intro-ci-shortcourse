@@ -20,10 +20,10 @@ a, a > code {
 .remark-code, .remark-inline-code { font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; }
 .remark-code-line-highlighted     { background-color: #ffff88; }
 code {
-  /* background: #F5F5F5; /* lighter */
-  background: #e7e8e2; /* darker */
-  border-radius: 3px;
-  padding: 4px;
+  background: #F5F5F5; /* lighter */
+  /* background: #e7e8e2; /* darker */
+  border-radius: 5px;
+  padding: 3px;
 } 
 .inverse {
   background-color: #272822;
@@ -66,4 +66,16 @@ img {
 blockquote {
   border-left: solid 5px lightgray;
   padding-left: 1em;
+}
+table {
+  border: 1px solid #666;
+  align-self: center;
+  width: 70%;
+  margin-left:  auto;
+  margin-right: auto;
+  border-collapse:  collapse;
+}
+th {
+	border-bottom: 1px solid #333;
+	padding: .25em;
 }
