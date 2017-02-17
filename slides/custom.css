@@ -51,7 +51,10 @@ code {
 .right-column {
   width: 75%;
   float: right;
-  padding-top: 1em;
+	margin: 0em;
+	padding: 0;
+	line-height: normal;
+	white-space: normal;
 }
 .pull-left {
   float: left;

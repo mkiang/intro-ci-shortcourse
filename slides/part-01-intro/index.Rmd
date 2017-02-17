@@ -2,7 +2,7 @@
 title: "Causal Inference for Data Science"
 subtitle: "ITAM Short Workshop"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
-date: "March 13, 2017"
+date: "March 15, 2017"
 output:
   xaringan::moon_reader:
     css: ["custom.css", "./../custom.css", ]
@@ -296,6 +296,8 @@ layout: false
 ]
 .right-column[
 # What is a causal effect?
+
+.center[<img src="./assets/basic_dag.jpg" width="200">]
 ]
 --
 .right-column[
@@ -405,11 +407,11 @@ layout: false
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
-| Eddie |    _?_    |       1   |  1  |  1  |
-| Marla |    _?_    |       0   |  1  |  0  |
-| Bob   |       0   |   _?_     |  0  |  0  |
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
 | ...   |     ...   |     ...   | ... | ... |
-| Tyler |       1   |   _?_     |  0  |  1  |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
 ]
 --
 .right-column[
@@ -451,11 +453,11 @@ layout: false
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
-| Eddie |    _?_    |       1   |  1  |  1  |
-| Marla |    _?_    |       0   |  1  |  0  |
-| Bob   |       0   |   _?_     |  0  |  0  |
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
 | ...   |     ...   |     ...   | ... | ... |
-| Tyler |       1   |   _?_     |  0  |  1  |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
 
 - If each person's assignment $A$ is independent of their observed outcome $Y$, then we call the groups $A=1$ and $A=0$ "exchangeable". 
 ]
@@ -475,11 +477,11 @@ layout: false
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
-| Eddie |    _?_    |       1   |  1  |  1  |
-| Marla |    _?_    |       0   |  1  |  0  |
-| Bob   |       0   |   _?_     |  0  |  0  |
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
 | ...   |     ...   |     ...   | ... | ... |
-| Tyler |       1   |   _?_     |  0  |  1  |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
 
 - Every person has to have a non-zero probability of being in any level of $A$.
 ]
@@ -499,11 +501,11 @@ layout: false
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
-| Eddie |    _?_    |       1   |  1  |  1  |
-| Marla |    _?_    |       0   |  1  |  0  |
-| Bob   |       0   |   _?_     |  0  |  0  |
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
 | ...   |     ...   |     ...   | ... | ... |
-| Tyler |       1   |   _?_     |  0  |  1  |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
 
 - We need a stable treatment (150mg of Advil) and stable control (no Advil). We cannot estimate a causal effect if we have varying doses of Advil within levels of $A$.
 ]
@@ -524,6 +526,37 @@ layout: false
 
 - Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
 
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Conclusion
+
+- Think of causal effects in terms of comparing **counterfactuals** or **potential outcomes**
+]--
+.right-column[
+- However, we can never observe both counterfactuals — fundamental problem of causal inference.
+]
+--
+.right-column[
+- That's what makes causal inference so hard.
+]
+--
+.right-column[
+- BUT! Under certain (often very strong) assumptions, we can still rigorously estimate causal effects within this framework.
+]
+--
+.right-column[
+- We can address these assumptions two ways: experimentally or structurally.
+]
+--
+.right-column[
+- Up next: Experimental ways of estimating causality.
+]
 ---
 class: center, middle
 # Thanks!
