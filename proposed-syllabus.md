@@ -1,8 +1,16 @@
 ## <span style="color:red">PROPOSED WORSHOP SYLLABUS </span>
 
 ###Introduction to Causal Inference: From Data to Action
-- Instituto Tecnológico Autónomo de México
-- March 13-XX 2017
+- Instituto Tecnológico Autónomo de México (ITAM)
+- March 15-16, 2017
+- 14:00-18.00
+- Campus Rio Hondo classroom XXXX
+- Limited (30 seats) 
+
+### Lecturers
+- [Mathew Kiang](https://mathewkiang.com) ([GitHub](https://github.com/mkiang))
+- [Zhe Zhang](https://sites.google.com/view/zhezhang) ([GitHub](https://github.com/writezhe))
+- [Monica Alexander](http://monicaalexander.com) ([GitHub](https://github.com/MJAlexander))
 
 ### Description
 New information is being generated and stored at the fastest rate in human history. This has lead to a promise of a “big data” revolution and the belief that fundamental questions about business, government, and biomedical research will finally be answered. Questions like: How much will my Master’s in Data Science degree increasing my earnings? How will a country-wide increase in minimum wage affect the unemployment rate? Does the MMR vaccine cause autism? While certainly helpful, more data by itself is insufficient for answering these important questions. By using methods from social sciences, this workshop is designed to introduce data scientists to causal inference and enable them to ask, investigate, and answer these questions.
