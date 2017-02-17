@@ -1,0 +1,17 @@
+\documentclass[]{article}
+\usepackage{tikz}
+\usepackage{pgf}
+\usetikzlibrary{positioning}
+\begin{document}
+
+\section{Basic DAG}
+
+\begin{tikzpicture}
+    % nodes %
+    \node[text centered] (x) {$X$};
+    \node[right = 1 of x, text centered] (y) {$Y$};
+    % edges %
+    \draw[->, line width = 1] (x) -- (y);
+\end{tikzpicture}
+
+\end{document}

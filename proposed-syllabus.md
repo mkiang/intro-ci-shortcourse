@@ -22,15 +22,14 @@ The first section of the course is focused on understanding the fundamental issu
 #### First section
 1. Why should we care about causal inference? Motivation and examples
 1. What is causal inference? Introduction to the Rubin Causal Model
+2. Using Causal DAGs
 1. Randomized Control Trials: The Ideal Case
-1. Observational Studies: The Real Case
-1. Understanding Bias through Causal DAGs: Confounding and Selection
+2. Biases: Confounding and Selection
+1. Instrumental Variables
 
 #### Continuing sections
-1. Topics for the second half:
 1. Matching Designs
-1. Natural Experiments 
-1. Instrumental Variables
-1. Differences-in-Differences
+1. Natural Experiments: Panel data, time series, Differences-in-Differences
 1. Regression Discontinuity
+2. Study designg
 
