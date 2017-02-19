@@ -14,4 +14,18 @@
     \draw[->, line width = 1] (x) -- (y);
 \end{tikzpicture}
 
+\section{Simple Example DAG}
+
+\begin{tikzpicture}
+    % nodes %
+    \node[text centered] (y) {$Y$};
+    \node[right = 1 of x, text centered] (z) {$Z$};
+    \node[above left = 1 of x, text centered] (u) {$U$};
+    \node[below left = 1 of x, text centered] (x) {$X$};
+    % edges %
+    \draw[->, line width = 1] (y) -- (z);
+    \draw[->, line width = 1] (x) -- (y);
+    \draw[->, line width = 1] (u) -- (y);
+\end{tikzpicture}
+
 \end{document}
