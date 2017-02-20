@@ -227,3 +227,83 @@ layout: false
 - calling customer service
 ]
 
+---
+# Omitted Variables
+
+- we rarely "prove" causality
+- instead, we argue based on domain expertise and theory that we are not facing biases
+- often, a good analysis adjusts a lot of the assumptions to ensure the results are "robust" to possible biases
+
+---
+# Instrumental Variables
+
+- any other variables in the world or data that helps to encourage a real-world experiment
+- by leveraging this information, we can remove omitted variable bias
+- denote such instruments with $z_i$ variables for each observation $i$
+
+---
+# Instrumental Variables Graphically
+
+- replace with our own graphics for consistent letters
+
+![iv_base](./assets/iv_no_issue.png) ![iv_base](./assets/iv_confound.png)
+![iv_base](./assets/iv_with_z.png)
+
+---
+# Instrumental Variable Key
+
+- instead of using the observed $X_i$ or $T_i$, which may be influenced by confounders,
+we use a predicted version of $\hat{X_i}$, which does not suffer from influence from confounders.
+
+- "good instruments come from a combination of institutional knowledge and ideas about the processes determining the variables of interest" (Angrist & Pischke)
+  - i.e., it's not just about data
+  
+---
+# Various Types of Instruments
+
+- natural experiments
+- policy variation
+- policy/implementation details
+- actions taken by third parties
+
+---
+# Various Types of Instruments
+
+- examples of and papers using different types 
+
+---
+# Caveats about IV
+
+- we can never "prove" that an IV is valid, it has to be argued
+- we can show that an IV is weak sometimes though
+- beware of internal validity causality; LATE
+  - causality is determined based on meaningful variation (e.g., randomized experiment); an IV may only lead to meaningful variation for a small part of the population (e.g., RD)
+  - can help inform our theoretical understanding
+  - comes up when we consider the more realistic scenario that casual effects are heterogeneous
+
+---
+# LATE
+
+- only estimate the avg causal effect for those who are affected
+- those who are affected by all be affected in the same direction; otherwise it complicates calculation
+  - this is a hypothetical/theoretical assumption, we can never know
+- "IV solves the problem of causal inference in a randomized trial with partial compliance" (Angrist, Pischke)
+
+---
+# Intention to Treat in Randomized Treatments
+
+- some people who choose to decline a randomized offer/treatment
+- use the offer variable as an IV
+
+---
+# Workshop Brainstorm
+
+- imagine you work at Google/Federal Government/Facebook and you want to estimate ???
+- think of possible instruments?
+
+---
+# Sources
+
+- Cameron & Triveti textbook
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides
