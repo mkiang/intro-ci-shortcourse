@@ -30,6 +30,200 @@ options(htmltools.dir.version = FALSE)
 
 - why linear regression?
 - overview of linear regression checks
+- possible biases in linear regression
 
 ???
 Linear regression is interpretable. We care about unbiased interpretations rather than predictive fit. These overlap, but the former is most important.
+
+
+---
+
+# Review of Linear Regression
+
+- outcome is additive in the provided features
+- $Y_i = \beta_0 + \beta \mathbf{X_i} + \epsilon_i $
+- $Y_i = \beta_0 + \gamma T_i + \beta \mathbf{X_i} + \epsilon_i $
+
+- Going to spend a lot of time thinking about $\gamma$ and $\epsilon_i$.
+- Though we will just use regression, this does not limit our scope much:
+- interactions: $\beta_j X_j \cdot X_k$
+- feature transformations: $log(Y_i)$
+- flexible semi-parametric: $Y_i = \beta_0 + \gamma T_i + \beta f(\mathbf{X_i}) + \epsilon_i $
+
+---
+
+# Causal Regression
+
+- conditional expectation function is assumed to be causal
+- controlling for observed differences
+- looking for systematic randomness; we know we can't explain (close to) everything, instead we want to get *unbiased* estimates of specific causal patterns of interest.
+  
+![CEF_example](./assets/mhe_cef.png)
+  
+  
+---
+
+# Regression Maths
+
+- True CEF (best estimate for $Y_i$): $$Y_i = E[Y_i|X_i]+\epsilon_i$$
+- Linear regression estimates the best MSE linear approximation for $E[Y_i|X_i]$
+  - how does the distribution of $Y_i$ change *wrt* $X_i$?
+  - linear regression gives us interpretable coefficients
+
+![CEF_regression](./assets/mhe_cef_regression.png)
+
+---
+
+# Regression in Potential Outcomes
+
+- [todo] left open
+
+---
+
+# Causal Language
+
+- be careful using: {"effect", "leads to", "results in", "because of"}
+- instead when just observed patterns {"related with", "pattern", "correlation", "tends to", "observed"}
+
+---
+
+# Conditional Independence
+
+- getting a Master's degree may not be appropriately random
+- people who are prescribed a drug treatment may not be comparable to general population
+
+- it could be argued though:
+  - students with similar GPA, age, and Bachelor degrees may be random
+  - people with similar blood measurements seen by different doctors may have random drug treatment
+  
+- ${Y_{0i}, Y_{1i}} \bot C_i ?$
+- ${Y_{0i}, Y_{1i}} \bot C_i | \mathbf{X_i}?$
+- $Y_{si} \bot s_i | \mathbf{X_i}\quad\forall s?$
+
+---
+
+# Avg Causal Effect
+
+$$
+\begin{align*}
+\ & E[Y_{i}|X_{i},s_{i}=s]-E[Y_{i}|X_{i},s_{i}=s-1]\\
+ & =E[Y_{si}-Y_{(s-1)i}|X_{i}]
+\end{align*}
+$$
+--
+- but there's an $X_i$ there?
+
+# Linear Regression with CIA
+
+- linear additive assumption simplifies things
+
+$$
+\begin{align*}
+\ \gamma_{s_i} & =E[Y_{i}|X_{i},s_{i}=s]-E[Y_{i}|X_{i},s_{i}=s-1]\\
+ & =E[Y_{si}-Y_{(s-1)i}] + \beta X_i - \beta X_i\\
+ & =E[Y_{si}-Y_{(s-1)i}]
+\end{align*}
+$$
+
+---
+
+# Biases: when Conditional Independece is violated
+
+- omitted variables: correlation with the $T_i$ leads the error term to affect the estimate of $\gamma$
+- skip the math;
+- conceptually, 
+
+![ovb_education](./assets/ovb_estimates.png)
+
+
+---
+
+# Biases in Observational Data
+
+???
+
+(almost) All data is observational.
+
+If you think you have an experiment, it's probably still observational data.
+
+---
+
+# Roadmap
+
+4 major types of bias:
+- *omitted variable confounding*
+- selection
+- truncation/censored variables
+- choice of regression error term
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Omitted Variable Confounding
+]
+.right-column[
+<br><br><br>
+- most common occurrence in analysis, i.e. OVB
+- up to analyst to decide if OVB affects insights
+- occurs when omitted variable affects both the outcome and a predictor
+]
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Omitted Variable Confounding
+]
+.right-column[
+- most common occurrence in analysis, i.e. OVB
+- up to analyst to decide if OVB affects insights
+- occurs when omitted variable affects both the outcome and a predictor
+![Wired Article](./assets/dag_ovb_simple.png)
+]
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Omitted Variable Confounding
+  #### Examples
+]
+.right-column[
+```{r}
+library(tidyverse)
+df_educ <- data_frame(iq = runif(200, 1, 100),
+                      school_years = 16 - 0.05*iq + rnorm(200),
+                      income = 20000 + 5000*school_years + 5000*rnorm(200) + 500*iq)
+summary(lm(income ~ school_years, data = df_educ))
+summary(lm(income ~ school_years + iq, data = df_educ))
+```
+
+]
+
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Omitted Variable Confounding
+  #### Academic Examples
+]
+.right-column[
+- job training programs [cite] [todo]
+- schooling
+]
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Omitted Variable Confounding
+  #### Data Science Examples
+]
+.right-column[
+- advertising tracking
+- adoption of a mobile app
+- calling customer service
+]
+
