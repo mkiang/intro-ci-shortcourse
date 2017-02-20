@@ -20,13 +20,41 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 
+<!--
 class: center, middle
 
-# Roadmap
 
-???
+.center[<img src="./assets/do_you_like_dags.jpg">]
+-->
 
-Ok. Now that we have a general understanding of Rubin Causal Model, we're going to take a step back and learn about DAGs and then under what conditions the RCM will work.
+# This talk
+--
+
+### Randomized Control Trials
+
+- Thinking about causality in the ideal setting
+--
+
+### Causal Directed Acyclic Graphs
+
+- Useful ways of encoding our beliefs and assumptions.
+
+- Helpful for thinking about ways our assumptions can be wrong
+--
+
+### Thinking about how bias affects the ideal case (more next lecture)
+
+---
+# Randomized Control Trials
+
+- Recall from last lecture, because of Fundamental Problem of Causal Inference, we can never observe both counterfactuals.
+- Instead, we ask: under what conditions do the data we have properly estimate the data we want? 
+- That is, when does: $$Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$$
+
+---
+class: center, middle
+# The Life-changing Magic of DAGs
+
 ---
 # Causal Directed Acyclic Graphs (DAGs)
 
@@ -46,7 +74,7 @@ Ok. Now that we have a general understanding of Rubin Causal Model, we're going 
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
     
 ---
-# Rules for *drawing* a DAG
+# Rules for drawing a DAG
 
 .center[<img src="./assets/example_dag.jpg" width="200">]
 
@@ -67,7 +95,7 @@ Ok. Now that we have a general understanding of Rubin Causal Model, we're going 
 
 - $X$ and $U$ are direct causes of $Y$
 - $Y$ is a direct cause of $Z$
-- $X$/$U$ are *not* direct causes of $Z$, but *indirect* causes through $Y$
+- $X$ and $U$ are *not* direct causes of $Z$, but *indirect* causes through $Y$
 - $X$ and $U$ are not causes of each other
 - No two variables share a common cause
 
