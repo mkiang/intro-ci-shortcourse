@@ -2,7 +2,7 @@
 
 ### Authors:
 - [Mathew Kiang](https://mathewkiang.com) ([GitHub](https://github.com/mkiang))
-- [Zhe Zhang](https://sites.google.com/view/zhezhang) ([GitHub](https://github.com/writezhe))
+- [Zhe Zhang](http://aboutzhe.com) ([GitHub](https://github.com/writezhe))
 - [Monica Alexander](http://monicaalexander.com) ([GitHub](https://github.com/MJAlexander))
 
 ### Requirements (R packages):
