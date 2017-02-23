@@ -137,6 +137,14 @@ $$
 
 
 ---
+# Recap: What does it mean to "control of covariates"
+
+- makes observed outcomes independent of our causal treatment/action of interest
+- based on theory only though; there can always be omitted variable bias
+  - and bias caused by bad controls
+  - and functional form biases
+
+---
 
 # Biases in Observational Data
 
@@ -294,6 +302,38 @@ we use a predicted version of $\hat{X_i}$, which does not suffer from influence 
 
 - some people who choose to decline a randomized offer/treatment
 - use the offer variable as an IV
+![iv_itt_effects](./assets/iv_rct_itt_effects_regression.png)
+
+---
+# Characterizing Instruments
+
+- it's also useful to consider some numbers around LATE
+  - how many "compliers"/"affected" do we have?
+  - what % of our observed treated were affected by $IV$/$z$?
+
+![iv_size_of_compliers](./assets/iv_size_of_compliers.png)
+
+- small group of "compliers"" is not necessarily bad (like only those on the margin of usefulness)
+
+- (optional) also can compare composition of descriptive variables of the compliers to others.
+
+--- 
+# Lots more Details on IV
+
+- see book and reading for additional (multiple instruments, interpretation and math of instruments with covariates, IVs for continuous treatment variables)
+- key overall idea: look for things in the world/nature/policies that results in some random variation! Finding that is the most difficult part. Once you find it, you can refer to math and textbooks and references to nail the correct interpretation/identification.
+
+- "key source of variation"
+- "what's your identification (strategy)"
+- be excited but cautious though, there are a lot of ways things can go wrong
+  - different functional forms for the instrument
+
+- overall key advice: always be cautious and recognizing the assumptions that go into causal work. Valuable exercise to think through skeptically.
+
+---
+# Despite Caution, When is Causal Work Useful?
+
+- Raj Chetty
 
 ---
 # Workshop Brainstorm
