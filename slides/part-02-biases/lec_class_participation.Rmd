@@ -1,0 +1,46 @@
+---
+title: "Causal Inference for Data Science"
+subtitle: "ITAM Short Workshop"
+author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+date: "March 16, 2017"
+output:
+  xaringan::moon_reader:
+    css: ["custom.css", "./../custom.css", ]
+    # In order for the css file to work, you need to set your working directory
+    # to one above the slide directory ('./../') and then call moon_reader via
+    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
+    # Or just knit it into a browser and it should work immediately.
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+# Class Participation
+
+- Suggest types of companies that you would like to work for
+- We will write them on the board and assign groups of 3 to discuss
+
+---
+# Group Break Out
+
+- We'll come up with 2 questions to discuss
+- Describe the ideal dataset
+- Generate the data even perhaps?
+- Come up to the class and present a little bit
+
+---
+# Sources
+
+- Cameron & Triveti textbook
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides
