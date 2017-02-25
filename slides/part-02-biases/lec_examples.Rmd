@@ -28,7 +28,26 @@ options(htmltools.dir.version = FALSE)
 # Example of CIA
 
 
+---
+# Impact of Information on Markets
 
+- "The Digital Provide: Information (Technology), Market Performance, and Welfare in the South Indian Fisheries Sector" (Robert Jensen, QJE 2007)
+
+- Special:
+  - entry of cell phones is arguably exogenous to the fisherman and the fish markets
+  - usual studies of impact of cell phones is macroeconomic and difficult to tease out cause and effect
+  - important to look at the impact of information enabled by technology
+
+![jensen_phones](./assets/jensen_phone_adoption.png)
+![jensen_prices](./assets/jensen_price_changes.png)
+
+---
+# Impact of Additional Education?
+
+![iv_AA_labor_laws](./assets/ang_acem_labor_laws_iv.png)
+
+---
+# 
 
 ---
 # Sources
