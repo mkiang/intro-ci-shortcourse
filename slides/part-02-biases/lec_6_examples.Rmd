@@ -47,7 +47,14 @@ options(htmltools.dir.version = FALSE)
 ![iv_AA_labor_laws](./assets/ang_acem_labor_laws_iv.png)
 
 ---
-# 
+# Amazon Q&A Impact
+
+- Newegg, etc.
+- Imagine you work at Amazon
+- Product specific controls by comparing two platforms (one with Q&A, one without)
+- Scraped the data, comparing the sales ranks, controls
+- Have to argue that Platform 2 & Amazon have similar time trends (e.g. what about Amazon sales being all on the first day and dropping off after that, while Platform 2 is stable) and track each other similarly
+- Using video games, they can identify "new" product entries and measure uniqueness across platforms.
 
 ---
 # Sources

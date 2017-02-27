@@ -25,22 +25,16 @@ options(htmltools.dir.version = FALSE)
 ```
 
 ---
-# Class Participation
+# Review
 
-- Suggest types of companies that you would like to work for
-- We will write them on the board and assign groups of 3 to discuss
-
----
-# Group Break Out
-
-- We'll come up with 2 questions to discuss
-- Describe the ideal dataset
-- Generate the data even perhaps?
-- Come up to the class and present a little bit
+- 
 
 ---
-# Sources
+# Group Brainstorm Exercise
 
-- Cameron & Triveti textbook
-- Mostly Harmless Econometrics
-- Osea Giuntella, slides
+- Various types of companies that you or peers would like to work for?
+- Form groups of 3-4 with those nearby
+- We will assign you one causal question; your group comes up with another question
+  - Describe the ideal dataset to collect (experiment vs non-experimental)
+  - Generate the data even perhaps?
+  - Come up to the class and present a little bit
