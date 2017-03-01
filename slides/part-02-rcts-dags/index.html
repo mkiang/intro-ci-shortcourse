@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
     <meta name="date" content="2017-03-15" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
     <link rel="stylesheet" href="../custom.css" type="text/css" />
   </head>
   <body>
@@ -28,6 +29,17 @@ class: center, middle
 --&gt;
 
 # Roadmap
+
+???
+
+So we've got some of the basic definitions down. We know what a causal effect is and we have a framework for estimating causal effects under certain assumptions. Now we're going to talk about sort of the best case scenario for estimaing causal effects — RCTs. **NEXT SLIDE**
+
+While you probably won't ever get to do an RCT in the real world, they are useful to think about because ultimately ever method for causal inference is trying to mimic an RCT and we want to know why. **NEXT SLIDE**
+
+Then we'll take a bit of a detour and talk about DAGs. I think they're very useful; however, a lot of people don't. Regardless, you should know about them because you'll likely come across them in the literature. **NEXT SLIDE**
+
+Finally, we'll return to RCTs and use DAGs to loosen up some of the restrictions of RCTs and show how bias can affect estimates when we don't have an RCT. Then next lecture, Zhe will talk more about the math behind these different biases.
+
 --
 
 ### Randomized Control Trials
@@ -37,47 +49,83 @@ class: center, middle
 
 ### Causal Directed Acyclic Graphs (DAGs)
 
-- Useful ways of encoding our beliefs and assumptions.
+- Useful ways of encoding our beliefs and assumptions
 
 - Helpful for thinking about ways our assumptions can be wrong
 --
 
-### Back to RCTs and how they address biases 
+### Use DAGs to show how RCTs avoid bias
 
-- More about biases next lecture
+- More about these biases next lecture
+
 
 ---
 # Randomized Control Trials
-
-.footnote[Wikipedia]
 
 .pull-right[&lt;img src="./assets/james_lind.jpg" width="250"&gt;]
 
+???
+
+Again, we'll start off with a bit of motivation. This is James Lind. He was a Scottish physician in the Royal Navy **NEXT SLIDE**
+
+He conducted the first recorded RCT on scurvy, which is a disease from Vitamin C deficiency and causes pretty bad symptoms. It's a disease of the connective tissue because Vitamin C is required to create connective tissue, all sorts of bad things happen. Severe bleeding, gum disease, inability to heal from superficial wounds, etc. People eventually get personality changes and then die of infection or bleeding. That said, it's very easy to treat. Just some Vitamin C and improvement occurs in days and full recovery in about a month. Was very common back when there were long sea voyages and they were unable to keep fresh fruit available. **NEXT SLIDE**
+
+So Lind was on a ship and he found 12 sailrs with survey. Randomly split them up into 6 groups and gave each group a different treatment in addition to their regular diet. **NEXT SLIDE**
+
+As he suspected, only the group that had citrus fruits showed substantial improvement with one returning back to work and one on the mend (they ran out of fruit before he could completely heal).
+
+--
+.footnote[Wikipedia]
+
 - First recorded RCT was done in 1747 by James Lind
 
-- Scurvy is this terrible disease caused by Vitamin C deficiency and was a huge during long sea voyages
+--
 
-- Lind took 12 sailors with scurvy and split them into groups of 2:
+- Scurvy is a terrible disease caused by Vitamin C deficiency and was a huge issue during long sea voyages
+
+--
+
+- Lind took 12 sailors with scurvy and split them into six groups of two:
 
     - Groups were assigned: (1) 1 qt cider, (2) 25 drops of vitriol, (3) 6 spoonfuls of vinegar, (4) 1/2 pt of sea water, (5) garlic, mustard, and barley water, (6) 2 oranges and 1 lemon
 
-- Only Group 6 (citrus fruit) showed improvement
+--
+
+- Only Group 6 (citrus fruit) showed substantial improvement
 
 ---
 # Randomized Control Trials
-
 .footnote[Hernan Epi 201]
 
-### Even with small sample size, Lind showed convincing causal effect
 
-### We can gain knowledge without knowing the mechanism — Lind believed acid stupid putrefaction. Medicine had not yet understood importance of vitamins.
+### What's the big deal about RCTs?
+
+--
+
+- Even with a very small sample size, Lind was able to show convincing causal effect
+
+--
+
+- RCTs allow us to gain knowledge about causal effects **without knowing the mechanism** 
+
+    - Lind believed acid stopped putrefaction. 
+    - Medicine had not yet understood importance of vitamins.
+    
+---
+# Randomized Control Trials
+
+### But RCTs aren't perfect
+
+- Not every question can be answered with an RCT (feasibility or ethical concerns)
+
+- Smaller sample size often means limited generalizability
 
 ---
 # RCT Definitions
 
 .footnote[Hernan Epi 201]
 
-- **Randomized**: The intervention is assigned randomly (either marginally or conditionally) 
+- **Randomized**: The intervention is assigned randomly
 
 --
 
@@ -89,15 +137,19 @@ class: center, middle
 
 - **Trial**: An experiment where the goal is to study effect of some medical intervention on humans
 
-    - Trials have ethical requirements that experiments may not. (e.g., equipoise)
+    - Trials have ethical requirements that experiments may not (e.g., equipoise)
 
-### In an ideal RCT, no loss to follow-up, perfect compliance, only one version of treatment, double (or triple) blind assignment
+--
+&lt;br&gt;
+### In an ideal RCT, there is no loss to follow-up, perfect compliance, only one version of treatment, double (or triple) blind assignment
 ---
 # Randomized Control Trials
 
 - Recall from last lecture, because of the *Fundamental Problem of Causal Inference*, we can never observe both counterfactuals.
-- Instead, we ask: under what conditions do the data we have properly estimate the data we want? 
-- That is, when does: `$$Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$$`
+
+--
+
+- Instead, we ask: under what conditions do the data we have properly estimate the data we want? `$$Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$$`
 --
 
 - Again, recall our assumptions for the Rubin causal model:
@@ -108,8 +160,7 @@ class: center, middle
     - And that we have *stability*?
 
 --
-
-### These are all met in an ideal RCT
+### .center[These are all met in an ideal RCT]
 
 ---
 # Randomized Control Trials
@@ -118,23 +169,73 @@ class: center, middle
 
 - Suppose we have a large (nearly infinite) population of perfect compliers
 
+--
+
 - We divide them into two groups: (1) Group Heads and (2) Group Tails 
+
+--
 
 - We assigned the groups by flipping a (fair) coin
 
+--
+
 - Now, we decide to treat Group Heads and not treat Group Tails 
 
-    - The risk of death in Group Heads is: `\(Pr[Y=1|A=1] = .75\)`
+    - The risk of death in Group Heads is: `\(Pr[Y=1|A=1] = .25\)`
+
+--
 
 - Pretend that instead of doing this, we treated Group Tails and did not treat Group Heads. What would the expected risk of death in Group Tails be?
+
+--
+
+    - Still `\(.25\)`
 
 ---
 class: center, middle
 # Exchangeability is a consequence of randomization
 
-.footnote[This is why randomized control trials are considered the "gold standard"]
+--
+
+## Unfortunately, we (usually) won't get to randomize
+
 ---
-class: center, middle
+# Formal definition of exchangeability
+.footnote[Hernan Epi 201]
+
+The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A\)`.
+
+`$$Y^a \perp A \text{ for all } a$$`
+
+--
+
+- Exchangeability is "another causal concept that cannot be represented by associational (statistical) language"
+
+--
+
+### NOTE!
+
+Exchanagebility is not the same as independence. That is, `$$Y^a \perp A \neq Y \perp A$$`
+
+---
+# Aside: Measures of causal effect
+
+If exchangeability holds, we can express the causal effects in different ways:
+
+--
+
+1. **Absolute difference**: `\(ATE = Pr[Y=1|A=1] - Pr[Y=1|A=0]\)`
+
+--
+
+1. **Risk ratio**: `\(ATE = \frac{Pr[Y=1|A=1]}{Pr[Y=1|A=0]}\)`
+
+--
+
+1. **Odds ratio**: `\(ATE = \frac{Pr[Y=1|A=1] / Pr[Y=0|A=1]}{Pr[Y=1|A=0] / Pr[Y=1|A=0]}\)`
+
+---
+class: center, middle, inverse
 # The Life-changing Magic of DAGs
 
 ---
@@ -189,7 +290,7 @@ class: center, middle
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
 
 - Edge implies statistical dependence
-- No statistical dependence if there is a *collider*. Two arrow heads into one variable ($U \rightarrow Y \leftarrow X$)
+- No statistical dependence if there is a *collider*. Two arrow heads into one variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
 - No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable) or a *descendent* of that variable
 - There is statistical dependence if we block a collider or a descendent of that collider
 
@@ -205,10 +306,10 @@ class: center, middle
 - `\(X\)` and `\(Y\)` are statistically dependent
 - `\(U\)` and `\(Y\)` are statistically dependent
 - `\(Y\)` and `\(Z\)` are statistically dependent
-
 --
-- `\(X\)` and `\(Z\)` are statistically dependent ($X \rightarrow Y \rightarrow Z$)
-- `\(U\)` and `\(Z\)` are statistically dependent ($U \rightarrow Y \rightarrow Z$)
+
+- `\(X\)` and `\(Z\)` are statistically dependent (i.e., `\(X \rightarrow Y \rightarrow Z\)`)
+- `\(U\)` and `\(Z\)` are statistically dependent (i.e., `\(U \rightarrow Y \rightarrow Z\)`)
 
 ---
 # Reading DAGs: Statistical implications
