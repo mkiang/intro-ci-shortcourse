@@ -2,14 +2,14 @@
 
 ###Introduction to Causal Inference: From Data to Action
 - Instituto Tecnológico Autónomo de México (ITAM)
-- March 15-16, 2017
-- 14:00-18.00
-- Campus Rio Hondo classroom XXXX
+- March 15, 2017 from 14:00-18.00 -classroom 213(RH)
+- March 16, 2017 from 14:00-16:00 -classroom SA-3(RH)
+		 from 16:00-18:00 -classroom 204(RH)
 - Limited (30 seats) 
 
 ### Lecturers
 - [Mathew Kiang](https://mathewkiang.com) ([GitHub](https://github.com/mkiang))
-- [Zhe Zhang](https://sites.google.com/view/zhezhang) ([GitHub](https://github.com/writezhe))
+- [Zhe Zhang](http://aboutzhe.com) ([GitHub](https://github.com/writezhe))
 - [Monica Alexander](http://monicaalexander.com) ([GitHub](https://github.com/MJAlexander))
 
 ### Description
