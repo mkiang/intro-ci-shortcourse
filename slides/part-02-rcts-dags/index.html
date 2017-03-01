@@ -204,7 +204,6 @@ class: center, middle
 .footnote[Hernan Epi 201]
 
 The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A\)`.
-
 `$$Y^a \perp A \text{ for all } a$$`
 
 --
@@ -242,8 +241,28 @@ class: center, middle, inverse
 # Causal Directed Acyclic Graphs (DAGs)
 
 .center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+
+- Causal DAGs are an easy tool for us to express statistical associations implied by our assumptions in their causal structure. 
+
+--
+
+- They also allow us to do the reverse. Given a set of associations in our data, diagram the causal structures that could result in those associations.
+
+--
+
+- Causal DAGs provide a mathematical link between statistics and causality.
+
+
+---
+# Causal Directed Acyclic Graphs (DAGs)
+
+.center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - Graphically, the goal is to estimate magnitude and direction arrow. Statistically, we can only estimate the magnitude
+
+--
 
 - The edge itself can exist for at least 5 reasons:
     1. Just random luck
@@ -251,51 +270,63 @@ class: center, middle, inverse
     1. `\(Y\)` actually causes `\(X\)` (reverse causation)
     1. `\(X\)` and `\(Y\)` share a common cause (confounding)
     1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
-    
-- Our job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
 
-.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+--
+
+- Our job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
     
 ---
 # Rules for drawing a DAG
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - Time flows left to right (thus arrows always point right)
 
-- An arrow implies our belief that something is *causal*
+--
 
-- The lack of an arrow implies our belief that things are *not* causal
+- An arrow implies our belief that something is *causal*. Conversely, the lack of an arrow implies our belief that things are *not* causal
+
+--
 
 - Everything we are concerned with exists in the DAG
-
-.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 ---
 # Reading DAGs: Causal assumptions
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - `\(X\)` and `\(U\)` are direct causes of `\(Y\)`
-- `\(Y\)` is a direct cause of `\(Z\)`
-- `\(X\)` and `\(U\)` are *not* direct causes of `\(Z\)`, but *indirect* causes through `\(Y\)`
-- `\(X\)` and `\(U\)` are not causes of each other
-- No two variables share a common cause
+--
 
-.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+- `\(Y\)` is a direct cause of `\(Z\)`
+--
+
+- `\(X\)` and `\(U\)` are *not* direct causes of `\(Z\)`, but *indirect* causes through `\(Y\)`
+--
+
+- `\(X\)` and `\(U\)` are not causes of each other
+--
+
+- No two variables share a common cause
 
 ---
 # Reading DAGs: Statistical implications
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
-
-- Edge implies statistical dependence
-- No statistical dependence if there is a *collider*. Two arrow heads into one variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
-- No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable) or a *descendent* of that variable
-- There is statistical dependence if we block a collider or a descendent of that collider
-
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
+- An edge implies statistical dependence
+--
+
+- No statistical dependence if there is a *collider*. Two arrow heads into one variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
+--
+
+- No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable) or a *descendent* of that variable
+--
+
+- There is statistical dependence if we block a collider or a descendent of that collider
 
 ---
 # Reading DAGs: Statistical implications
@@ -342,12 +373,32 @@ class: center, middle, inverse
 1. **Neglible randomness.** Statistical associations (or lack of such associations) are never due to random change (i.e., large sample size assumption).
 
 ---
-# DAGs Conclusion
-.center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
+# RCTs and DAGs
 
-### Powerful way of elucidating our beliefs and assumptions with only a few nodes and edges
+- Earlier, I said the edge in a DAG can exist for five reasons:
+    1. Just random luck
+    1. `\(X\)` really does cause `\(Y\)` (causal)
+    1. `\(Y\)` actually causes `\(X\)` (reverse causation)
+    1. `\(X\)` and `\(Y\)` share a common cause (confounding)
+    1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
 
+--
 
+### .center[RCTs address most of these]
+
+---
+# RCTs and DAGs
+
+1. Just random luck
+    - A large sample size and check confidence interval
+1. `\(X\)` really does cause `\(Y\)` (causal)
+1. `\(Y\)` actually causes `\(X\)` (reverse causation)
+    - Temporal ordering
+1. `\(X\)` and `\(Y\)` share a common cause (confounding)
+    - Randomization prevents common causes
+1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
+
+--
 
 ---
 class: center, middle
