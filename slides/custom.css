@@ -15,7 +15,7 @@ a, a > code {
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
-  font-size: 90%;
+  font-size: 70%;
 }
 .remark-code, .remark-inline-code { 
 	font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
@@ -63,6 +63,8 @@ code {
 .pull-right {
   float: right;
   width: 47%;
+  padding-left: .1em;
+  text-align: right;
 }
 .pull-right ~ * {
   clear: both;
@@ -93,4 +95,8 @@ ul {
 }
 .red {
 	color: red;
+}
+
+ul li ul {
+	padding-left: 1em;
 }

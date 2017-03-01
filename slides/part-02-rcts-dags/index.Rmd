@@ -1,11 +1,11 @@
 ---
-title: "DAGs and RCTs"
+title: "Randomized Control Trials"
 subtitle: "Evaluating causality in an *ideal* setting"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
 date: "March 15, 2017"
 output:
   xaringan::moon_reader:
-    css: ["custom.css", "./../custom.css", ]
+    css: ["./../custom.css", ]
     # In order for the css file to work, you need to set your working directory
     # to one above the slide directory ('./../') and then call moon_reader via
     # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
@@ -27,7 +27,7 @@ class: center, middle
 .center[<img src="./assets/do_you_like_dags.jpg">]
 -->
 
-# This talk
+# Roadmap
 --
 
 ### Randomized Control Trials
@@ -35,22 +35,104 @@ class: center, middle
 - Thinking about causality in the ideal setting
 --
 
-### Causal Directed Acyclic Graphs
+### Causal Directed Acyclic Graphs (DAGs)
 
 - Useful ways of encoding our beliefs and assumptions.
 
 - Helpful for thinking about ways our assumptions can be wrong
 --
 
-### Thinking about how bias affects the ideal case (more next lecture)
+### Back to RCTs and how they address biases 
+
+- More about biases next lecture
 
 ---
 # Randomized Control Trials
 
-- Recall from last lecture, because of Fundamental Problem of Causal Inference, we can never observe both counterfactuals.
+.footnote[Wikipedia]
+
+.pull-right[<img src="./assets/james_lind.jpg" width="250">]
+
+- First recorded RCT was done in 1747 by James Lind
+
+- Scurvy is this terrible disease caused by Vitamin C deficiency and was a huge during long sea voyages
+
+- Lind took 12 sailors with scurvy and split them into groups of 2:
+
+    - Groups were assigned: (1) 1 qt cider, (2) 25 drops of vitriol, (3) 6 spoonfuls of vinegar, (4) 1/2 pt of sea water, (5) garlic, mustard, and barley water, (6) 2 oranges and 1 lemon
+
+- Only Group 6 (citrus fruit) showed improvement
+
+---
+# Randomized Control Trials
+
+.footnote[Hernan Epi 201]
+
+### Even with small sample size, Lind showed convincing causal effect
+
+### We can gain knowledge without knowing the mechanism — Lind believed acid stupid putrefaction. Medicine had not yet understood importance of vitamins.
+
+---
+# RCT Definitions
+
+.footnote[Hernan Epi 201]
+
+- **Randomized**: The intervention is assigned randomly (either marginally or conditionally) 
+
+--
+
+- **Control**: There is (at least) one well-defined comparison group
+
+--
+
+- **Experiment**: Investigators (directly) control the intervention
+
+- **Trial**: An experiment where the goal is to study effect of some medical intervention on humans
+
+    - Trials have ethical requirements that experiments may not. (e.g., equipoise)
+
+### In an ideal RCT, no loss to follow-up, perfect compliance, only one version of treatment, double (or triple) blind assignment
+---
+# Randomized Control Trials
+
+- Recall from last lecture, because of the *Fundamental Problem of Causal Inference*, we can never observe both counterfactuals.
 - Instead, we ask: under what conditions do the data we have properly estimate the data we want? 
 - That is, when does: $$Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$$
+--
 
+- Again, recall our assumptions for the Rubin causal model:
+--
+
+    - How do we ensure our groups *exchangeable*?
+    - That we have *positivity*?
+    - And that we have *stability*?
+
+--
+
+### These are all met in an ideal RCT
+
+---
+# Randomized Control Trials
+
+.footnote[Hernan Epi 201]
+
+- Suppose we have a large (nearly infinite) population of perfect compliers
+
+- We divide them into two groups: (1) Group Heads and (2) Group Tails 
+
+- We assigned the groups by flipping a (fair) coin
+
+- Now, we decide to treat Group Heads and not treat Group Tails 
+
+    - The risk of death in Group Heads is: $Pr[Y=1|A=1] = .75$
+
+- Pretend that instead of doing this, we treated Group Tails and did not treat Group Heads. What would the expected risk of death in Group Tails be?
+
+---
+class: center, middle
+# Exchangeability is a consequence of randomization
+
+.footnote[This is why randomized control trials are considered the "gold standard"]
 ---
 class: center, middle
 # The Life-changing Magic of DAGs
@@ -64,10 +146,10 @@ class: center, middle
 
 - The edge itself can exist for at least 5 reasons:
     1. Just random luck
-    1. $X$ really does cause $Y$
-    1. $Y$ actually causes $X$
-    1. $X$ and $Y$ share a common cause
-    1. $X$ and $Y$ have a common effect that we are conditioning on
+    1. $X$ really does cause $Y$ (causal)
+    1. $Y$ actually causes $X$ (reverse causation)
+    1. $X$ and $Y$ share a common cause (confounding)
+    1. $X$ and $Y$ have a common effect that we are conditioning on (selection)
     
 - Our job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
 
