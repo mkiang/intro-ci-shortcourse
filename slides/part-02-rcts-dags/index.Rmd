@@ -1,6 +1,6 @@
 ---
-title: "Randomized Control Trials"
-subtitle: "Evaluating causality in an *ideal* setting"
+title: "Evaluating causality in an *ideal* setting"
+subtitle: "RCTs and DAGs"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
 date: "March 15, 2017"
 output:
@@ -31,13 +31,13 @@ class: center, middle
 
 ???
 
-So we've got some of the basic definitions down. We know what a causal effect is and we have a framework for estimating causal effects under certain assumptions. Now we're going to talk about sort of the best case scenario for estimaing causal effects — RCTs. **NEXT SLIDE**
+So we've got some of the basic definitions down. We know what a causal effect is and we have a framework for estimating causal effects under certain assumptions. Now we're going to talk about the best case scenario for estimaing causal effects — RCTs. **NEXT SLIDE**
 
-While you probably won't ever get to do an RCT in the real world, they are useful to think about because ultimately ever method for causal inference is trying to mimic an RCT and we want to know why. **NEXT SLIDE**
+While you probably won't a lot of randomized experiments in the real world, they are useful to think about because ultimately every method for causal inference is trying to mimic an RCT. **NEXT SLIDE**
 
-Then we'll take a bit of a detour and talk about DAGs. I think they're very useful; however, a lot of people don't. Regardless, you should know about them because you'll likely come across them in the literature. **NEXT SLIDE**
+Then we'll take a bit of a detour and talk about DAGs. I think they're very useful; however, a lot of people don't. Regardless, you should know about them because you'll likely come across them in the causal inference literature. And hopefully I can convince you that they provide a useful way of linking your causal question to your data and regressions. **NEXT SLIDE**
 
-Finally, we'll return to RCTs and use DAGs to loosen up some of the restrictions of RCTs and show how bias can affect estimates when we don't have an RCT. Then next lecture, Zhe will talk more about the math behind these different biases.
+Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when we don't have an RCT (and why RCTs are so powerful). Then next lecture, Zhe will talk more about the math behind these different biases.
 
 --
 
@@ -69,7 +69,7 @@ Again, we'll start off with a bit of motivation. This is James Lind. He was a Sc
 
 He conducted the first recorded RCT on scurvy, which is a disease from Vitamin C deficiency and causes pretty bad symptoms. It's a disease of the connective tissue because Vitamin C is required to create connective tissue, all sorts of bad things happen. Severe bleeding, gum disease, inability to heal from superficial wounds, etc. People eventually get personality changes and then die of infection or bleeding. That said, it's very easy to treat. Just some Vitamin C and improvement occurs in days and full recovery in about a month. Was very common back when there were long sea voyages and they were unable to keep fresh fruit available. **NEXT SLIDE**
 
-So Lind was on a ship and he found 12 sailrs with survey. Randomly split them up into 6 groups and gave each group a different treatment in addition to their regular diet. **NEXT SLIDE**
+So Lind was on a ship and he found 12 sailrs with scurvey. Randomly split them up into 6 groups and gave each group a different treatment in addition to their regular diet. **NEXT SLIDE**
 
 As he suspected, only the group that had citrus fruits showed substantial improvement with one returning back to work and one on the mend (they ran out of fruit before he could completely heal).
 
@@ -96,8 +96,15 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 # Randomized Control Trials
 .footnote[Hernan Epi 201]
 
-
 ### What's the big deal about RCTs?
+
+???
+
+There are a few things worth nothing about Lind's RCT. **NEXT SLIDE**
+
+First, he showed a strong causal effect with a tiny sample. An n=12 study would literally never get published today, but nonetheless, it's hard to argue with a strong causal effect even in a small RCT. **NEXT SLIDE**
+
+Second, even though Lind was wildly wrong about **why** the RCT worked, he was right about the causal effect of citric acid on preventing and curing scurvy. Back then, medicine didn't reocgnize the importance of vitamins and so Lind believed that survey or all the bleeding was a result of the body beging to putrefy and acid reduced the process.
 
 --
 
@@ -112,12 +119,21 @@ As he suspected, only the group that had citrus fruits showed substantial improv
     
 ---
 # Randomized Control Trials
-
 ### But RCTs aren't perfect
+
 
 - Not every question can be answered with an RCT (feasibility or ethical concerns)
 
-- Smaller sample size often means limited generalizability
+???
+
+However, it is worth noting that you can't always do an RCT. You've never read an RCT on the causal effects of smoking and lung cancer in humans. It would be wildly unethical to force some humans to smoke and prevent others from doing so. The famous example people like to use is that you've never read an RCT on the effectiveness of parachutes on preventing death from jumping out of a plane. We know they work. We have observational studies to indicate it works. We have strong priors. Etc. **NEXT SLIDE**
+
+It's also important to note that RCTs are often very costly and have a smaller, more select sample size. While the *internal* validity is high, the *external* validity may not be. In other words, I know the causal effect is true for people *inside of my study*. But I cannot be certain that it is true for everybody outside of my study as well.
+
+
+--
+
+- Smaller sample size often means limited generalizability. The *internal validity* of an RCT is very high, but the *external validity* is often not.
 
 ---
 # RCT Definitions
@@ -125,6 +141,7 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 .footnote[Hernan Epi 201]
 
 - **Randomized**: The intervention is assigned randomly
+
 
 --
 
