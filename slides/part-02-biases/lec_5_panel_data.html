@@ -1,33 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Causal Inference for Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="date" content="2017-03-16" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Causal Inference for Data Science
+## ITAM Short Workshop
+### Mathew Kiang, Zhe Zhang, Monica Alexander
+### March 16, 2017
+
 ---
-title: "Causal Inference for Data Science"
-subtitle: "ITAM Short Workshop"
-author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
-date: "March 16, 2017"
-output:
-  xaringan::moon_reader:
-    css: ["custom.css", "./../custom.css", ]
-    # In order for the css file to work, you need to set your working directory
-    # to one above the slide directory ('./../') and then call moon_reader via
-    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
-    # Or just knit it into a browser and it should work immediately.
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
----
+
 name: inverse
 layout: true
 class: center, middle, inverse
 
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-```
+
 
 ---
 # Review So Far
 
-- Emphasis on $\approx$ linear regression
+- Emphasis on `\(\approx\)` linear regression
 - Much potential bias, specifically OVB
 - Conditional indepdence assumption ("controls")
 - Instrumental variables can generate (local) meaningful variation to study
@@ -65,14 +66,14 @@ Imagine that we're looking at 50 islands between 1999 - 2010.
 What is the effect of better satellite internet?
 
 --
-$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + \beta AvgTemp_i + \beta Beaches_i + \epsilon$$
+`$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + \beta AvgTemp_i + \beta Beaches_i + \epsilon$$`
 
 --
 Actually:
 
-$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + F\_Unobserved_i + \epsilon$$
+`$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + F\_Unobserved_i + \epsilon$$`
 
-$$Earnings_it = \alpha_i + \gamma Usage_{Internet,it} + \epsilon$$
+`$$Earnings_it = \alpha_i + \gamma Usage_{Internet,it} + \epsilon$$`
 
 ??
 First, we'll look at fixed effects
@@ -86,7 +87,7 @@ If we argue that these are fixed and how they affect island earnings are constan
 
 Can include time and region FE too
 
-$$Earnings_it = \alpha_i + Region_i + Year_t + \gamma Usage_{Internet,it} + \epsilon$$
+`$$Earnings_it = \alpha_i + Region_i + Year_t + \gamma Usage_{Internet,it} + \epsilon$$`
 
 This is a loose approximation of a time-series model
 - capturing overall variation over time or time trends
@@ -136,15 +137,15 @@ Could be an additive effect or a % effect of union status
 
 Naive (ignores natural differences):
 
-$$Y_{it} = Post_{it} + \beta X_{it} + \epsilon_{it}$$
+`$$Y_{it} = Post_{it} + \beta X_{it} + \epsilon_{it}$$`
 
 --
 
 With diff-in-diff:
 
-$$Y_{it} = Post_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$
+`$$Y_{it} = Post_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$`
 
-$$Y_{it} = Time_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$
+`$$Y_{it} = Time_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$`
 
 
 ??
@@ -184,7 +185,7 @@ Idea is that you use the non-treated group to estimate the counterfactual estima
 ---
 # DiD Example Discussion 
 
-Bertrand and Mullainathan (2003) looks at state-by-state differences in rules surrounding mergers & acquisitions.
+Bertrand and Mullainathan (2003) looks at state-by-state differences in rules surrounding mergers &amp; acquisitions.
 
 DiD = wage differences across states pre-law change and post-law change.
 
@@ -236,3 +237,32 @@ Dig more into the argued causal mechanisms
 - Mostly Harmless Econometrics
 - Osea Giuntella, slides
 - Todd Gormley, slides
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
