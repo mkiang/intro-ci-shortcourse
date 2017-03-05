@@ -155,12 +155,12 @@ However, this suffers from the fact that the
 ---
 # Parallel Trend is a Must
 
-![good_trend](./assets/gormley_parallel.png)
+![good_trend](./assets/DiD_gormley_parallel.png)
 
 ---
 # Parallel Trend is a Must
 
-![good_trend](./assets/gormley_no_parallel.png)
+![good_trend](./assets/DiD_gormley_no_parallel.png)
 
 ??
 Idea is that you use the non-treated group to estimate the counterfactual estimate
@@ -172,14 +172,20 @@ Idea is that you use the non-treated group to estimate the counterfactual estima
 - non-parallel trend 
   - i.e. local-specific time trends, time shocks
   - "time varying omitted variables"
-  
+
+--  
+
 - group-specific unobserveds? OK
 - time-specific unobserveds? OK
 
 - Issue: unobserved variables are correlated with both the self-selection of treatment and the timing of the treatment
   - individual income boost leads to adoption
 
+--
 - "avg treatment effect on treated"
+
+--
+- what if group fundamentals change as a function of treatment?
 
 ---
 # DiD Example Discussion 
@@ -207,6 +213,8 @@ Relative time indicators
 - allows the estimation of dynamic treatment effects
 - reduces risk of time-varying omitted variables
 
+![relative_time](./assets/DiD_nagaraj_relative_time.png)
+
 ---
 # Improve on the Simple Diff-in-Diff Idea
 
@@ -229,6 +237,16 @@ Dig more into the argued causal mechanisms
 # Private Impact of Public Maps
 
 [todo, go in-depth into Nagaraj reading, emphasize the robustness]
+
+---
+# Hands-On With DiD Data
+
+[todo, find a dataset to use]
+
+---
+# Regression Discontinuity Designs
+
+- similar in flavor to IV, diff-in-diff
 
 ---
 # Sources
