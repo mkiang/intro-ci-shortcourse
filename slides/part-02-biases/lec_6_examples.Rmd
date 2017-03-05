@@ -57,6 +57,51 @@ options(htmltools.dir.version = FALSE)
 - Using video games, they can identify "new" product entries and measure uniqueness across platforms.
 
 ---
+# Michael Luca
+
+- impact of quality disclosure and rankings?
+- impact of Yelp reviews?
+
+---
+# Really good example on impact of public technology investment
+
+- very well written, explaining why they do what they do
+- DiD with controls and 
+- also an IV, with LATE
+- clarifies the argued mechanism using data too!
+
+---
+# Wikipedia Effect?
+
+- What is effect of Wikipedia? Hard Question; Georgia Tech econ on translation variety
+
+---
+# AirBnB in Austin
+
+---
+# Impact of Yelp in Seattle
+
+---
+# Diff in Diff on Impact of Fake Hotel Reviews
+
+- initial consistent difference between TripAdvisors and Expedia
+- use 2nd variation on nearby value of independent hotels
+
+---
+# Reddit Random Voting
+
+(Science paper, Muchnik et al 2013)
+Effects, very diverse
+Do we believe it though? It's not clear that down-voting can be triggered though.
+Also upvotes affect the chance a posting is viewed, difficult.
+
+---
+# Marketplace RCTs
+
+Testing treatment groups can affect availability for the other control group
+Or affecting only a portion of a seller's categories of goods
+
+---
 # Sources
 
 - Cameron & Triveti textbook

@@ -1,28 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Causal Inference for Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="date" content="2017-03-15" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Causal Inference for Data Science
+## ITAM Short Workshop
+### Mathew Kiang, Zhe Zhang, Monica Alexander
+### March 15, 2017
+
 ---
-title: "Causal Inference for Data Science"
-subtitle: "ITAM Short Workshop"
-author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
-date: "March 15, 2017"
-output:
-  xaringan::moon_reader:
-    css: ["custom.css", "./../custom.css", ]
-    # In order for the css file to work, you need to set your working directory
-    # to one above the slide directory ('./../') and then call moon_reader via
-    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
-    # Or just knit it into a browser and it should work immediately.
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
----
+
 name: inverse
 layout: true
 class: center, middle, inverse
 
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-```
+
 
 
 ---
@@ -50,7 +51,7 @@ Ultimately, we're often left with omitted variable bias.
 
 - variables in the world or data that helps to encourage a real-world experiment
 - by leveraging this information, we can remove omitted variable bias
-- denote such instruments with $z_i$ variables for each observation $i$
+- denote such instruments with `\(z_i\)` variables for each observation `\(i\)`
 
 --
 - Different from a control variable. Does not enable conditional independence assumption (CIA).
@@ -66,19 +67,19 @@ Ultimately, we're often left with omitted variable bias.
 ---
 # Instrumental Variable Key
 
-- cannot use the observed $T_i$, which we believe is influenced by unobserved confounders
-- observed variation in $T_i$ = "random/natural" variation + systematic variation from unobservables
+- cannot use the observed `\(T_i\)`, which we believe is influenced by unobserved confounders
+- observed variation in `\(T_i\)` = "random/natural" variation + systematic variation from unobservables
 
-- do we have something that can predict only the "random" variation in $T_i$?
-- Get $\hat{T_i} = f(Z_i, X_i)$ where $\hat{T_i} \bot u_i$. So $\hat{T_i}$ is only influenced by $Z_i$.
+- do we have something that can predict only the "random" variation in `\(T_i\)`?
+- Get `\(\hat{T_i} = f(Z_i, X_i)\)` where `\(\hat{T_i} \bot u_i\)`. So `\(\hat{T_i}\)` is only influenced by `\(Z_i\)`.
 
 ---
 # Exclusion Restriction
 
-$Z_i$ only works if it does NOT look like $U_i$.
+`\(Z_i\)` only works if it does NOT look like `\(U_i\)`.
 
-- $Z_i$ must be essentially randomly assigned, conditional on other covariates $X_i$
-- it cannot influence the outcome $Y_i$ except through $T_i$
+- `\(Z_i\)` must be essentially randomly assigned, conditional on other covariates `\(X_i\)`
+- it cannot influence the outcome `\(Y_i\)` except through `\(T_i\)`
 
 ???
 We're not looking at the math here, but we trust that if you get the idea, you can look up a textbook or an online source to clarify the math for why this works.
@@ -95,10 +96,10 @@ We're not looking at the math here, but we trust that if you get the idea, you c
 ---
 # How to Use an Instrumental Variable
 
-1. Get $\hat{T_i}$ predicted on the instrument + other covariates. ("First Stage")
-  - usually, look at $R^2$ or special type of F-test
+1. Get `\(\hat{T_i}\)` predicted on the instrument + other covariates. ("First Stage")
+  - usually, look at `\(R^2\)` or special type of F-test
   
-2. Use the regression $Y_i = \gamma \hat{T_i}|_{(Z_i,X_i)} + \beta X_i + \epsilon_i$ ("Second Stage")
+2. Use the regression `\(Y_i = \gamma \hat{T_i}|_{(Z_i,X_i)} + \beta X_i + \epsilon_i\)` ("Second Stage")
 
 ---
 # Example: Birthdate as an IV
@@ -106,12 +107,33 @@ We're not looking at the math here, but we trust that if you get the idea, you c
 Angrist, Kreuger 1991; study of school on future earnings
 
 --
-```{r}
-library(tidyverse); library(stringr); library(haven)
 
-df <- read_dta('./../datasets/ak_91_iv_qob.dta')
-agg_df <- df %>% unite(yob_qob, yob, qob, remove = F) %>%
-  group_by(yob_qob) %>%
+```r
+library(tidyverse); library(stringr); library(haven)
+```
+
+```
+## Loading tidyverse: ggplot2
+## Loading tidyverse: tibble
+## Loading tidyverse: tidyr
+## Loading tidyverse: readr
+## Loading tidyverse: purrr
+## Loading tidyverse: dplyr
+```
+
+```
+## Conflicts with tidy packages ----------------------------------------------
+```
+
+```
+## filter(): dplyr, stats
+## lag():    dplyr, stats
+```
+
+```r
+df &lt;- read_dta('./../datasets/ak_91_iv_qob.dta')
+agg_df &lt;- df %&gt;% unite(yob_qob, yob, qob, remove = F) %&gt;%
+  group_by(yob_qob) %&gt;%
   summarise(mean_s = mean(s),
             qob = mean(qob),
             yob = mean(yob),
@@ -123,10 +145,13 @@ ggplot(agg_df, aes(x = yob_qob, y = mean_s, group = NA)) +
   scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")])
 ```
 
+![](lec_4_instrumental_variables_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
 ---
 # Loose Check for Relevance
 
-```{r}
+
+```r
 ggplot(agg_df, aes(x = yob_qob, y = mean_lnw, group = NA)) + 
   geom_point(aes(color = factor(qob)), size = 3) + 
   geom_line() + geom_label(aes(label = qob, 
@@ -134,42 +159,47 @@ ggplot(agg_df, aes(x = yob_qob, y = mean_lnw, group = NA)) +
   scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")])
 ```
 
+![](lec_4_instrumental_variables_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
 ---
 # Try 2SLS By Hand
 
-```{r, eval = F}
+
+```r
 library(tidyverse)
-df <- read_dta('../datasets/ak_91_iv_qob.dta') %>%
-  mutate_at(.funs = as.factor, .cols = c("yob", "sob", "qob")) %>%
+df &lt;- read_dta('../datasets/ak_91_iv_qob.dta') %&gt;%
+  mutate_at(.funs = as.factor, .cols = c("yob", "sob", "qob")) %&gt;%
   mutate(q4 = ifelse(qob == 4, 1, 0))
 # check first stage
-no_instrument <- lm(s ~ yob + sob, data = df)
-first_stage <- lm(s ~ yob + sob + qob, data = df)
+no_instrument &lt;- lm(s ~ yob + sob, data = df)
+first_stage &lt;- lm(s ~ yob + sob + qob, data = df)
 anova(no_instrument, first_stage)
 # run manual second stage
-df <- df %>% mutate(s_hat = predict(first_stage))
-second_stage <- lm(lnw ~ s_hat + yob + sob, data = df)
+df &lt;- df %&gt;% mutate(s_hat = predict(first_stage))
+second_stage &lt;- lm(lnw ~ s_hat + yob + sob, data = df)
 ```
 
 ---
 # Use Built in 2SLS Packages
 
-```{r, eval = F}
+
+```r
 library(AER)
-no_iv_reg <- lm(lnw ~ s, data = df)
-no_iv_reg_full <- lm(lnw ~ s + yob + sob, data = df)
-iv_q4_reg <- ivreg(lnw ~ yob + s | . - s + q4, data = df)
-iv_q4_reg_full <- ivreg(lnw ~ yob + sob + s | . - s + q4, data = df)
-iv_allQ_reg <- ivreg(lnw ~ yob + sob + s | . - s + qob, data = df)
+no_iv_reg &lt;- lm(lnw ~ s, data = df)
+no_iv_reg_full &lt;- lm(lnw ~ s + yob + sob, data = df)
+iv_q4_reg &lt;- ivreg(lnw ~ yob + s | . - s + q4, data = df)
+iv_q4_reg_full &lt;- ivreg(lnw ~ yob + sob + s | . - s + q4, data = df)
+iv_allQ_reg &lt;- ivreg(lnw ~ yob + sob + s | . - s + qob, data = df)
 ```
 
 
 ---
 # Outputting Regression Results
 
-```{r, eval = F}
+
+```r
 library(stargazer)
-a <- capture.output(
+a &lt;- capture.output(
   stargazer(no_iv_reg, no_iv_reg_full, second_stage, 
             iv_q4_reg, iv_q4_reg_full, iv_allQ_reg,
             type = "text", # no.space = T,
@@ -202,7 +232,7 @@ a <- capture.output(
 
 [todo, add many more]
 
-"good instruments come from a combination of institutional knowledge and ideas about the processes determining the variables of interest" (Angrist & Pischke)
+"good instruments come from a combination of institutional knowledge and ideas about the processes determining the variables of interest" (Angrist &amp; Pischke)
 
 - examples of and papers using different types 
 - some ML work to search for instruments
@@ -287,7 +317,7 @@ On the right is the 2SLS, IV estimate of the causal effect of Training. It only 
 
 - it's also useful to consider some numbers around LATE
   - how many "compliers"/"affected" do we have?
-  - what % of our observed treated were affected by $IV$/$z$?
+  - what % of our observed treated were affected by `\(IV\)`/$z$?
 
 ![iv_size_of_compliers](./assets/iv_size_of_compliers.png)
 
@@ -316,6 +346,35 @@ Kelibergen-Paap rk Wald F Stat
 ---
 # Sources
 
-- Cameron & Triveti textbook
+- Cameron &amp; Triveti textbook
 - Mostly Harmless Econometrics
 - Osea Giuntella, slides
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

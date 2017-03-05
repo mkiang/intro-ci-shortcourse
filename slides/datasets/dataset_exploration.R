@@ -27,7 +27,7 @@ ggplot(df, aes(x = date_cal, y = log_val, color = measure,
 df <- read_dta('datasets/AA_schooling_small.dta')
 
 # Angrist Kreuger (QoB on schooling)
-df <- read_dta('datasets/ak_91_iv_qob.dta') %>%
+df <- read_dta('./../datasets/ak_91_iv_qob.dta') %>%
   mutate(reg_wage = exp(lnw))
 agg_df <- df %>% 
   unite(yob_qob, yob, qob, remove = F) %>%
@@ -35,10 +35,18 @@ agg_df <- df %>%
   summarise(mean_s = mean(s),
             qob = mean(qob),
             yob = mean(yob),
-            mean_lw = mean(lnw))
+            mean_lnw = mean(lnw))
 ggplot(agg_df, aes(x = yob_qob, y = mean_s, group = NA)) + 
   geom_point(aes(color = factor(qob)), size = 3) + 
-  geom_line() + geom_label(aes(label = qob))
+  geom_line() + geom_label(aes(label = qob,
+                               fill = factor(qob))) +
+  scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")])
+
+ggplot(agg_df, aes(x = yob_qob, y = mean_lnw, group = NA)) + 
+  geom_point(aes(color = factor(qob)), size = 3) + 
+  geom_line() + geom_label(aes(label = qob, 
+                               fill = factor(qob))) +
+  scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")])
 
 ggplot(agg_df, aes(x = yob_qob, y = mean_lw, group = NA)) + 
   geom_point(aes(color = factor(qob)), size = 3) + 

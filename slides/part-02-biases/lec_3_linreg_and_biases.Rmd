@@ -28,15 +28,25 @@ options(htmltools.dir.version = FALSE)
 
 # Statistics of Causal Inference
 
-- causal interpretation of linear regression
+- linear regression; with causal interpretation
 - possible causal biases / "mis-identification"
 - linear regression is not restrictive
 
 ???
-Linear regression is interpretable. We care about unbiased interpretations rather than predictive fit. These overlap, but the former is most important.
+We're going to cover these three topics.
+First, Matt introduced the importance of casual identification and causal questions.
+He also emphasized the Rubin Causal Model (potential outcomes framework).
+We'll return to this throughout the next few lectures.
+In this lecture, we talk about the basic statistical tools we use to identify causal estimates. Specifically in much of the literature, it is linear regression.
+
+In ML and data science, usually we like linear regression for a first attempt, but it's not really a "hot" model to use in general. This is because it usually is not the best predictor. However, in this case, the best prediction is not what we care about.
+
+Instead, we want to be able to identify a causal estimate. And an unbiased causal estimate.
+
+Linear regression is interpretable. We would like better prediction, but that's usually not the first priority. Let's take this next image as an example.
 
 ---
-# Example Data
+# Job Earnings: Predicting vs Causal Estimate
 
 ![CEF_example](./assets/mhe_cef.png)
 ??
@@ -64,60 +74,128 @@ $$Y_i = \beta_0 + \gamma T_i + \beta \mathbf{X_i} + \epsilon_i$$
 # Causal Linear Regression
 
 - What we really care about:
-$$ E[Y|X=x_i] $$
+$$ E[Y|T=T_i] $$
 
 ![CEF_regression](./assets/mhe_cef_regression.png)
+
+???
+We really care about changes in this value. How does the expected value of Y (outcome) change?
 
 ---
 # Recreate Graphic
 
 ```{r, message=F, error=FALSE, warning=F}
 library(tidyverse); library(haven)
-df <- read_dta('../datasets/ak_91_iv_qob.dta')
+df <- read_dta('../datasets/ak_91_iv_qob.dta') %>%
+  mutate(weekly_wage = exp(lnw))
 year_df <- df %>% group_by(s) %>%
   summarise(mean_lw = mean(lnw))
-ggplot(year_df, aes(x = s, y = mean_lw)) + geom_point() +
-  geom_line()
+g_complex <- ggplot(year_df, aes(x = s, y = mean_lw)) + 
+  geom_point() + 
+  geom_smooth(span = 0.35, se = F, color = 'red') +
+  ggtitle("CEF with complex fit")
+g_simple <- ggplot(year_df, aes(x = s, y = mean_lw)) + 
+  geom_point() + 
+  geom_smooth(method = 'lm', se = F, color = 'red') +
+  ggtitle("CEF with simple linear regression")
 ```
 
+```{r}
+g_simple
+```
 
 ---
 
-# Causal Regression
+# Causal Regression Interpretation
 
-- conditional expectation function (CEF) is argued to be causal
-- controlling for observed differences
 - estimating systematic randomness; 
   - we know we can't explain (close to) everything
   - instead, we want *unbiased* estimates of particular causal patterns
+- argue that the conditional expectation function (CEF) is causal
 
 ??
 We know that it's not that simple to explain complex real-world outcomes with a linear model.
-However, if we believe we have an unbiased estimate, this is helpful approximation. The exact numbers usually aren't that crucial.
+We need to argue using using theory that our estimate of the CEF is okay.
+
+However, if we believe we have an unbiased estimate, this is useful approximation. The exact numbers usually aren't that crucial. 
 And linear models are fairly robust.
 
 ---
+# CEF
 
-# Regression Maths
+$$Y = E[Y|T] + \epsilon$$
 
-- True CEF (best estimate for $Y_i$): $$Y_i = E[Y_i|X=X_i]+\epsilon_i$$
-- Linear regression estimates the best MSE **linear** approximation for $E[Y_i|X_i]$
+???
+This is the best MSE predictor, no matter. What we need to do is to find a functional form of the explained part.
+By definition, Epsilon is uncorrelated and mean-zero. 
+
+---
+
+# Best Linear Approximation to CEF
+
+- True generative process: $Y = E[Y|T]+\epsilon \approx \gamma T + \epsilon$.
+- $E[\epsilon] = 0$
   - how does the distribution of $Y_i$ change *wrt* $X_i$?
   - linear regression gives us interpretable coefficients
-- Only the average causal effect
+  - Only the average causal effect
   
+- True $\gamma, \epsilon$ are unknown. Instead, we estimate using observations $i$: 
+$$Y_i = \hat_{\gamma} T_i + \hat{\epsilon_i}$$
+  
+???
+Even if truly non-linear, there is some use to have a robust linear approximation.
+
+
+---
+# Linear Regression With Binary Treatment
+
+$$E[Y_i|T=T_1] - E[Y_i|T=T_0] = \\ \gamma (T_1 - T_0) + \\ E[\epsilon_i|T_1] - E[\epsilon_i|T_0]$$
+
+$$E[Y_i|T=T_1] - E[Y_i|T=T_0] = \gamma + (0 - 0)$$
+
+---
+# Linear Regression More Generally
+
+$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = \\ \gamma (T_a - T_b) + \\ E[\epsilon_i|T_a] - E[\epsilon_i|T_b]$$
+
+$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = \gamma (T_a - T_b)$$
+
+---
+# (Causal) Linear Regression Gone Wrong
+
+$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = \\ \gamma (T_a - T_b) + \\ E[\epsilon_i|T_a] - E[\epsilon_i|T_b]$$
+
+What if?:
+
+$$E[\epsilon_i|T_a] >> E[\epsilon_i|T_b]$$
+
+Then:
+
+$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = \gamma (T_a - T_b) + Bias_{OVB}$$
+
+---
+# Example of OVB
+
+# (Causal) Linear Regression Gone Wrong
+
+$$E[Y_i|Loc_A] - E[Y_i|Loc_B] = \\ \gamma + \\ E[\epsilon_i|Loc_A] - E[\epsilon_i|Loc_B]$$
+
+$\epsilon_i$ could be higher in $Loc_A$ because of the wealthy parents and peers effect, while $\epsilon_i$ could be lower in $Loc_B$ because of nearby crime and travel time.
+
+- Occurs because assumed linear model is wrong. The true model may be $Y = \gamma Loc_A + \beta wealth_{parents} + \epsilon$.
+
+---
+# Omitted Variable Bias Confounding
+
+- true correlation between {$T_i$, $\epsilon$} (not $\hat{\epsilon}$) causes problems
+- AKA: **omitted variable bias**, **confounding**
+
 ---
 
-# Regression Maths (in Potential Outcomes)
+# Note on Using Causal Terminology
 
-- [todo] copy from MKiang?
-
----
-
-# Note on Causal Language
-
-- be careful using: {"effect", "leads to", "results in", "because of"}
-- instead when just observed patterns {"related with", "pattern", "correlation", "tends to", "observed"}
+- causal: {"effect", "leads to", "results in", "because of", "impact"}
+- observed patterns: {"related with", "pattern", "correlation", "tends to move with", "observed"}
 
 ---
 
@@ -130,12 +208,15 @@ And linear models are fairly robust.
   - students with similar GPA, age, and Bachelor degrees may be random
   - people with similar blood measurements seen by different doctors may have random drug treatment
   
-- ${Y_{0i}, Y_{1i}} \bot C_i ?$
+- ${Y_{0i}, Y_{1i}} \bot T_i ?$
+
+???
+Previously we assumed that 
 
 --
 
-- ${Y_{0i}, Y_{1i}} \bot C_i | \mathbf{X_i}?$
-- $Y_{si} \bot s_i | \mathbf{X_i}\quad\forall s?$
+- ${Y_{0i}, Y_{1i}} \bot T_i | \mathbf{X_i}?$
+- $Y_{ti} \bot T_i | \mathbf{X_i}\quad\forall t?$
 
 ---
 
@@ -143,8 +224,8 @@ And linear models are fairly robust.
 
 $$
 \begin{align*}
-\ & E[Y_{i}|X_{i},s_{i}=s]-E[Y_{i}|X_{i},s_{i}=s-1]\\
- & =E[Y_{si}-Y_{(s-1)i}|X_{i}]
+\ & E[Y_{i}|X_{i},s_{i}=s]-E[Y_{i}|X_{i},s_{i}=s-1] \\
+\ & =E[Y_{si}-Y_{(s-1)i}|X_{i}]
 \end{align*}
 $$
 
