@@ -53,11 +53,11 @@ layout: false
 ]
 ???
 
-So this is kind of the roadmap. First, for the workshop. Causal inference is this huge field with lots of different approaches and we can't cover it all, but we want to hit the main points. First, the Rubin causal model or the **counterfactual model**, which is by far the most popular causal framework in social science. **NEXT SLIDE**
+So this is kind of the roadmap. First, for the workshop. Causal inference is this huge field with lots of different approaches and we can't cover it all, but we want to hit the main points. First, the Rubin causal model or the **counterfactual model** / **potential outcomes model**, which is by far the most popular causal framework in social science. **NEXT SLIDE**
 
-Then, within this framework, what is the ideal situation. Like all frameworks, there are fundamental assumptions. So first we'll go over situations when these assumptions are guaranteed to be met. **NEXT SLIDE**
+Then, within this framework, what is the ideal situation. Like all frameworks, there are fundamental assumptions. So as a starting point, we'll go over situations when these assumptions are guaranteed to be met. A little bit about RCTs and why they're powerful. **NEXT SLIDE**
 
-Then we'll start to chip away at the assumptions and loosen them up a bit. So what are all the ways we won't meet this ideal situations? **NEXT SLIDE**
+Then we'll start to chip away at the assumptions. The RCM is most powerful in observational data when you don't have all these assumptions guaranteed. How do your results get biased and what can you do about it? **NEXT SLIDE**
 
 Finally, we'll spend a little bit today and all of tomorrow going over ways we can address these biases using analytical methods. (NOTE: We could address many of these using design-based methods, but we likely won't have time to go over that and it's not often you get to design studies as a data scientist.)
 
@@ -600,3 +600,4 @@ class: center, middle
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
 - [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
 - [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/) by Gelman and Hill
+- [Statistical Models and Shoe Leather](http://www.sas.rochester.edu/psc/clarke/405/Freedman91.pdf)
