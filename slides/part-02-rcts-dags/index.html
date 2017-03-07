@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
     <meta name="date" content="2017-03-15" />
-    <link rel="stylesheet" href="custom.css" type="text/css" />
     <link rel="stylesheet" href="../custom.css" type="text/css" />
   </head>
   <body>
@@ -31,12 +30,13 @@ class: center, middle
 # Roadmap
 
 ???
+`\(\def\indep{\perp \! \! \perp}\)`
 
 So we've got some of the basic definitions down. We know what a causal effect is and we have a framework for estimating causal effects under certain assumptions. Now we're going to talk about the best case scenario for estimaing causal effects — RCTs. **NEXT SLIDE**
 
-While you probably won't a lot of randomized experiments in the real world, they are useful to think about because ultimately every method for causal inference is trying to mimic an RCT. **NEXT SLIDE**
+While you probably won't get to do a lot of randomized experiments in the real world, they are useful to think about because ultimately every study design or analytic method in causal inference is ultimately just trying to mimic an RCT. **NEXT SLIDE**
 
-Then we'll take a bit of a detour and talk about DAGs. I think they're very useful; however, a lot of people don't. Regardless, you should know about them because you'll likely come across them in the causal inference literature. And hopefully I can convince you that they provide a useful way of linking your causal question to your data and regressions. **NEXT SLIDE**
+After talking a bit about RCTs, we'll take a bit of a detour and talk about ways you can graphically state your causal and statistical assumptions. Causal DAGs. I think they're very useful and hope I can convince you they are too; however, a lot of people don't. Regardless, you should know about them because you'll likely come across them in the causal inference literature. **NEXT SLIDE**
 
 Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when we don't have an RCT (and why RCTs are so powerful). Then next lecture, Zhe will talk more about the math behind these different biases.
 
@@ -66,11 +66,11 @@ Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when 
 
 ???
 
-Again, we'll start off with a bit of motivation. This is James Lind. He was a Scottish physician in the Royal Navy **NEXT SLIDE**
+Again, we'll start off with a bit of motivation and history. **NEXT SLIDE** 
 
-He conducted the first recorded RCT on scurvy, which is a disease from Vitamin C deficiency and causes pretty bad symptoms. It's a disease of the connective tissue because Vitamin C is required to create connective tissue, all sorts of bad things happen. Severe bleeding, gum disease, inability to heal from superficial wounds, etc. People eventually get personality changes and then die of infection or bleeding. That said, it's very easy to treat. Just some Vitamin C and improvement occurs in days and full recovery in about a month. Was very common back when there were long sea voyages and they were unable to keep fresh fruit available. **NEXT SLIDE**
+This is James Lind. He was a Scottish physician in the Royal Navy and he conducted the first recorded RCT in the 1700s. Specifically, he was interested in scurvy which is a disease from Vitamin C deficiency and causes pretty bad symptoms. It's a disease of the connective tissue because Vitamin C is required to create connective tissue, all sorts of bad things happen. Severe bleeding, gum disease, inability to heal from superficial wounds, etc. People eventually get personality changes and then die of infection or bleeding. That said, it's very easy to treat. Just some Vitamin C and improvement occurs in days and full recovery in about a month. Was very common back when there were long sea voyages and they were unable to keep fresh fruit available. **NEXT SLIDE**
 
-So Lind was on a ship and he found 12 sailrs with scurvey. Randomly split them up into 6 groups and gave each group a different treatment in addition to their regular diet. **NEXT SLIDE**
+So Lind was on a ship and he found 12 sailors with scurvey. He randomly split them up into 6 groups and gave each group a different treatment in addition to their regular diet. These are the six different interventions. **NEXT SLIDE**
 
 As he suspected, only the group that had citrus fruits showed substantial improvement with one returning back to work and one on the mend (they ran out of fruit before he could completely heal).
 
@@ -81,7 +81,7 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 
 --
 
-- Scurvy is a terrible disease caused by Vitamin C deficiency and was a huge issue during long sea voyages
+- Scurvy is a terrible disease caused by Vitamin C deficiency. Serious issue during long sea voyages.
 
 --
 
@@ -91,7 +91,7 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 
 --
 
-- Only Group 6 (citrus fruit) showed substantial improvement
+- Only Group 6 (citrus fruit) showed substantial improvement.
 
 ---
 # Randomized Control Trials
@@ -101,7 +101,7 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 
 ???
 
-There are a few things worth nothing about Lind's RCT. **NEXT SLIDE**
+There are a few things worth noting about Lind's RCT. **NEXT SLIDE**
 
 First, he showed a strong causal effect with a tiny sample. An n=12 study would literally never get published today, but nonetheless, it's hard to argue with a strong causal effect even in a small RCT. **NEXT SLIDE**
 
@@ -117,13 +117,18 @@ Second, even though Lind was wildly wrong about **why** the RCT worked, he was r
 
     - Lind believed acid stopped putrefaction. 
     - Medicine had not yet understood importance of vitamins.
-    
+
 ---
 # Randomized Control Trials
 ### But RCTs aren't perfect
 
+.center[&lt;img src="./assets/parachutes_rcts.jpg" width="450"&gt;]
 
-- Not every question can be answered with an RCT (feasibility or ethical concerns)
+---
+# Randomized Control Trials
+### But RCTs aren't perfect
+
+- Expensive — limited feasibility
 
 ???
 
@@ -131,22 +136,36 @@ However, it is worth noting that you can't always do an RCT. You've never read a
 
 It's also important to note that RCTs are often very costly and have a smaller, more select sample size. While the *internal* validity is high, the *external* validity may not be. In other words, I know the causal effect is true for people *inside of my study*. But I cannot be certain that it is true for everybody outside of my study as well.
 
+--
+
+- Ethical concerns — real effects on real people 
+
+    - Facebook and emotional manipulation study
 
 --
 
-- Smaller sample size often means limited generalizability. The *internal validity* of an RCT is very high, but the *external validity* is often not.
+- Smaller sample size (compared to observational studies) — limited generalizability
+
+    - The *internal validity* of an RCT is very high, but the *external validity* is often not.
+
+--
+
+- Difficult — good RCTs are very hard to do
 
 ---
 # RCT Definitions
+
+### .red[TODO: SHOULD I TAKE THIS OUT?]
 
 .footnote[Hernan Epi 201]
 
 - **Randomized**: The intervention is assigned randomly
 
+???
 
 --
 
-- **Control**: There is (at least) one well-defined comparison group
+- **Controlled**: There is (at least) one well-defined comparison group
 
 --
 
@@ -184,7 +203,7 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 
 .footnote[Hernan Epi 201]
 
-- Suppose we have a large (nearly infinite) population of perfect compliers
+- Suppose we have a very large (nearly infinite) population of perfect compliers
 
 --
 
@@ -198,7 +217,7 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 
 - Now, we decide to treat Group Heads and not treat Group Tails 
 
-    - The risk of death in Group Heads is: `\(Pr[Y=1|A=1] = .25\)`
+    - The risk of death in Group Heads is: `\(Pr(Y=1|A=1) = .25\)`
 
 --
 
@@ -206,7 +225,7 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 
 --
 
-    - Still `\(.25\)`
+    - Risk of death in Group Tails would still `\(.25\)` if we flipped treatment.
 
 ---
 class: center, middle
@@ -221,7 +240,7 @@ class: center, middle
 .footnote[Hernan Epi 201]
 
 The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A\)`.
-`$$Y^a \perp A \text{ for all } a$$`
+`$$Y^a \indep A \text{ for all } a$$`
 
 --
 
@@ -231,24 +250,13 @@ The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A
 
 ### NOTE!
 
-Exchanagebility is not the same as independence. That is, `$$Y^a \perp A \neq Y \perp A$$`
+Exchanagebility is not the same as independence. That is, `$$Y^a \indep A \neq Y \indep A$$`
+
 
 ---
-# Aside: Measures of causal effect
+class: center, middle
+# All design and analytic methods try to mimic randomization in order to "create" exchangeability
 
-If exchangeability holds, we can express the causal effects in different ways:
-
---
-
-1. **Absolute difference**: `\(ATE = Pr[Y=1|A=1] - Pr[Y=1|A=0]\)`
-
---
-
-1. **Risk ratio**: `\(ATE = \frac{Pr[Y=1|A=1]}{Pr[Y=1|A=0]}\)`
-
---
-
-1. **Odds ratio**: `\(ATE = \frac{Pr[Y=1|A=1] / Pr[Y=0|A=1]}{Pr[Y=1|A=0] / Pr[Y=1|A=0]}\)`
 
 ---
 class: center, middle, inverse
@@ -260,16 +268,26 @@ class: center, middle, inverse
 .center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
-- Causal DAGs are an easy tool for us to express statistical associations implied by our assumptions in their causal structure. 
+- Causal DAGs provide a mathematical link between statistics and causality.
+
+
+???
+
+Let's take what may seem like a little detour and talk about DAGs. DAGs are directed acyclic graphs. DAGs allow us to visually express our assumptions about causal effects based only on statistical associations. That is, you have some data and you run a regression with a bunch of variables and you get out a bunch of coefficients. Drawing a DAG allows you to very explicitly state the relationship between all those statistical associations and how they lead to some causal effect. **NEXT SLIDE**
+
+Importantly, they allow you to also do the reverse. That is, given a bunch of associations from your regression model, what are the different ways you could have come up with a causal estimate and how are those ways wrong. **NEXT SLIDE**
+
+DAGs have a strong mathematical underpinning and link causality and statistics. If you're interested in learning more about them, definitely check out Causality from Judea Pearl. 
+
+--
+
+- Causal DAGs are an easy tool for us to express statistical associations implied by our assumptions of their causal structure. 
 
 --
 
 - They also allow us to do the reverse. Given a set of associations in our data, diagram the causal structures that could result in those associations.
 
---
-
-- Causal DAGs provide a mathematical link between statistics and causality.
-
+.center[&lt;img src="./assets/total_confounding.jpg" width="300"&gt;]
 
 ---
 # Causal Directed Acyclic Graphs (DAGs)
@@ -423,6 +441,23 @@ class: center, middle
 ---
 # Additional Reading
 - TODO
+
+---
+# Aside: Measures of causal effect
+
+If exchangeability holds, we can express the causal effects in different ways:
+
+--
+
+1. **Absolute difference**: `\(ATE = Pr[Y=1|A=1] - Pr[Y=1|A=0]\)`
+
+--
+
+1. **Risk ratio**: `\(ATE = \frac{Pr[Y=1|A=1]}{Pr[Y=1|A=0]}\)`
+
+--
+
+1. **Odds ratio**: `\(ATE = \frac{Pr[Y=1|A=1] / Pr[Y=0|A=1]}{Pr[Y=1|A=0] / Pr[Y=1|A=0]}\)`
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

@@ -24,12 +24,14 @@ layout: true
 class: center, middle, inverse
 
 
+`\(\def\indep{\perp \! \! \perp}\)`
 
 ---
 
 # Introductions
 
 ???
+`\(\def\indep{\perp \! \! \perp}\)`
 
 Introduce ourselves. Thanks for opportunity. Talk about our backgrounds and different approachs to causal inference
 
@@ -432,7 +434,7 @@ layout: false
 .right-column[
 ## Assumptions
 
-- **Exchangeability**. `\(Y^a \perp A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
+- **Exchangeability**. `\(Y^a \indep A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
 ]
 --
 .right-column[
@@ -488,7 +490,7 @@ layout: false
 ]
 --
 .right-column[
-- If we treated everybody (`\(A=1\)`), we would not be able to estimate a causal effect.
+- If we treated everybody ($A=1$), we would not be able to estimate a causal effect.
 ]
 ---
 layout: false
