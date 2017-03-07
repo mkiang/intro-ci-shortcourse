@@ -29,6 +29,7 @@ options(htmltools.dir.version = FALSE)
 # Introductions
 
 ???
+$\def\indep{\perp ! ! \perp}$
 
 Introduce ourselves. Thanks for opportunity. Talk about our backgrounds and different approachs to causal inference
 
@@ -236,7 +237,7 @@ layout: false
 .right-column[
 <br><br>
 ## Hormone replacement therapy
-By 1990's, HRT was incredily popular medication for women.
+In 1990's, HRT was incredily popular medication for women.
 ]
 --
 .right-column[
@@ -382,11 +383,11 @@ layout: false
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ |
 |-------|:---------:|:---------:|
-| Eddie |    _?_    |       1   |
-| Marla |    _?_    |       0   |
-| Bob   |       0   |     _?_   |
+| Eddie | .red[_?_] |       1   |
+| Marla | .red[_?_] |       0   |
+| Bob   |       0   | .red[_?_] |
 | ...   |     ...   |     ...   |
-| Tyler |       1   |   _?_     |
+| Tyler |       1   | .red[_?_] |
 ]
 --
 .right-column[
@@ -431,7 +432,7 @@ layout: false
 .right-column[
 ## Assumptions
 
-- **Exchangeability**. $Y^a \perp A$ for all values of $a$. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
+- **Exchangeability**. $Y^a \indep A$ for all values of $a$. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
 ]
 --
 .right-column[
@@ -576,3 +577,4 @@ class: center, middle
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
 - [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
+- [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/) by Gelman and Hill

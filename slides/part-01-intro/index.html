@@ -30,6 +30,7 @@ class: center, middle, inverse
 # Introductions
 
 ???
+`\(\def\indep{\perp ! ! \perp}\)`
 
 Introduce ourselves. Thanks for opportunity. Talk about our backgrounds and different approachs to causal inference
 
@@ -383,11 +384,11 @@ layout: false
 
 | Name  | `\(Y^{a=0}\)` | `\(Y^{a=1}\)` |
 |-------|:---------:|:---------:|
-| Eddie |    _?_    |       1   |
-| Marla |    _?_    |       0   |
-| Bob   |       0   |     _?_   |
+| Eddie | .red[_?_] |       1   |
+| Marla | .red[_?_] |       0   |
+| Bob   |       0   | .red[_?_] |
 | ...   |     ...   |     ...   |
-| Tyler |       1   |   _?_     |
+| Tyler |       1   | .red[_?_] |
 ]
 --
 .right-column[
@@ -432,7 +433,7 @@ layout: false
 .right-column[
 ## Assumptions
 
-- **Exchangeability**. `\(Y^a \perp A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
+- **Exchangeability**. `\(Y^a \indep A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
 ]
 --
 .right-column[
@@ -488,7 +489,7 @@ layout: false
 ]
 --
 .right-column[
-- If we treated everybody (`\(A=1\)`), we would not be able to estimate a causal effect.
+- If we treated everybody ($A=1$), we would not be able to estimate a causal effect.
 ]
 ---
 layout: false
