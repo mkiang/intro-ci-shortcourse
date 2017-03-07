@@ -238,7 +238,7 @@ layout: false
 .right-column[
 &lt;br&gt;&lt;br&gt;
 ## Hormone replacement therapy
-By 1990's, HRT was incredily popular medication for women.
+In 1990's, HRT was incredily popular medication for women.
 ]
 --
 .right-column[
@@ -319,6 +319,22 @@ Implicitly, Drug B only caused the headache if Eddie would *not* have received t
 --
 .right-column[
 So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units). Importantly, we only observe **one** outcome so all comparisons are hypothetical. 
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+# Rubin Causal Model
+
+- This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin causal model. 
+
+- Counterfactual thinking separates the Rubin causal model from other causal frameworks like Bradford-Hill, Rothman, or Koch's postulates. 
+
+- Unlike the other frameworks, the counterfactuals allow us to make causal statements using observational data.
 ]
 ---
 layout: false
@@ -443,6 +459,12 @@ layout: false
 .right-column[
 - **Stable unit treatment value assumption (SUTVA)**. Two things. First, treatment and control are stable — there's only one form of each. Second, the assignment of one unit does not affect the outcome of another.
 ]
+--
+.right-column[
+- **Consistency**..red[*] `\(Pr(Y^{a})=Pr(Y|A=a) \text{ for all } a\)`The observed outcome for treatment `\(a\)` is equal to potential outcome under treatment `\(a\)`. "Well-defined" intervention.
+]
+
+.footnote[.red[*] There is debate about whether this is an assumption or an axiom.]
 ---
 layout: false
 .left-column[
@@ -578,6 +600,7 @@ class: center, middle
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
 - [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
+- [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/) by Gelman and Hill
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({

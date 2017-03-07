@@ -327,6 +327,22 @@ layout: false
   ### Rubin causal model
 ]
 .right-column[
+# Rubin Causal Model
+
+- This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin causal model. 
+
+- Counterfactual thinking separates the Rubin causal model from other causal frameworks like Bradford-Hill, Rothman, or Koch's postulates. 
+
+- Unlike the other frameworks, the counterfactuals allow us to make causal statements using observational data.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
 # Counterfactuals
 ]
 .right-column[
@@ -442,6 +458,12 @@ layout: false
 .right-column[
 - **Stable unit treatment value assumption (SUTVA)**. Two things. First, treatment and control are stable — there's only one form of each. Second, the assignment of one unit does not affect the outcome of another.
 ]
+--
+.right-column[
+- **Consistency**..red[*] $Pr(Y^{a})=Pr(Y|A=a) \text{ for all } a$The observed outcome for treatment $a$ is equal to potential outcome under treatment $a$. "Well-defined" intervention.
+]
+
+.footnote[.red[*] There is debate about whether this is an assumption or an axiom.]
 ---
 layout: false
 .left-column[
