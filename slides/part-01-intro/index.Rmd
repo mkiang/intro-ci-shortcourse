@@ -48,7 +48,7 @@ layout: false
   ### Workshop
 ]
 .right-column[
-<br><br><br>
+## Overarching goal
 - **Rubin causal model.** Establish a rigorous framework for evaluating and understanding causality
 ]
 ???
@@ -82,7 +82,7 @@ layout: false
   ### Today
 ]
 .right-column[
-<br><br>
+## Topics for today
 - **Introduction to Causal Inference**. Establish a framework we can all use.
 ]
 ???
@@ -115,7 +115,7 @@ layout: false
   ### Now
 ]
 .right-column[
-<br><br>
+## Introduction to Causal Inference
 - **Motivation.** Why do we care about causal inference at all?
 ]
 --
@@ -136,7 +136,7 @@ template: inverse
 So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? 
 
 ---
-# Almost all questions we are interested in are *causal*
+# Almost all questions we care about are *causal* questions
 
 ???
 Well, the simple answer is that most of the questions we are interested in are causal questions. 
@@ -155,7 +155,7 @@ Yet our tools are correlation based.
 
 --
 
-# Yet almost all our tools for to answer these questions are based on *correlation*..red[*]
+## .center[Yet almost all our tools for to answer these questions are based on *correlation*..red[*]]
 
 .footnote[.red[*]Big data does not fix this.]
 
@@ -194,7 +194,6 @@ layout: false
   ### Causal Inference Gone Bad
 ]
 .right-column[
-<br><br>
 ## eBay example
 Does an increase in spending on keyword advertisements increase my return?
 ]
@@ -215,7 +214,6 @@ layout: false
   ### Causal Inference Gone Bad
 ]
 .right-column[
-<br><br>
 ## eBay example
 Causal question: **Compared to not increasing ad revenue**, how much does an increase in ad revenue affect my return?
 ]
@@ -235,7 +233,6 @@ layout: false
   ### Causal Inference Gone Bad
 ]
 .right-column[
-<br><br>
 ## Hormone replacement therapy
 In 1990's, HRT was incredily popular medication for women.
 ]
@@ -255,7 +252,6 @@ layout: false
   ### Causal Inference Gone Bad
 ]
 .right-column[
-<br><br>
 ## Hormone replacement therapy
 Increased risk by about 25%, putting lots of lives at risk. 
 ]
@@ -275,11 +271,9 @@ layout: false
   ### Causal Inference Done Right
 ]
 .right-column[
-<br><br>
 ## TODO
-We need one good example here.
+.red[We need one good example here.]
 ]
-
 
 ---
 template: inverse
@@ -293,10 +287,35 @@ class: center, middle
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
+]
+
+.right-column[
+## Causal Inference and Prediction
+
+- Both causal inference and prediction use associational models but goals are different
+]
+--
+.right-column[
+- In prediction, we are only concerned with maximizing our ability to esimate $y$ given some input $x$
+]
+--
+.right-column[
+- In causal inference, we care about how $y$ will change if we manipulate $x$
+]
+--
+.right-column[
+- Example: Carrying matches and lung cancer.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
 ]
 .right-column[
-# What is a causal effect?
+## What is a causal effect?
 
 .center[<img src="./assets/basic_dag.jpg" width="200">]
 ]
@@ -323,11 +342,12 @@ So a causal effect is a comparison of two *potential outcomes* (or *counterfactu
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
 .right-column[
-# Rubin Causal Model
+## Rubin Causal Model
 
 - This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin causal model. 
 
@@ -339,11 +359,12 @@ layout: false
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
 .right-column[
-# Counterfactuals
+## Counterfactuals
 ]
 .right-column[
 So, we define our counterfactuals: 
@@ -367,12 +388,12 @@ The *__individual__ causal effect* of Drug B then is $ICE=Y^{a=1} - Y^{a=0}$
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
 .right-column[
-# Data we **_want_**
-### "God's Data"
+## Data we **_want_**
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ |
 |-------|:---------:|:---------:|
@@ -381,6 +402,7 @@ layout: false
 | Bob   |       0   |       0   |
 | ...   |     ...   |     ...   |
 | Tyler |       1   |       0   |
+### .center["God's Data]
 ]
 --
 .right-column[
@@ -390,12 +412,12 @@ This is not possible in reality. For example, even if we use the same person but
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
 .right-column[
-# Data we **_have_**
-### The Fundamental Problem of Causal Inference
+## Data we **_have_**
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ |
 |-------|:---------:|:---------:|
@@ -404,6 +426,7 @@ layout: false
 | Bob   |       0   | .red[_?_] |
 | ...   |     ...   |     ...   |
 | Tyler |       1   | .red[_?_] |
+### .center[The Fundamental Problem of Causal Inference]
 ]
 --
 .right-column[
@@ -416,11 +439,12 @@ class: center, middle
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
 .right-column[
-### The Fundamental Problem of Causal Inference
+## Fundamental Problem of CI
 
 | Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
 |-------|:---------:|:---------:|:---:|:---:|
@@ -442,6 +466,7 @@ Under what conditions do the data we have properly estimate the data we want? Th
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
@@ -468,6 +493,7 @@ layout: false
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
@@ -492,6 +518,7 @@ layout: false
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
@@ -516,6 +543,7 @@ layout: false
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
   ### Rubin causal model
 ]
@@ -537,7 +565,7 @@ layout: false
 - One person taking Advil should not affect the outcome of another person.
 ]
 ---
-# Caveat about Rubin Causal Model
+## Caveat about Rubin Causal Model
 
 - Despite how it will feel when reading the literature, this is **not the only framework** of causal inference. 
 
@@ -599,5 +627,6 @@ class: center, middle
 - [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
 - [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
 - [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
-- [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/) by Gelman and Hill
+- [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/chap9.pdf) by Gelman and Hill
 - [Statistical Models and Shoe Leather](http://www.sas.rochester.edu/psc/clarke/405/Freedman91.pdf)
+- [To Explain or To Predict](https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf)
