@@ -548,6 +548,12 @@ layout: false
 | ...   |     ...   |     ...   | ... | ... |
 | Tyler |       1   | .red[_?_] |  0  |  1  |
 ]
+
+???
+
+If we had God's data, we could just take the average counterfactual under treatment and subtract it from the average counterfactual under control and get the average treatment effect. **NEXT SLIDE**
+
+Unfortunately we don't. So instead we have to ask, when can we approximate God's data using our actual observed data? That is, when does the difference in counterfactual outcomes the same as the difference in observed outcomes? **NEXT SLIDE**
 --
 .right-column[
 If we had "God's Data", the _**average treatment effect**_ would be `\(ATE=Pr(Y^{a=1})-Pr(Y^{a=0})\)`
@@ -569,6 +575,16 @@ layout: false
 
 - **Exchangeability**. `\(Y^a \indep A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
 ]
+
+???
+
+And the answer is when all these assumptions hold. If these assumptions are true, then in the Rubin causal model, the observed difference is the same as the counterfactual difference. First, exchangeability. This one is by far the most important. It just says that your counterfactual outcome is independent of your observed treatment. There are a lot of other names for it. It's the one we will spend the most time on. **NEXT SLIDE**
+
+Then there's positivity. Everybody has some positive probability of either receiving or not receiving treatment. **NEXT SLIDE**
+
+SUTVA which actually has two assumptions in one. First, the treatment is stable — that is, if I say I'm going to administer medicine, I'm administering the same level to everybody. It's a homongeous treatment. Likewise, a homogenous control. Second, my treatment does not affect your outcome. **NEXT SLIDE**
+
+Lastly, there's consistency which isn't really an assumption as much as axiomatic. **NEXT SLIDE**
 --
 .right-column[
 - **Positivity**. Every unit has a positive probability of having any value of `\(a\)`.
@@ -604,6 +620,12 @@ layout: false
 
 - If each person's assignment `\(A\)` is independent of their observed outcome `\(Y\)`, then we call the groups `\(A=1\)` and `\(A=0\)` "exchangeable". 
 ]
+
+???
+
+So exchangeability. If it turns out that the people in the control group are systematically different than the people in the experimental group, they cannot be considered the same — that is, they are not exchangeable. **NEXT SLIDE**
+
+This can only be assured if there is random assignment. Otherwise, we just make it as reasonable as possible and hope it is true. **NEXT SLIDE**
 --
 .right-column[
 - This is **only** ensured when the mechanism of assignment `\(A\)` is random. Otherwise, we try to make this as reasonable as possible, but can never confirm it to be true. 
