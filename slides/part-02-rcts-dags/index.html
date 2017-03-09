@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
     <meta name="date" content="2017-03-15" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
     <link rel="stylesheet" href="../custom.css" type="text/css" />
   </head>
   <body>
@@ -54,9 +55,11 @@ Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when 
 - Helpful for thinking about ways our assumptions can be wrong
 --
 
-### Use DAGs to show how RCTs avoid bias
+### Understanding Bias from a Graphical Perspective
 
 - More about these biases next lecture
+
+- Why RCTs avoid many of these biases
 
 
 ---
@@ -231,7 +234,11 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 class: center, middle
 # Exchangeability is a consequence of randomization
 
---
+## &amp;nbsp;
+
+---
+class: center, middle
+# Exchangeability is a consequence of randomization
 
 ## Unfortunately, we (usually) won't get to randomize
 
@@ -249,7 +256,6 @@ The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A
 --
 
 ### NOTE!
-
 Exchanagebility is not the same as independence. That is, `$$Y^a \indep A \neq Y \indep A$$`
 
 
@@ -265,11 +271,9 @@ class: center, middle, inverse
 ---
 # Causal Directed Acyclic Graphs (DAGs)
 
-.center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
-- Causal DAGs provide a mathematical link between statistics and causality.
-
+- Causal DAGs provide a mathematical link between statistical association and causality.
 
 ???
 
@@ -281,34 +285,41 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 
 --
 
-- Causal DAGs are an easy tool for us to express statistical associations implied by our assumptions of their causal structure. 
+- DAGs allow us to easily express the statistical associations of different variables implied by our assumed causal structure 
+
+.center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
 
 --
 
-- They also allow us to do the reverse. Given a set of associations in our data, diagram the causal structures that could result in those associations.
+- Even better, also allow us to do the reverse. Given a set of associations in our data, diagram the possible causal structures that could result in the same associations
 
 .center[&lt;img src="./assets/total_confounding.jpg" width="300"&gt;]
 
 ---
-# Causal Directed Acyclic Graphs (DAGs)
+# DAGs and Causal Inference
 
 .center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
-- Graphically, the goal is to estimate magnitude and direction arrow. Statistically, we can only estimate the magnitude
+- Graphically, the goal of causal inference is to estimate magnitude and direction of the arrow arrow
 
 --
 
-- The edge itself can exist for at least 5 reasons:
-    1. Just random luck
-    1. `\(X\)` really does cause `\(Y\)` (causal)
-    1. `\(Y\)` actually causes `\(X\)` (reverse causation)
-    1. `\(X\)` and `\(Y\)` share a common cause (confounding)
-    1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
+- Statistically, we can only estimate the magnitude
 
 --
 
-- Our job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
+- The edge represents statistical association, which can exist due to one or more of the following reasons:
+    1. **Randomness**: Just got lucky
+    1. **Causal**: `\(X\)` really does cause `\(Y\)`
+    1. **Reverse Causation**: `\(Y\)` actually causes `\(X\)`
+    1. **Confounding**: `\(X\)` and `\(Y\)` share a common cause
+    1. **Selection**: `\(X\)` and `\(Y\)` have a common effect that we are conditioning on
+
+---
+class: center, middle
+
+# Your job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
     
 ---
 # Rules for drawing a DAG
@@ -324,7 +335,7 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 
 --
 
-- Everything we are concerned with exists in the DAG
+- Everything we are concerned with exists in the DAG (all common causes must be in the DAG)
 
 ---
 # Reading DAGs: Causal assumptions
@@ -338,7 +349,7 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 - `\(Y\)` is a direct cause of `\(Z\)`
 --
 
-- `\(X\)` and `\(U\)` are *not* direct causes of `\(Z\)`, but *indirect* causes through `\(Y\)`
+- `\(X\)` and `\(U\)` are *indirect* of causes `\(Z\)` through `\(Y\)`
 --
 
 - `\(X\)` and `\(U\)` are not causes of each other
@@ -355,13 +366,13 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 - An edge implies statistical dependence
 --
 
-- No statistical dependence if there is a *collider*. Two arrow heads into one variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
+- No statistical dependence if there is a *collider*. That is, when two arrowheads point to same variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
 --
 
-- No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable) or a *descendent* of that variable
+- No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable)
 --
 
-- There is statistical dependence if we block a collider or a descendent of that collider
+- There is statistical dependence if we block a collider or a *descendent* of that collider
 
 ---
 # Reading DAGs: Statistical implications
@@ -408,24 +419,120 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 1. **Neglible randomness.** Statistical associations (or lack of such associations) are never due to random change (i.e., large sample size assumption).
 
 ---
-# RCTs and DAGs
+class: center, middle
 
-- Earlier, I said the edge in a DAG can exist for five reasons:
-    1. Just random luck
-    1. `\(X\)` really does cause `\(Y\)` (causal)
-    1. `\(Y\)` actually causes `\(X\)` (reverse causation)
-    1. `\(X\)` and `\(Y\)` share a common cause (confounding)
-    1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
+# Understanding Bias Graphically
+## Structural underpinnings of bias
+
+???
+
+I'm going to go over the ways our models can be wrong using DAGS. It's really just sort of a high level conceptual view of bias and causal inference. Then Zhe will talk about bias in a more mathematical way.
+---
+# The Structure of Bias
+
+.center[&lt;img src="./assets/partial_confounding.jpg" width="200"&gt;]
+
+- Recall the five ways we can find statistical association:
+    
+    1. **Randomness**: Just got lucky
+    1. **Causal**: `\(X\)` really does cause `\(Y\)`
+    1. **Reverse Causation**: `\(Y\)` actually causes `\(X\)`
+    1. **Confounding**: `\(X\)` and `\(Y\)` share a common cause
+    1. **Selection**: `\(X\)` and `\(Y\)` have a common effect that we are conditioning on
+
+---
+# The Structure of Bias
+
+.center[&lt;img src="./assets/partial_confounding.jpg" width="200"&gt;]
+
+- Recall the five ways we can find statistical association:
+    
+    1. ~~**Randomness**: Just got lucky~~
+    1. **Causal**: `\(X\)` really does cause `\(Y\)`
+    1. **Reverse Causation**: `\(Y\)` actually causes `\(X\)`
+    1. **Confounding**: `\(X\)` and `\(Y\)` share a common cause
+    1. **Selection**: `\(X\)` and `\(Y\)` have a common effect that we are conditioning on
+
+- Ignore (1) because of negligible randomness assumption (in other words, assume we have a sufficient sample size).
+
+---
+# The Structure of Bias
+
+.center[&lt;img src="./assets/partial_confounding.jpg" width="200"&gt;]
+
+- Recall the five ways we can find statistical association:
+    
+    1. ~~**Randomness**: Just got lucky~~
+    1. **Causal**: `\(X\)` really does cause `\(Y\)`
+    1. ~~**Reverse Causation**: Y actually causes X~~
+    1. **Confounding**: `\(X\)` and `\(Y\)` share a common cause
+    1. **Selection**: `\(X\)` and `\(Y\)` have a common effect that we are conditioning on
+
+- Ignore (1) because of negligible randomness assumption (in other words, assume we have a sufficient sample size).
+
+- Reverse causation (3) can really only be addressed through temporal ordering.
 
 --
 
-### RCTs address most of these
+- So we are going to focus on **confounding** and **selection**.
 
-- Large sample size allows for checking (1) via confidence intervals
+---
+#  The Structure of Bias: Confounding
 
-- Temporal ordering excludes (2)
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+- When a causal relation between two variables differs from their statistical association, the relationship is **confounded**.
 
-- Randomization excludes (3)
+- For example, here the relationship between `\(X\)` and `\(Y\)` does not exist causally, but there is a statistical association induced by *total* confounding through `\(U\)`.
+
+.center[&lt;img src="./assets/total_confounding.jpg" width="200"&gt;] 
+
+- Similarly, below, even when a causal relationship does exist, the statistical association is poorly estimated due to *partial* confounding through `\(U\)`.
+
+.center[&lt;img src="./assets/partial_confounding.jpg" width="200"&gt;]
+
+---
+# The Structure of Bias: Confounding
+
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+
+- Confounding is specific to variables of interest. Here, `\(U\)` confounds the `\(X \rightarrow Y\)` relationship, but does not confound the `\(Z \rightarrow Y\)` relationship.
+
+.center[&lt;img src="./assets/iit_iv.jpg" width="200"&gt;]
+
+- Blocking a confounder or a *sufficient set* of confounders allows for the proper estimation of causal effect.
+
+.center[&lt;img src="./assets/blocked_confounder.jpg" width="200"&gt;]
+---
+# The Structure of Bias: Selection/Collider Bias
+
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+
+- Collider bias is "the change in association ebtween two variables when conditioning on their common effect". Most common form is selection bas.
+
+
+---
+
+- Recall the five ways we can find a statistical association:
+    1. ~~Just random luck~~
+    1. `\(X\)` really does cause `\(Y\)` (causal)
+    1. ~~Y actually causes X (reverse causation)~~
+    1. `\(X\)` and `\(Y\)` share a common cause (confounding)
+    1. `\(X\)` and `\(Y\)` have a common effect that we are conditioning on (selection)
+
+- Luck can be addressed by using a large enough sample size to evaluate confidence intervals of the effects.
+
+- Reverse causation can really only be addressed through temporal ordering.
+
+
+
+
+
+--
+
+- RCTs address most of these
+    - Large sample size allows for checking (1) via confidence intervals
+    - Temporal ordering excludes (3)
+    - Randomization excludes (4)
 
 
 ---

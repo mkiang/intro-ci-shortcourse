@@ -67,7 +67,7 @@
 \end{tikzpicture}
 
 
-\section{RCT/IV}
+\section{ITT/IV}
 
 \begin{tikzpicture}
     % nodes %
@@ -82,6 +82,18 @@
     \draw[->, line width = 1] (z) -- (x);
 \end{tikzpicture}
 
+\section{Blocked Confounder DAG (partial)}
+
+\begin{tikzpicture}
+    % nodes %
+    \node[text centered] (x) {$X$};
+    \node[right = 1 of x, text centered] (y) {$Y$};
+    \node[left = 1 of x, text centered, rectangle, draw] (u) {$U$};
+    % edges %
+    \draw[->, line width = 1] (x) -- (y);
+    \draw[->, line width = 1] (u) -- (x);
+    \draw[->, line width = 1] (u.north) [out=30,in=150] to (y.north);
+\end{tikzpicture}
 
 
 \end{document}
