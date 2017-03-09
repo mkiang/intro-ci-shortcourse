@@ -617,7 +617,7 @@ layout: false
 | ...   |     ...   |     ...   | ... | ... |
 | Tyler |       1   | .red[_?_] |  0  |  1  |
 
-- If each person's assignment $A$ is independent of their observed outcome $Y$, then we call the groups $A=1$ and $A=0$ "exchangeable". 
+- If each person's observed assignment $a$ is independent of their *counterfactual* outcome $Y^{A=a}$, then we call the groups $A=1$ and $A=0$ "exchangeable". 
 ]
 
 ???
