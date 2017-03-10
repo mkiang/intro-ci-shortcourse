@@ -363,8 +363,40 @@ One easy example is carrying matches in your pocket and lung cancer. Turns out t
 ]
 --
 .right-column[
-- Example: Carrying matches and lung cancer.
+- (Even when manipulating `\(x\)` is not possible — the impossible counterfactual. For example, does race have a causal effect on mortality?)
 ]
+
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+]
+
+.right-column[
+## Carrying Matches and Lung Cancer
+
+- If you work for a company that sells drugs to treat lung cancer, you just want to find people who are likely to have lung cancer (even if they don't know it.)
+]
+
+--
+
+.right-column[
+- That is, *prediction* is your goal. So you find that people who carry matches are much more likely to get lung cancer and those are the people you target.
+]
+
+--
+
+.right-column[
+- If, however, you want to prevent lung cancer, you need a causal model. You need to know that smokers are more likely to carry matches and more likely to get lung cancer.
+]
+
+--
+
+.right-column[
+- Intervening on the matches doesn't make sense. You need to intervene on the causal pathway — smoking.
+]
+
 ---
 layout: false
 .left-column[
@@ -379,7 +411,7 @@ layout: false
 ]
 --
 .right-column[
-If Edward takes Drug B and get a headache, did Drug B *cause* his headache?
+If Edward takes Drug B and gets a headache, did Drug B *cause* his headache?
 ]
 
 ???
@@ -400,6 +432,18 @@ Implicitly, Drug B only caused the headache if Eddie would *not* have received t
 --
 .right-column[
 So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units). Importantly, we only observe **one** outcome so all comparisons are hypothetical. 
+]
+---
+layout: false
+.left-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+"Everybody want to know what I would do if I didn't win... I guess we'll never know."
+
+— Kanye West, 47th Annual Grammy Awards
+]
+.right-column[
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+&lt;img src="./assets/ci_expert.jpg" width="350"&gt;
 ]
 ---
 layout: false
@@ -572,6 +616,37 @@ layout: false
   ### Rubin causal model
 ]
 .right-column[
+## Linking Association to Causality
+
+### .center[Model coefficients are *not* causal effects.]
+
+- No causal effects can be derived purely from observational data alone.
+]
+--
+.right-column[
+- None.
+]
+--
+.right-column[
+- That coefficient from your difference-in-differences IPW model — not a causal effect.
+]
+--
+.right-column[
+- That estimate from your new cutting edge machine learning algorithm — not a causal effect.
+]
+--
+.right-column[
+### .center[You must have additional assumptions to estimate causal effects.]
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
 ## Assumptions
 
 - **Exchangeability**. `\(Y^a \indep A\)` for all values of `\(a\)`. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
@@ -681,6 +756,10 @@ layout: false
 .right-column[
 - One person taking Advil should not affect the outcome of another person.
 ]
+--
+.right-column[
+- Important because it reduces the number of potential outcomes for ecah unit to two.
+]
 ---
 ## Caveat about Rubin Causal Model
 
@@ -738,6 +817,7 @@ class: center, middle
 - [Hormone replacement therapy](https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2014/11/Authors__Response_Part_I__Observational_Studies.6.pdf) - Hernán MA, Alonso A, Logan R, Grodstein F, Michels KB, Willett WC, Manson JE, Robins JM. Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease (with discussion). Epidemiology 2008; 19:766-779
 - [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
 - [Causality chapter](http://www.ics.uci.edu/~sternh/courses/265/imbensrubin1.pdf) by Imbens and Rubin
+- [GOV 2001 Lecture Notes](http://projects.iq.harvard.edu/gov2001/book/lecture-notes-advanced-quantitative-political-methodology)
 
 ---
 # Additional Reading
@@ -748,6 +828,7 @@ class: center, middle
 - [Statistical Models and Shoe Leather](http://www.sas.rochester.edu/psc/clarke/405/Freedman91.pdf)
 - [To Explain or To Predict](https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf)
 - [Don Rubin on Design vs Analysis](http://projecteuclid.org/download/pdfview_1/euclid.aoas/1223908042)
+- [Is the "well defined intervention" assumption politically conservative?](https://www.ncbi.nlm.nih.gov/pubmed/26777446)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
