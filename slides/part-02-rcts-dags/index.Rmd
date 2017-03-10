@@ -457,7 +457,11 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 ---
 # The Structure of Bias
 
+<!-- 
+
 .center[<img src="./assets/partial_confounding.jpg" width="200">]
+
+-->
 
 - Recall the five ways we can find statistical association:
     
@@ -476,7 +480,7 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - So we are going to focus on the structural foundations of **confounding** and **collider bias**.
 
 ---
-#  The Structure of Bias: Confounding
+#  Confounding
 
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 - When a causal relation between two variables differs from their statistical association, the relationship is **confounded**.
@@ -490,7 +494,7 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 .center[<img src="./assets/partial_confounding.jpg" width="200">]
 
 ---
-# The Structure of Bias: Confounding
+# Confounding
 
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
@@ -502,7 +506,7 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 .center[<img src="./assets/blocked_confounder.jpg" width="200">]
 ---
-# The Structure of Bias: Selection/Collider Bias
+# Collider/Selection Bias
 
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
