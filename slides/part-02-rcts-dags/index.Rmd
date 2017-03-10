@@ -313,7 +313,7 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
     1. **Causal**: $X$ really does cause $Y$
     1. **Reverse Causation**: $Y$ actually causes $X$
     1. **Confounding**: $X$ and $Y$ share a common cause
-    1. **Selection**: $X$ and $Y$ have a common effect that we are conditioning on
+    1. **Collider/Selection**: $X$ and $Y$ have a common effect that we are conditioning on
 
 ---
 class: center, middle
@@ -455,29 +455,30 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - Ignore (1) because of negligible randomness assumption (in other words, assume we have a sufficient sample size).
 
 ---
-# The Structure of Bias
+#  Reverse Causation
+.footnote[.red[*]Worth noting that reverse causation can be expressed as a special case of confounder, measurement, or collider bias.]
 
-<!-- 
 
-.center[<img src="./assets/partial_confounding.jpg" width="200">]
+- In observational data, we often do not have *temporal ordering*; that is, we don't know for sure our treatment occurred before our outcome. 
 
--->
+- For example, the causal question "Does income affect health?" has ambiguous temporal ordering. 
 
-- Recall the five ways we can find statistical association:
-    
-    1. ~~**Randomness**: Just got lucky~~
-    1. **Causal**: $X$ really does cause $Y$
-    1. ~~**Reverse Causation**: Y actually causes X~~
-    1. **Confounding**: $X$ and $Y$ share a common cause
-    1. **Collider/Selection**: $X$ and $Y$ have a common effect that we are conditioning on
+- Perhaps people who are sick a lot missed a lot of school and thus have lower paying jobs.
 
-- Ignore (1) because of negligible randomness assumption (in other words, assume we have a sufficient sample size).
+.center[<img src="./assets/reverse_single.jpg" width="200">]
 
-- Reverse causation (3) can really only be addressed through temporal ordering, but must be noted because things can often be both forward and reversely causal.
+- In reality, it is often a mix of both and causation is bidirectional.
+
+.center[<img src="./assets/reverse_double.jpg" width="200">]
 
 --
 
-- So we are going to focus on the structural foundations of **confounding** and **collider bias**.
+- In addition, sometimes real world causation does not fit nicely in a DAG — 
+
+---
+#  Reverse Causation: Example
+
+- OBESITY PARADOX?
 
 ---
 #  Confounding
@@ -514,9 +515,20 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 - Most common form is selection bias, but can also occur due to stratification, M-bias, or improper covariate adjustment.
 
-- Examples: Party at my house; fast and tall NBA players.
+- When we condition on some common effect (or a descendent of that common effect), we open up the path that was previously blocked by the collider. 
 
 .center[<img src="./assets/selection_bias.jpg" width="200">]
+
+---
+# Collider/Selection Bias: Example
+ 
+.center[<img src="./assets/nba_players.jpg" width="600">]
+
+???
+
+Let's pretend in order to play in the NBA, you have to either be very fast or very tall. This is Isaiah Thomas. He's 5' 9". The average height in the NBA is 6' 7". What do we know about his athletic ability? 
+
+We know he is fast, but we only know that because we are looking at NBA players. In the general population (that is, if we didn't condition on being in the NBA), there's no reason to believe there is a connection between height and speed.
 
 ---
 

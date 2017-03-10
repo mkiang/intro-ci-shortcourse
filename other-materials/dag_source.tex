@@ -16,6 +16,26 @@
     \draw[->, line width = 1] (x) -- (y);
 \end{tikzpicture}
 
+\section{Reverse Causation - Single}
+
+\begin{tikzpicture}
+    % nodes %
+    \node[text centered] (x) {$X$};
+    \node[right = 1 of x, text centered] (y) {$Y$};
+    % edges %
+    \draw[<-, line width = 1] (x) -- (y);
+\end{tikzpicture}
+
+\section{Reverse Causation - Double}
+
+\begin{tikzpicture}
+    % nodes %
+    \node[text centered] (x) {$X$};
+    \node[right = 1 of x, text centered] (y) {$Y$};
+    % edges %
+    \draw[<->, line width = 1] (x) -- (y);
+\end{tikzpicture}
+
 \section{Simple Example DAG}
 
 \begin{tikzpicture}
