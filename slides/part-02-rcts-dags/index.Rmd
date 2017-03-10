@@ -456,8 +456,6 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 ---
 #  Reverse Causation
-.footnote[.red[*]Worth noting that reverse causation can be expressed as a special case of confounder, measurement, or collider bias.]
-
 
 - In observational data, we often do not have *temporal ordering*; that is, we don't know for sure our treatment occurred before our outcome. 
 
@@ -467,8 +465,10 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 .center[<img src="./assets/reverse_single.jpg" width="200">]
 
+- "Reverse causality" is a more general term for bias. It is usually a special case of *confounding* or *collider bias*.
+
 ---
-#  Reverse Causation
+#  Reverse Causation: Example
 
 - In reality, it is often a mix of both and causation is bidirectional. 
 
@@ -480,10 +480,13 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 - Higher income also allows you to live a healthier lifestyle (e.g., gym membership, health insurance, quality food, etc.)
 
----
-#  Reverse Causation: Example
+--
 
-- OBESITY PARADOX?
+- **Obesity paradox**: People with high BMI seem to have better outcomes after heart attacks than those with normal BMI.
+
+--
+
+- One explanation has been reverse causality — people who are very ill tend to lose weight (and are also at higher risk of death).
 
 ---
 #  Confounding
@@ -511,6 +514,11 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - Blocking a confounder or a *sufficient set* of confounders allows for the proper estimation of causal effect.
 
 .center[<img src="./assets/blocked_confounder.jpg" width="200">]
+---
+# Confounding: Example
+
+
+
 ---
 # Collider/Selection Bias
 
@@ -571,18 +579,28 @@ class: center, middle
 - TODO
 
 ---
-# Aside: Measures of causal effect
+class: center, middle
+# Additional slides
+
+---
+# Example of M-Bias
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+.center[<img src="./assets/m_bias_example.jpg" width="650">]
+
+- Controlling for mother's diabetes status induces a correlation between low education and diabetes.
+
+---
+# Example of Survivor Bias
+.footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
+.center[<img src="./assets/survivor_bias.jpg" width="600">]
+
+---
+# Other measures of causal effect
 
 If exchangeability holds, we can express the causal effects in different ways:
 
---
-
 1. **Absolute difference**: $ATE = Pr[Y=1|A=1] - Pr[Y=1|A=0]$
 
---
-
 1. **Risk ratio**: $ATE = \frac{Pr[Y=1|A=1]}{Pr[Y=1|A=0]}$
-
---
 
 1. **Odds ratio**: $ATE = \frac{Pr[Y=1|A=1] / Pr[Y=0|A=1]}{Pr[Y=1|A=0] / Pr[Y=1|A=0]}$
