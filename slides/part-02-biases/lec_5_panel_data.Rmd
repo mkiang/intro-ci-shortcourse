@@ -249,6 +249,17 @@ Dig more into the argued causal mechanisms
 - similar in flavor to IV, diff-in-diff
 
 ---
+# Emphasis on General Meaningful Variation
+
+- Turo changes a product, looking at geographic diffusion
+
+- Scientists do experiment design. 
+- Observational causal inference people do experiment design afterwards.
+
+---
+# PSM (if there's room)
+
+---
 # Sources
 
 - Mostly Harmless Econometrics
