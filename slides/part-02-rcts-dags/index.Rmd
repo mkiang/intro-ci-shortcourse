@@ -42,7 +42,7 @@ Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when 
 
 --
 
-### Randomized Control Trials
+### Randomized Controlled Trials
 
 - Thinking about causality in the ideal setting
 --
@@ -62,7 +62,7 @@ Finally, we'll combine RCTs and DAGs to show how bias can affect estimates when 
 
 
 ---
-# Randomized Control Trials
+# Randomized Controlled Trials
 
 .pull-right[<img src="./assets/james_lind.jpg" width="250">]
 
@@ -96,10 +96,24 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 - Only Group 6 (citrus fruit) showed substantial improvement.
 
 ---
-# Randomized Control Trials
+# Randomized Controlled Experiment
+
+.center[<img src="./assets/facebook_emotion_header.jpg" width="600">]
+
+- Massive experiment involving > 600,000 people over 1 week
+
+- Found that emotions expressed by others (on Facebook) affect our own emotions.
+
+- Innovative because it showed that emotional contagion did not require directed social interaction, non-verbal cues, or face-to-face interaction. 
+
+- Also incredibly controversial due to manipulating emotions of real people on a large scale.
+
+
+---
+# Randomized Controlled Trials/Experiments
 .footnote[Hernan Epi 201]
 
-### What's the big deal about RCTs?
+### What's the big deal about randomization?
 
 ???
 
@@ -107,7 +121,7 @@ There are a few things worth noting about Lind's RCT. **NEXT SLIDE**
 
 First, he showed a strong causal effect with a tiny sample. An n=12 study would literally never get published today, but nonetheless, it's hard to argue with a strong causal effect even in a small RCT. **NEXT SLIDE**
 
-Second, even though Lind was wildly wrong about **why** the RCT worked, he was right about the causal effect of citric acid on preventing and curing scurvy. Back then, medicine didn't reocgnize the importance of vitamins and so Lind believed that survey or all the bleeding was a result of the body beging to putrefy and acid reduced the process.
+Second, even though Lind was wildly wrong about **why** the RCT worked, he was right about the causal effect of citric acid on preventing and curing scurvy. Back then, medicine didn't reocgnize the importance of vitamins and so Lind believed that survey or all the bleeding was a result of the body beging to putrefy and acid reduced the process
 
 --
 
@@ -115,19 +129,26 @@ Second, even though Lind was wildly wrong about **why** the RCT worked, he was r
 
 --
 
+- Conversely, despite very small causal effect, Facebook was able to show convincing causality (via large sample size)
+
+--
+
 - RCTs allow us to gain knowledge about causal effects **without knowing the mechanism** 
 
-    - Lind believed acid stopped putrefaction. 
-    - Medicine had not yet understood importance of vitamins.
+    - Lind believed acid stopped putrefaction
+    - Medicine had not yet understood importance of vitamins
+    - Previous research suggested emotional contagion required non-verbal cues to be effective
 
 ---
-# Randomized Control Trials
-### But RCTs aren't perfect
+# Randomized Controlled Trials
+### But RCTs aren't perfect! 
 
-.center[<img src="./assets/parachutes_rcts.jpg" width="450">]
+.pull-right[<img src="./assets/parachutes_rcts.jpg" width="650">]
+
+.pull-left["Parachutes reduce the risk of injury after gravitational challege, but their effectiveness has not been proved with randomised controlled trials."]
 
 ---
-# Randomized Control Trials
+# Randomized Controlled Trials
 ### But RCTs aren't perfect
 
 - Expensive — limited feasibility
@@ -146,22 +167,21 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 
 --
 
-- Smaller sample size (compared to observational studies) — limited generalizability
+- Limited generalizability
 
-    - The *internal validity* of an RCT is very high, but the *external validity* is often not.
+    - The *internal validity* of an RCT is very high, but the *external validity* is often not when sample size is small or selective
+    - For example, perhaps Facebook users value social posts more than non-Facebook users
 
 --
 
 - Difficult — good RCTs are very hard to do
 
 ---
-# RCT Definitions
-
-### .red[TODO: SHOULD I TAKE THIS OUT?]
+# RCT/E Definitions
 
 .footnote[Hernan Epi 201]
 
-- **Randomized**: The intervention is assigned randomly
+- **Randomized**: The intervention is assigned randomly (not necessarily the same as the treatment is *received* randomly)
 
 ???
 
@@ -178,10 +198,9 @@ It's also important to note that RCTs are often very costly and have a smaller, 
     - Trials have ethical requirements that experiments may not (e.g., equipoise)
 
 --
-<br>
-### In an ideal RCT, there is no loss to follow-up, perfect compliance, only one version of treatment, double (or triple) blind assignment
+- **Ideal setting**: In an ideal RCT, there is no loss to follow-up, perfect compliance, only one version of treatment, double (or triple) blind assignment
 ---
-# Randomized Control Trials
+# Randomized Controlled Trials
 
 - Recall from last lecture, because of the *Fundamental Problem of Causal Inference*, we can never observe both counterfactuals.
 
@@ -201,7 +220,7 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 ### .center[These are all met in an ideal RCT]
 
 ---
-# Randomized Control Trials
+# Randomized Controlled Trials
 
 .footnote[Hernan Epi 201]
 
@@ -476,7 +495,7 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 --
 
-- Healthier people tend to have characteristics that also lead to better health (relative to sicker people). 
+- Healthier people tend to have characteristics that also lead to higher income (relative to sicker people). 
 
 - Higher income also allows you to live a healthier lifestyle (e.g., gym membership, health insurance, quality food, etc.)
 
@@ -514,6 +533,10 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - Blocking a confounder or a *sufficient set* of confounders allows for the proper estimation of causal effect.
 
 .center[<img src="./assets/blocked_confounder.jpg" width="200">]
+
+--
+
+- **Obesity paradox**: Smoking leads to lower weight (on average), but also worse health outcomes.
 ---
 # Confounding: Example
 
@@ -533,6 +556,10 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - When we condition on some common effect (or a descendent of that common effect), we open up the path that was previously blocked by the collider. 
 
 .center[<img src="./assets/selection_bias.jpg" width="200">]
+
+--
+
+- **Obesity paradox**: Is there selection on patients who live long enough to get a heart attack? Perhaps these patients are different than the general obese population.
 
 ---
 # Collider/Selection Bias: Example
@@ -556,15 +583,6 @@ We know he is fast, but we only know that because we are looking at NBA players.
     - (4) Exchangeability (i.e., lack of confounding) is expected in randomization
     
 - Proper sampling methods and/or careful interpetation of the results can address (5).
-
----
-
-### NOTES TO MYSELF
-
-- I ignored measurement error which has a structure that can be shown in DAGs but is likely outside the scope of the class.
-- Maria Glymour has a very [good numerical example of survivor bias in 16.5](http://publicifsv.sund.ku.dk/~nk/epiF14/Glymour_DAGs.pdf)
-
-
 
 ---
 class: center, middle

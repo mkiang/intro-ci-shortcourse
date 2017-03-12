@@ -394,6 +394,12 @@ layout: false
 .right-column[
 - Intervening on the matches doesn't make sense. You need to intervene on the causal pathway — smoking.
 ]
+--
+
+.right-column[
+- The counterfactual here is important. A smoker without matches is still a smoker at risk of lung cancer. Smoker vs nonsmoker is what we care about.
+]
+
 
 ---
 layout: false
@@ -635,6 +641,10 @@ layout: false
 --
 .right-column[
 ### .center[You must have additional assumptions to estimate causal effects.]
+]
+--
+.right-column[
+- So be careful with causal statements.
 ]
 ---
 layout: false
