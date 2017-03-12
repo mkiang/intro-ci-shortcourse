@@ -101,14 +101,32 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 
 .center[&lt;img src="./assets/facebook_emotion_header.jpg" width="600"&gt;]
 
-- Massive experiment involving &gt; 600,000 people over 1 week
+???
+So you are all probabily more familiar with this study in PNAS. It was done by the Facebook Core Data Science Team. **NEXT SLIDE**
+
+They wanted to better understand social contagion so they conducted an experiment on over 600,000 Facebook users where they purposely hid negative or positive messages from users News Feeds and then tracked whether or not the users themselves posted more negative or positive emotions. **NEXT SLIDE**
+
+What they found was that emotional contagion existed within Facebook networks. That is, if you saw fewer negative posts, you were less negative and more positive in your own posts and vice versa. In other words, the emotions of your friends seemed to spread through Facebook. **NEXT SLIDE**
+
+It was really quite innovative because most social contagion work at this point had been done based on data and networks it was not designed for like the Framingham Heart Study or done in a laboratory setting with very few subjects. They were able to show that social contagion was real in an experimental setting and that you didn't actually need physical face-to-face interaction for it to happen. **NEXT SLIDE**
+
+It was also incredibly controversial because they never got informed consent from the users and yet they were manipulating users emotions. Thankfully, the effect size was very small, but what would have happened if the effect size wasn't small? And even if you have a small effect size, when you experiment on over half a million people, you may get a few adverse events. **NEXT SLIDE**
+
+--
+
+- Massive experiment involving &gt;600,000 people over 1 week
+
+--
 
 - Found that emotions expressed by others (on Facebook) affect our own emotions.
 
+--
+
 - Innovative because it showed that emotional contagion did not require directed social interaction, non-verbal cues, or face-to-face interaction. 
 
-- Also incredibly controversial due to manipulating emotions of real people on a large scale.
+--
 
+- Also incredibly controversial due to manipulating emotions of real people on a large scale.
 
 ---
 # Randomized Controlled Trials/Experiments
@@ -118,11 +136,13 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 
 ???
 
-There are a few things worth noting about Lind's RCT. **NEXT SLIDE**
+There are a few things worth noting about these ranodmized experiments. **NEXT SLIDE**
 
-First, he showed a strong causal effect with a tiny sample. An n=12 study would literally never get published today, but nonetheless, it's hard to argue with a strong causal effect even in a small RCT. **NEXT SLIDE**
+First, Lind showed a strong causal effect with a tiny sample. An n=12 study would literally never get published today, but nonetheless, it's hard to argue with a strong causal effect even in a small RCT. **NEXT SLIDE**
 
-Second, even though Lind was wildly wrong about **why** the RCT worked, he was right about the causal effect of citric acid on preventing and curing scurvy. Back then, medicine didn't reocgnize the importance of vitamins and so Lind believed that survey or all the bleeding was a result of the body beging to putrefy and acid reduced the process
+Second, even though there was just a tiny effect size, a large sample and randomization allowed Facebook to make pretty strong causal claims. **NEXT SLIDE**
+
+Third, even though Lind was wildly wrong about **why** the RCT worked, he was right about the causal effect of citric acid on preventing and curing scurvy. Back then, medicine didn't reocgnize the importance of vitamins and so Lind believed that survey or all the bleeding was a result of the body beging to putrefy and acid reduced the process. Similarly, we don't really understand the psychology of why social contagion works or much about it, yet it is hard to argue that it does not exist with such a large experiment. **NEXT SLIDE**
 
 --
 
@@ -143,6 +163,15 @@ Second, even though Lind was wildly wrong about **why** the RCT worked, he was r
 ---
 # Randomized Controlled Trials
 ### But RCTs aren't perfect! 
+
+???
+BUT! RCTs have very real drawbacks or else wouldn't even be here learning about causal inference on observational data. **NEXT SLIDE**
+
+This is a real article out of BMJ and the caption at the bottom says "Parachutes reduce the risk of injury after gravitational challenge, but their effectiveness has not been proved by randomized control trials." The point being that not everything can be tested with a randomized control trials. **NEXT SLIDE**
+
+--
+
+.footnote[.red[*]Smith and Pell, 2003.]
 
 .pull-right[&lt;img src="./assets/parachutes_rcts.jpg" width="650"&gt;]
 
@@ -296,11 +325,13 @@ class: center, middle, inverse
 
 ???
 
-Let's take what may seem like a little detour and talk about DAGs. DAGs are directed acyclic graphs. DAGs allow us to visually express our assumptions about causal effects based only on statistical associations. That is, you have some data and you run a regression with a bunch of variables and you get out a bunch of coefficients. Drawing a DAG allows you to very explicitly state the relationship between all those statistical associations and how they lead to some causal effect. **NEXT SLIDE**
+Let's take what may seem like a little detour and talk about DAGs. DAGs are directed acyclic graphs. DAGs allow us to visually express our assumptions about causal effects based only on statistical associations. That is, you have some data and you run a regression with a bunch of variables and you get out a bunch of coefficients. **NEXT SLIDE**
 
-Importantly, they allow you to also do the reverse. That is, given a bunch of associations from your regression model, what are the different ways you could have come up with a causal estimate and how are those ways wrong. **NEXT SLIDE**
+Drawing a DAG allows you to very explicitly state the relationship between all those statistical associations and how they lead to some causal effect. **NEXT SLIDE**
 
-DAGs have a strong mathematical underpinning and link causality and statistics. If you're interested in learning more about them, definitely check out Causality from Judea Pearl. 
+Importantly, they allow you to also do the reverse. That is, given a bunch of associations from your regression model, what are the different ways you could have come up with a causal estimate and how are those ways wrong. 
+
+DAGs have a strong mathematical underpinning and link causality and statistics. If you're interested in learning more about them, definitely check out Causality from Judea Pearl. **NEXT SLIDE**
 
 --
 
@@ -320,7 +351,15 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 .center[&lt;img src="./assets/basic_dag.jpg" width="200"&gt;]
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
-- Graphically, the goal of causal inference is to estimate magnitude and direction of the arrow arrow
+- Graphically, the goal of causal inference is to estimate magnitude and direction of the arrow
+
+???
+
+So in causal inference, you want to estimate the direction and magnitude of this arrow. X goes to Y so how much does changing X also change Y? **NEXT SLIDE**
+
+Now we can actually only estimate the magnitude. Our tools only allow us to estimate association so even if your model is right and your assumptions are right and your data are perfect, you're still only getting the magnitude of the effect. **NEXT SLIDE**
+
+And this estimate can occur for any one of these reasons. You can just got lucky with your sample. It could actually be causal. It could be reverse causation so maybe Y caused X and that's why they are associated. Maybe theres a common cause for both X and Y and you're estimating an association through a backdoor path. And lastly, maybe you are conditioning on something that is actually a common effect of X and Y. **NEXT SLIDE**
 
 --
 
@@ -339,6 +378,10 @@ DAGs have a strong mathematical underpinning and link causality and statistics. 
 class: center, middle
 
 # Your job is to figure out which of these reasons is most consistent with the data and rule out all other explanations
+
+???
+
+Of these reasons, which one is the most plausible? Which ones can you rule out? That's the point of causal inference. Statistical inference is just are you using the right model and making the right assumptions to get an appropriate estimate of the association, but causal inference goes one step farther. If you have an association, can you rule out other possible explanations of its causes?
     
 ---
 # Rules for drawing a DAG
@@ -347,6 +390,14 @@ class: center, middle
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - Time flows left to right (thus arrows always point right)
+
+???
+
+Ok. So let's go over the rules for drawing and reading a DAG. First, when you draw a causal DAG, assume time goes left to right. Thus arrows will always point right because something from the future cannot cause something from the past. **NEXT SLIDE**
+
+Any arrow implies your belief that one variable caused another. Converse, no arrow implies your believe that it did **not** cause something. This allows us to encode expert or domain-specific knowledge. If you know something cannot cause something else from previous research or from a biological limitation or whatever, then not drawing that arrow allows you to encode it. **NEXT SLIDE**
+
+Finally, everything you care about is in that DAG. Even things that are not in your regression. If it is plausible that it is somewhere in your causal pathway, then it must be included in the DAG. Not including it implies you do not believe it exists in the causal pathway. **NEXT SLIDE**
 
 --
 
@@ -363,32 +414,60 @@ class: center, middle
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - `\(X\)` and `\(U\)` are direct causes of `\(Y\)`
+
+???
+
+Ok. How do we read a causal DAG? There are two parts of reaching a causal DAG. First, the causal part. **NEXT SLIDE**
+
+In the DAG above, it is clear that both X and U independently are direct causes of Y. What is a direct cause of Z? **NEXT SLIDE**
+
+Does Z have any indirect causes? Yes, both U and X can cause Z through Y (i.e., Y mediates the U -&gt; Z relationship). **NEXT SLIDE**
+
+X and U do not cause each other. **NEXT SLIDE** And no two variables share a common cause. (But Y is a common effect of both U and X).
+
+There are also a lot of statistical implications and this is where DAGs are really powerfu. So we are going to kind of skim this because d-separation is useful but beyond the scope of this class. Really all you need to know are these rules. **NEXT SLIDE**
+
 --
 
 - `\(Y\)` is a direct cause of `\(Z\)`
+
 --
 
 - `\(X\)` and `\(U\)` are *indirect* of causes `\(Z\)` through `\(Y\)`
+
 --
 
 - `\(X\)` and `\(U\)` are not causes of each other
+
 --
 
 - No two variables share a common cause
 
 ---
-# Reading DAGs: Statistical implications
+# Reading DAGs: Mini d-Separation
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 - An edge implies statistical dependence
+
+???
+
+Any edge implies statistical dependence.  **NEXT SLIDE**
+
+However, no statistical dependence if there is a collider. So statistical association cannot flow from X to U because Y is a collider. **NEXT SLIDE**
+
+No statistical dependence if you condition or block a variable. **NEXT SLIDE**
+
+However, blocking a collider or a descendent of that collider opens up the path through that collider. **NEXT SLIDE**
 --
 
 - No statistical dependence if there is a *collider*. That is, when two arrowheads point to same variable (e.g., `\(U \rightarrow Y \leftarrow X\)`)
+
 --
 
 - No statistical dependence if we *condition* or *block* a variable (denoted with a box around that variable)
+
 --
 
 - There is statistical dependence if we block a collider or a *descendent* of that collider
@@ -399,12 +478,22 @@ class: center, middle
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
 
+???
+
+Ok So what edges in our DAG are statistical dependent? **NEXT SLIDE**
+
+--
+
 - `\(X\)` and `\(Y\)` are statistically dependent
+
 - `\(U\)` and `\(Y\)` are statistically dependent
+
 - `\(Y\)` and `\(Z\)` are statistically dependent
+
 --
 
 - `\(X\)` and `\(Z\)` are statistically dependent (i.e., `\(X \rightarrow Y \rightarrow Z\)`)
+
 - `\(U\)` and `\(Z\)` are statistically dependent (i.e., `\(U \rightarrow Y \rightarrow Z\)`)
 
 ---
@@ -413,6 +502,11 @@ class: center, middle
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
 
+???
+
+Is there anything in our DAG that is statistical independent? **NEXT SLIDE**
+
+--
 - `\(X\)` and `\(U\)` are statistically independent (blocked by a collider `\(Y\)`)
 
 --
@@ -428,13 +522,24 @@ class: center, middle
 - Similar to above, `\(U\)` and `\(Z\)` are statistically independent, conditional on `\(Y\)`.
 
 ---
-# DAGs Assumptions
+# Causal DAGs Assumptions
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 
 .center[&lt;img src="./assets/example_dag.jpg" width="200"&gt;]
 
-1. **Causal Markov Assumption.** Any variable `\(X\)` is independent of any other variable `\(Y\)` conditional on on the direct causes of `\(X\)` (unless `\(Y\)` is an effect of `\(X\)`).
+1. **Causal Markov Assumption.** Any variable `\(X\)` is independent of any other variable `\(Y\)` conditional on the direct causes of `\(X\)` (unless `\(Y\)` is an effect of `\(X\)`).
+
+???
+The CMA basically means if I know Y, knowing U and X won't provide me with more information about Z. If you just follow the rules in the slide before, this follows. **NEXT SLIDE**
+
+Faithfulness is easy... We're going to assume if there are positive and negative causal effects, we will be able to estimate them because they will never equal exactly 0. **NEXT SLIDE**
+
+Neglible randomness just means we are going to assume our sample size is of sufficient size that we aren't just getting lucky draws from our population. **NEXT SLIDE**
+
+--
 1. **Faithfulness.** Positive and negative causal effects never *perfectly* offset. 
+
+--
 1. **Neglible randomness.** Statistical associations (or lack of such associations) are never due to random change (i.e., large sample size assumption).
 
 ---
@@ -459,6 +564,9 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
     1. **Confounding**: `\(X\)` and `\(Y\)` share a common cause
     1. **Collider/Selection**: `\(X\)` and `\(Y\)` have a common effect that we are conditioning on
 
+???
+So recall this slide from before. These are the only ways a statistical association can exist.
+
 ---
 # The Structure of Bias
 
@@ -474,16 +582,36 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 - Ignore (1) because of negligible randomness assumption (in other words, assume we have a sufficient sample size).
 
+???
+
+Using the neglible randomness association, let's just forget about 1.
+
 ---
 #  Reverse Causation
 
 - In observational data, we often do not have *temporal ordering*; that is, we don't know for sure our treatment occurred before our outcome. 
 
+???
+
+In observational data, we often only have a cross-section of data and thus we don't know for sure temporal ordering. We can't be positive that our treatment occurred before our outcome. This is also true for more abstract or ill-defined causal questions. **NEXT SLIDE**
+
+Does income affect health? That is, do richer people live longer because they are richer? It's unclear... There's ambiguous temporal ordering. **NEXT SLIDE**
+
+Maybe people who get sick a lot miss a lot of school, don't do as well, get a lower quality education, and are hired into lower paying jobs? **NEXT SLIDE**
+
+Now, remember I said arrows should always point left to right? That's still true. Reverse causation is a general term and we use right to left arrows as shorthand, but they are almost always just special cases of collider bias or confounding. **NEXT SLIDE**
+
+--
+
 - For example, the causal question "Does income affect health?" has ambiguous temporal ordering. 
+
+--
 
 - Perhaps people who are sick a lot missed a lot of school and thus have lower paying jobs.
 
 .center[&lt;img src="./assets/reverse_single.jpg" width="200"&gt;]
+
+--
 
 - "Reverse causality" is a more general term for bias. It is usually a special case of *confounding* or *collider bias*.
 
@@ -493,6 +621,14 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 - In reality, it is often a mix of both and causation is bidirectional. 
 
 .center[&lt;img src="./assets/reverse_double.jpg" width="200"&gt;]
+
+???
+
+For these sort of ill-defined intervention or abstract questions, the directionality is often bidirectional and we are trying to decompose the effects. **NEXT SLIDE**
+
+Another example question is the obesity paradox, which has a lot of problems. But the obesity paradox is that it seems like people of high BMI (obese) have better outcomes after certain outcomes than those with a normal BMI. For example, heart attacks. After a heart attack that requires surgical intervention, obese people have a lower mortality rate than normal weight people. **NEXT SLIDE**
+
+One reason has been reverse causality. That really sick people lose weight quickly and are at higher risk of death. **NEXT SLIDE**
 
 --
 
@@ -514,9 +650,21 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 .footnote[.red[*]Ch 16 by Maria Glymour in Methods Social Epidemiology]
 - When a causal relation between two variables differs from their statistical association, the relationship is **confounded**.
 
-- For example, here the relationship between `\(X\)` and `\(Y\)` does not exist causally, but there is a statistical association induced by *total* confounding through `\(U\)`.
+???
+
+There are other definitions that talk about like backdoor paths and all these conditions, but they are actually poorly defined and it is not that hard to find a pathological case where those conditions do not hold but the relationship is confounded. Instead, we will use the general definition of confounding. A relationship is confounded when its causal relation differs from its statistical association. **NEXT SLIDE**
+
+For example. X and Y do not exist here and yet if you ran a regression and did not control for U, you would find a statistical association. In this case, we have total confounding. **NEXT SLIDE**
+
+Similarly, in this DAG, there is a causal relationship but its not accurate because the backdoor path from X to U to Y would change the statistical association. This is partial confounding. **NEXT SLIDE**
+
+--
+
+- For example, here the relationship between `\(X\)` and `\(Y\)` does not exist causally, but there is a statistical association induced by *total* confounding via `\(U\)`.
 
 .center[&lt;img src="./assets/total_confounding.jpg" width="200"&gt;] 
+
+--
 
 - Similarly, below, even when a causal relationship does exist, the statistical association is poorly estimated due to *partial* confounding through `\(U\)`.
 
@@ -531,6 +679,16 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 .center[&lt;img src="./assets/iit_iv.jpg" width="200"&gt;]
 
+???
+
+Note that confounding is specific to a pair of variables. Here, U confounds X to Y but it does not confound Z to Y. So we need to specify how a relationship is confounded. **NEXT SLIDE**
+
+Recall from our DAG rules that we could block U and it would allow for us to properly estimate X and Y. Also note that this is true for any single confounder but can also be done for a set of confounders. If we have a set of variables and blocking all of them allows us to estimate the causal effect, we call the set a sufficient set. (Also note that often times U will represent a sufficient set of variables and not just a single variable.) **NEXT SLIDE**
+
+Back to the Obesity Paradox. Another reason some people think the obesity paradox exists is due to confounding. For example, smoking will lead to lower weight but also much worse cardiovascular outcomes.  **NEXT SLIDE**
+
+--
+
 - Blocking a confounder or a *sufficient set* of confounders allows for the proper estimation of causal effect.
 
 .center[&lt;img src="./assets/blocked_confounder.jpg" width="200"&gt;]
@@ -543,7 +701,9 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 .center[&lt;img src="./assets/ice_cream_iq.png" width="800"&gt;]
 
-.footnote[.red[*][The Economist (April 1,  2016)](http://www.economist.com/blogs/graphicdetail/2016/04/daily-chart)]
+???
+
+This is a graph that came out last year in the Economist. On the X axis is the PISA reading score for different countries, which tells you the literacy of that country. On the Y axis is the number of liters of ice cream per year per capita. Does this indicate we should eat more ice cream to be smarter? Probably not. It's probably confounded by the income of the country. Also note it came out April Fools but many people took it seriously.
 
 ---
 # Collider/Selection Bias
@@ -552,7 +712,21 @@ I'm going to go over the ways our models can be wrong using DAGS. It's really ju
 
 - Collider bias is "the change in association between two variables when conditioning on their common effect". 
 
+???
+
+Remember that association doesn't flow through a collider unless you block it. Just like you need to block appropriate variables, you can also block inappropriately drawing a false association. **NEXT SLIDE**
+
+The most common form is called selection bias, but you can also induce this type of bias by stratifying inappropriately, M-bias, or inappropriate covariate adjustment. **NEXT SLIDE**
+
+Here is what it looks like graphically. **NEXT SLIDE**
+
+Now, obesity paradox. I'm trying to use the same paradox to show that many questions can suffer from multiple sources of bias. Maybe obese patients who live long enough to have a heart attack are different from obese patients who don't. **NEXT SLIDE**
+
+--
+
 - Most common form is selection bias, but can also occur due to stratification, M-bias, or improper covariate adjustment.
+
+--
 
 - When we condition on some common effect (or a descendent of that common effect), we open up the path that was previously blocked by the collider. 
 
@@ -574,20 +748,51 @@ Let's pretend in order to play in the NBA, you have to either be very fast or ve
 We know he is fast, but we only know that because we are looking at NBA players. In the general population (that is, if we didn't condition on being in the NBA), there's no reason to believe there is a connection between height and speed.
 
 ---
+class: center, middle
+# Back to RCTs
+
+???
+
+Ok. We took a bit of a detour, but let's go back to RCTs and hopefully we can see why they are so powerful.
+---
 
 # Strength of RCTs
 
-- Note that for an ideal RCT, the biases in (1), (3), and (4) are addressed within the design of the RCT.
+.center[&lt;img src="./assets/partial_confounding_blocked.jpg" width="200"&gt;]
 
-    - (1) large sample size and verify estimates with confidence intervals
-    - (3) Temporality is built into a trial
-    - (4) Exchangeability (i.e., lack of confounding) is expected in randomization
-    
-- Proper sampling methods and/or careful interpetation of the results can address (5).
+- The main strength of randomization is that you eliminate any confounding — both measured and unmeasured.
+
+???
+
+Randomization is the only way we can ensure exchangeability and no confounding. It basically eliminates the U to X pathway. **NEXT SLIDE**
+
+Another way to think about it is if you consider Z as your randomization (that is, your coin flip) then you can regress Z to Y and the only effect Z has on Y is through X and thus represents your causal effect. This is called IV or IIT and we'll talk about it more with Zhe. **NEXT SLIDE** 
+
+Lastly, a sufficiently powered RCT also reduces the chance for randomly luck. **NEXT SLIDE**
+
+Note, however, collider bias is still possible even in an RCT. 
+
+--
+
+.center[&lt;img src="./assets/iit_iv.jpg" width="170"&gt;]
+
+- Quick aside: Another way to think about this is if we regress on the randomization (e.g., the coin flip), then we are estimating `\(Z \rightarrow X \rightarrow Y\)` for our causal effect, and this relationship is unconfounded. (This is known as IV or Intention-to-treat. More in a bit.)
+
+--
+
+- Also address reverse causality through proper temporal ordering. And lastly, sufficient sample size eliminates random chance.
+
+--
+
+- **NOTE**: Does not eliminate collider bias.
 
 ---
 class: center, middle
 # Thanks!
+
+???
+
+Ok. Going to hand it over to Zhe who will talk a bit more about the mathematical underpinnings of bias.
 
 ---
 # Sources
