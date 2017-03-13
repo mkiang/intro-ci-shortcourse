@@ -18,6 +18,7 @@ output:
 ---
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+xaringan::summon_remark()
 ```
 
 <!--
@@ -797,11 +798,10 @@ Ok. Going to hand it over to Zhe who will talk a bit more about the mathematical
 # Sources
 
 - [Chapter 16 Methods in Social Epidemiology](http://publicifsv.sund.ku.dk/~nk/epiF14/Glymour_DAGs.pdf) by Maria Glymour
-
-
----
-# Additional Reading
-- TODO
+- [The Economist: Ice Cream and IQ](http://www.economist.com/blogs/graphicdetail/2016/04/daily-chart)
+- [Miguel Hernan Causal Inference Book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)
+- [Smith and Pell — Parachutes and RCTs](http://www.bmj.com/content/327/7429/1459)
+- [Facebook Emotion Study](http://www.pnas.org/content/111/24/8788.full)
 
 ---
 class: center, middle
