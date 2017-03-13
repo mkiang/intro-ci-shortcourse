@@ -2,7 +2,7 @@
 title: "Causal Inference for Data Science"
 subtitle: "ITAM Short Workshop"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
-date: "March 13, 2017"
+date: "March 15, 2017"
 output:
   xaringan::moon_reader:
     css: ["custom.css", "./../custom.css", ]
@@ -26,20 +26,44 @@ options(htmltools.dir.version = FALSE)
 
 ---
 
+# Introductions
+
+???
+$\def\indep{\perp \! \! \perp}$
+
+Introduce ourselves. Thanks for opportunity. [Talk about our backgrounds and different approachs to causal inference.]
+
+---
+
 # Roadmap
+
+???
+
+[Quickly talk about the structure and goals of the workshop (2 days, 8 topics, 4 topics per day, about 50-55 minutes for each topic and then 5-10 minutes for a break / questions.)]
 
 ---
 layout: false
 .left-column[
   ## Roadmap
-### For the workshop
+  ### Workshop
 ]
 .right-column[
+## Overarching goal
 - **Rubin causal model.** Establish a rigorous framework for evaluating and understanding causality
 ]
+???
+
+So this is kind of the roadmap of where we want to be by the end of the two days. First, the overarching goals of the workshop. Causal inference is a huge field with lots of different approaches and we can't cover it all, but we want to hit the main points that will be most useful for data science. First, we want to establish a foundation in the Rubin causal model or the **counterfactual model** / **potential outcomes model**, which is by far the most popular causal framework in social science. It's not the only one, but it is the one that is most commonly used for observational data. **NEXT SLIDE**
+
+Then, within this framework, we will talk about the ideal situation. Like all frameworks and models, there are fundamental assumptions that must be met for us to make valid inference. So as a starting point, we'll go over an experimental design which is when these assumptions are guaranteed to be met. This will help us understand why experiments and RCTs are considered the gold standard and why all our analytical and design-based methods are focused on trying to mimic an RCT. **NEXT SLIDE**
+
+Then we'll start to chip away at the assumptions. The RCM is most powerful in observational data when you don't have all these assumptions guaranteed. How do your results get biased and what can you do about it? **NEXT SLIDE**
+
+Finally, we'll spend a little bit today and all of tomorrow going over ways we can address these biases using analytical methods. It will be more applied and interactive with thought experiments. (NOTE: We could address many of these using design-based methods, but we likely won't have time to go over that and it's not often you get to design studies as a data scientist.)
+
 --
 .right-column[
-- **Experimental designs.** Within this framework, discuss the **ideal** situation for inferring causality, randomized control trials
+- **Experimental designs.** Within this framework, discuss the *ideal* situation for inferring causality, randomized control trials
 ]
 --
 .right-column[
@@ -51,17 +75,56 @@ layout: false
 ]
 
 ---
+layout: false
 .left-column[
   ## Roadmap
-  ### For the workshop
-  ### For today
+  ### Workshop
+  ### Today
 ]
 .right-column[
-- **Motivation.** Why do we care about causal inference at all?
+## Topics for today
+- **Introduction to Causal Inference**. Establish a framework we can all use.
+]
+???
+So for today, we're going to do four talks. First, we're going to make sure we are all on the same page about what causal inference is within this same framework. **NEXT SLIDE**
+
+Second, within this framework, let's talk about estimating a causal effect in a best case scenario and go over ways we can explicitly state our causal assumptions using graphical diagrams. **NEXT SLIDE**
+
+Third, we'll talk about different obstacles to estimating causal effects. In the real world setting a randomized control trial is often not feasible or ethical so what can we do to ensure we aren't breaking the assumptions of our framework? Or what can we do when we can't confirm we meet the assumptions? How can we get close? **NEXT SLIDE**
+
+And then we'll introduce a method to overcome some of these obstacles called instrumental variables and talk about how it attempts to mimic an RCT.
+--
+.right-column[
+- **Estimating Causal Effects.** Within this framework, how do we estimate a "causal effect" in the ideal case — a randomized control trial.
 ]
 --
 .right-column[
-- **Definition.** What is causal inference? 
+- **Obstacles to Estimation.** In the real world, we have a variety of biases. What do we do?
+]
+--
+.right-column[
+- **Instrumental variables.** First example of overcoming biases and how IV relates to our ideal case.
+]
+
+---
+layout: false
+.left-column[
+  ## Roadmap
+  ### Workshop
+  ### Today
+  ### Now
+]
+.right-column[
+## Introduction to Causal Inference
+- **Motivation.** Why do we care about causal inference at all?
+]
+
+???
+
+Ok. Are there any questions about today or the overarching theme of the workshop? Let's get started. I'm going to mainly talk about why we care about causal inference, define some things to make sure we are all talking about the same thing, and then give you a framework to think about causal effects.
+--
+.right-column[
+- **Definition.** What is a causal effect? What is causal inference? 
 ]
 --
 .right-column[
@@ -71,64 +134,684 @@ layout: false
 ---
 template: inverse
 
-## Motivation
-### Why do we care about causal inference at all?
+# Motivation
+## Why do we care about causal inference at all?
+???
+So why do we even care about causal inference? Obviously, you guys care because you're here, but why should data scientists in general care about causal inference? 
 
 ---
+# Almost all questions we care about are *causal* questions
+
+???
+
+Well, the simple answer is that most of the questions we are interested in are causal questions. 
+
+Right? If you work for the government and you want to reduce poverty, you want to know what happens to poverty when you give out cash transfers? What happens to the employment rate when you change the minimum wage? If you live in a city with gun violence, will increasing gun restrictions help to lower the violence? 
+
+If I change $x$ will that change $y$. 
+
+Yet our tools are correlation based. And no matter how much data you have, it will always be association or correlation based. Big data doesn't change this. There was and still is this notion that if you have enough data, you can figure out how things work, and we don't think that's true. We think causal inference will help you make good causal decisions within data science.
+
+--
+
+1. What is the effect of Drug B on the population?
+
+1. How will increasing minimum wage affect the employment rate?
+
+1. Do unconditional cash transfer programs help relieve poverty?
+
+1. Will stricter gun laws reduce gun-related homocide?
+
+--
+
+## .center[Yet almost all our tools for to answer these questions are based on *correlation*..red[*]]
+
+.footnote[.red[*]Big data does not fix this.]
+
+---
+layout: false
 .left-column[
   ## Motivation
-  ### Example 1
+
+"Scientists are trained to recognize that correlation is not causation, that no conclusions should be drawn simply on the basis of correlation between $X$ and $Y$ (it could just be a coincidence)."
 ]
 .right-column[
-Text here.
+<br><br><br>
+![Wired Article](./assets/wired_article.png)
+]
+???
+This is an article from Wired Magazine and it has a bit of the sentiment we see a lot now. It starts off pretty well... Correlation is not causation. But from the title of the article, I think you know where this is headed.
 
-- Bullet points
+---
+layout: false
+.left-column[
+  ## Motivation
+"There is now a better way. Petabytes allow us to say: 'Correlation is enough.'"
+]
+.right-column[
+<br><br><br>
+![Wired Article](./assets/wired_article.png)
+]
+???
+In other words, he believes we are collecting so much data that soon correlation is all you'll need. This obviously ignores issues of how you're collecting the data, the quality of the data, selection of people generating the data, and the like, but on top of that, it just disregards causal inference entirely.
 
-- An example
+---
+layout: false
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+]
+.right-column[
+## eBay example
+Does an increase in spending on keyword advertisements increase my return?
+]
+
+???
+
+So here's an example of when causal inference shows you something has gone wrong. This is a pretty famous ebay example that came out in 2015 and one of the data scientists at eBay wanted to know if it was worth it to spend money on keyword advertisements. So those little ads on the side that pop up in google or whatever when people search for certain terms. **NEXT SLIDE**
+
+Now all prior information would indicate that keyword ads are highly effective. You are, after all, targeting only people who are interested in something you have to offer.**NEXT SLIDE**
+
+All predictive modeling suggests there's a huge correlation between people who click on those ads and end up buying something.**NEXT SLIDE**
+--
+.right-column[
+Prior: Targeted internet advertising is highly effective (you get people who are interested in your product)
+]
+--
+.right-column[
+Predictive models indicate ad clicks translates to increased success
 ]
 
 ---
+layout: false
+.footnote[Blake, T., Nosko, C. and Tadelis, S. (2015)]
 .left-column[
   ## Motivation
-  ### Example 1
-  ### Example 2
+  ### Causal Inference Gone Bad
 ]
 .right-column[
-Text here.
-
-- Bullet points
-
-- An example again
+## eBay example
+Causal question: **Compared to not increasing ad revenue**, how much does an increase in ad revenue affect my revenue?
 ]
 
+???
+So the statistical question has been answered. Is clicking on a keyword ad associated with buying something? Yes. But the causal question is different. Compared to not using keyword ads, how much does using keyword ads affect my revenue? **NEXT SLIDE**
+
+So they stopped advertising on two search engines but kept advertising on one and they kept track of what people did once they clicked through via these different search engiens. **NEXT SLIDE**
+
+They found that almost everybody, like 99.5%, would eventually find the ad through unpaid searchers. Some other studies suggested returns were negative — that is, they spent more on the ads than the .5% were spending on their site.
+--
+.right-column[
+Design: Stop advertising on two search engines, but continue on one.
+]
+--
+.right-column[
+Results: Almost everybody found the site through unpaid search traffic. (Other studies show the returns to be *negative*)
+]
 ---
+layout: false
+.footnote[e.g., Hernán et al. Epidemiology (2008)]
 .left-column[
   ## Motivation
-  ### Example 1
-  ### Example 2
-  ### Example 3
+  ### Causal Inference Gone Bad
 ]
 .right-column[
-Last one.
+## Hormone replacement therapy
+In 1990's, HRT was incredily popular medication for women.
+]
 
-- Bullet points with more
-- Bullet points
+???
 
-- Last example
+Ok. So that's a cute little example, but bad causal inference also has pretty serious consequences. Back in the 90s, there was a treatment called hormone replacement therapy for women who had reached menopause. So when you hit menopause, there's a shift in your estrogen and testosterone levels and the idea was you could replace these hormones and hopefully see positive health effects. **NEXT SLIDE**
+
+So all observational studies, including NHS, indicated HRT was really good. It reduced levels of heart disease by 35-45% and in public health 2-3% if really good. You're taking about millions of people so even tiny positive effects are really good overall. **NEXT SLIDE**
+
+But then in the late 90s and early 00s, two RCTs came out and found that RCT increased CVD risk. **NEXT SLIDE**
+--
+.right-column[
+All observation studies, including Nurses' Health Study, indicated HRT lowered risk of CVD by about 35-45%.
+]
+--
+.right-column[
+Then, two RCTs (HERS and WHI) found HRT actually **increased** risk of CVD.
+]
+---
+layout: false
+.footnote[e.g., Hernán et al. Epidemiology (2008)]
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+]
+.right-column[
+## Hormone replacement therapy
+Increased risk by about 25%, putting lots of lives at risk. 
+]
+
+???
+
+And not by a small amount. It significantly increased CVD risk. **NEXT SLIDE**
+
+We now recognize the short comings of the observational data, but the result was a huge debate in public health about whether or not we should be using observational data at all. **NEXT SLIDE**
+
+On the plus side, Hernan et al showed that proper analysis with good domain knowledge could have led to the right result using observational data. **NEXT SLIDE**
+--
+.right-column[
+In retrospect, lots of errors and biases that were unaccounted in observational studies. Caused a large (and often vitriolic) debate in public health.
+]
+--
+.right-column[
+On the plus side, see Hernan et al. 2008 for how sophisticated analyses (and domain-specific knowledge) would have resulted in correct conclusions.
+]
+---
+layout: false
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+  ### Causal Inference Done Right
+]
+.right-column[
+## TODO
+.red[We need one good example here.]
 ]
 
 ---
 template: inverse
 
-## Definition
-### What is causal inference?
+# Definition
+## What is causal inference?
+
+???
+
+Not going to keep you in suspense. Let's just define it and then we will break it down.
+---
+class: center, middle
+# Causal inference is the process of estimating a comparison of counterfactual or potential outcomes under different treatment conditions on the same set of units.
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+]
+
+.right-column[
+## Causal Inference and Prediction
+
+- Both causal inference and prediction use associational models but goals are different
+]
+
+???
+
+So first I want to highlight how this is different from prediction. Causal inference is interested in cmoparing these counterfactuals on the same set of units. It wants to know what would have happened to the same units if instead of this, something else happened. 
+
+Now both causal inference and prediction use the same models, but the goals are very different. **NEXT SLIDE**
+
+Right? In prediction, you only care about how accurate you can be at predicting some out of sample $y$. We only care about maximizing that ability. Given some set of inputs, how do I estimate $y$ with minimal error. **NEXT SLIDE**
+
+In contrast, causal inference cares about manipulation on the same person. We want an unbiased estimate of if I change x, what would happen to y. **NEXT SLIDE**
+
+One easy example is carrying matches in your pocket and lung cancer. Turns out that carrying matches is highly predictive of lung cancer risk. If all you care about is finding people who have lung cancer or predicting who will have lung cancer, this is enough data for you. However, people who carry matches are more likely to smoke and smoking causes lung cancer. If you want to reduce the chances of somebody getting lung cancer, you can't just say "don't carry matches", you need to know the causal pathway and reduce smoking.
+--
+.right-column[
+- In prediction, we are only concerned with maximizing our ability to estimate $y$ given some input $x$
+]
+--
+.right-column[
+- In causal inference, we care about how $y$ will change if we manipulate $x$
+]
+--
+.right-column[
+- (Even when manipulating $x$ is not possible — the impossible counterfactual. For example, does race have a causal effect on mortality?)
+]
 
 ---
-template: inverse
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+]
 
-## Rubin causal model
-### A framework for evaluating causality
+.right-column[
+## Carrying Matches and Lung Cancer
 
+- If you work for a company that sells drugs to treat lung cancer, you just want to find people who are likely to have lung cancer (even if they don't know it.)
+]
+
+--
+
+.right-column[
+- That is, *prediction* is your goal. So you find that people who carry matches are much more likely to get lung cancer and those are the people you target.
+]
+
+--
+
+.right-column[
+- If, however, you want to prevent lung cancer, you need a causal model. You need to know that smokers are more likely to carry matches and more likely to get lung cancer.
+]
+
+--
+
+.right-column[
+- Intervening on the matches doesn't make sense. You need to intervene on the causal pathway — smoking.
+]
+--
+
+.right-column[
+- The counterfactual here is important. A smoker without matches is still a smoker at risk of lung cancer. Smoker vs nonsmoker is what we care about.
+]
+
+
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+]
+.right-column[
+## What is a causal effect?
+
+.center[<img src="./assets/basic_dag.jpg" width="200">]
+]
+--
+.right-column[
+If Edward takes Drug B and gets a headache, did Drug B *cause* his headache?
+]
+
+???
+
+Ok. So we are focused on causal inference in this workshop. But first, let's ask what is a causal effect?
+
+What do we mean when we say something *caused* something else? We intuitively understand but what do we mean explicitly? Let's pretend Edward take a Drug and gets a headache. Did the Drug cause my headache?
+
+It only caused my headache if we knew I wouldn't have gotten the headache, had I not taken the drug. **NEXT SLIDE**
+
+Right? If Eddie would have gotten the headache anyways, then the drug did not cause his headache. **NEXT SLIDE**
+
+So we are comparing two scenarios on the same person. One in which Eddie takes the drug and one in which he doesn't. If you somehow could see the two outcomes of the same exact person, you'd be able to estimate a causal effect. **NEXT SLIDE**
+--
+.right-column[
+Implicitly, Drug B only caused the headache if Eddie would *not* have received the headache if Eddie had not taken Drug B.
+]
+--
+.right-column[
+So a causal effect is a comparison of two *potential outcomes* (or *counterfactuals*) on a unit (or a single set of units). Importantly, we only observe **one** outcome so all comparisons are hypothetical. 
+]
+---
+layout: false
+.left-column[
+<br><br><br>
+"Everybody want to know what I would do if I didn't win... I guess we'll never know."
+
+— Kanye West, 47th Annual Grammy Awards
+]
+.right-column[
+<br><br><br>
+<img src="./assets/ci_expert.jpg" width="350">
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Rubin Causal Model
+- This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin causal model. 
+]
+
+???
+
+So this idea of counterfactuals is really important. It's the centerpiece of the Rubin causal model. **NEXT SLIDE** 
+
+It's what separates RCM from many other frameworks of causality. **NEXT SLIDE** 
+
+Further, it is what allows us to estimate causal effects in observational data. **NEXT SLIDE** 
+--
+
+.right-column[
+- Counterfactual thinking separates the Rubin causal model from other causal frameworks like Bradford-Hill, Rothman, or Koch's postulates. 
+]
+--
+.right-column[
+- Unlike the other frameworks, the counterfactuals allow us to make causal statements using observational data.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Counterfactuals
+
+So, we define our counterfactuals: 
+- Let $A$ be a binary treatment with $1$ indicating the drug is taken and $0$ otherwise
+- $Y^{a=0}$ is the outcome if Eddie had *not* taken the drug 
+- $Y^{a=1}$ is the outcome if Eddie *had* taken the drug
+]
+
+???
+
+So let's formalize this with a little bit of notation.
+
+Some people prefer **potential outcomes** to emphasize that two different outcomes could potentially be observed depending on the treatment while others prefer **counterfactuals** to emphasize that each outcome represents situations that may not actually occur. 
+
+Let A be a binary treatment where 1 indicates you received treatment and 0 indicates you did not. Then Y^{a=1} is your potential outcome if you receive treatment and Y^{a=0} is your potential outcome if you did not. **NEXT SLIDE** 
+
+Then, your causal effect exists only if those two things are different, right? **NEXT SLIDE** 
+
+And if it exists, we can estiamte it by taking the different between the two (or the ratio or the odds ratio). 
+--
+.right-column[
+Then, Drug B has a causal effect if and only if $Y^{a=0}\neq Y^{a=1}$
+]
+--
+.right-column[
+The *__individual__ causal effect* of Drug B then is $ICE=Y^{a=1} - Y^{a=0}$
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Data we .red[_want_]
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ |
+|-------|:---------:|:---------:|
+| Eddie |       1   |       1   |
+| Marla |       1   |       0   |
+| Bob   |       0   |       0   |
+| ...   |     ...   |     ...   |
+| Tyler |       1   |       0   |
+### .center["God's Data"]
+]
+???
+
+Ok. So this is what the data we want look like. It's the data we would have on every single person if we could somehow know what would happen to that exact person at that exact time under two different treatments. **NEXT SLIDE** 
+
+Clearly, this is not possible in reality. Even if we use the same person, we are using different times. Maybe the second time, Eddie drinks more water so he is more hydrated and that's why he doesn't get a headache. Who knows? **NEXT SLIDE** 
+--
+.right-column[
+This is not possible in reality. For example, even if we use the same person but at different times, we cannot consider it to be the same unit.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Data we .red[_have_]
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ |
+|-------|:---------:|:---------:|
+| Eddie | .red[_?_] |       1   |
+| Marla | .red[_?_] |       0   |
+| Bob   |       0   | .red[_?_] |
+| ...   |     ...   |     ...   |
+| Tyler |       1   | .red[_?_] |
+### .center[The Fundamental Problem of Causal Inference]
+]
+???
+This is the data we actually observe. We don't know what his potential outcome was if he did not take the drug, but if we assume something called consistency, we can pretend that his potential outcome given he did take the drug is what we observed since we observed he did not take the drug. **NEXT SLIDE** 
+
+This brings us to the fundamental problem of causal inference. Namely, we can never observe both potential outcomes and thus individual causal effects can never be estimated. **NEXT SLIDE** 
+--
+.right-column[
+For each individual, we only observe one of the potential outcomes — thus, individual causal effects cannot be estimated
+]
+---
+class: center, middle
+# Causal inference is a missing data problem
+
+???
+
+You'll often hear people say that causal inference is just a missing data problem and this is what they mean by it. In fact, Rubin, Little, and other giants in the field are also people who specialize in missing data.
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Fundamental Problem of CI
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
+]
+
+???
+
+If we had God's data, we could just take the average counterfactual under treatment and subtract it from the average counterfactual under control and get the average treatment effect. **NEXT SLIDE**
+
+Unfortunately we don't. So instead we have to ask, when can we approximate God's data using our actual observed data? That is, when does the difference in counterfactual outcomes the same as the difference in observed outcomes? **NEXT SLIDE**
+--
+.right-column[
+If we had "God's Data", the _**average treatment effect**_ would be $ATE=Pr(Y^{a=1})-Pr(Y^{a=0})$
+]
+--
+.right-column[
+Under what conditions do the data we have properly estimate the data we want? That is, when does $Pr(Y^{a=1})-Pr(Y^{a=0})=Pr(Y|A=1)-Pr(Y|A=0)$
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Linking Association to Causality
+
+### .center[Model coefficients are *not* causal effects.]
+
+- No causal effects can be derived purely from observational data alone.
+]
+--
+.right-column[
+- None.
+]
+--
+.right-column[
+- That point estimate from your Bayesian Additive Regression Tree — not a causal effect.
+]
+--
+.right-column[
+- Your random forest estimate — not a causal effect.
+]
+--
+.right-column[
+### .center[You must have additional assumptions to estimate causal effects.]
+]
+--
+.right-column[
+- So be careful with causal statements.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Assumptions
+
+- **Exchangeability**. $Y^a \indep A$ for all values of $a$. Often also called ignorability, exogenieity, no unmeasured confounders, selection on observables, randomization, etc. 
+]
+
+???
+
+And the answer is when all these assumptions hold. If these assumptions are true, then in the Rubin causal model, the observed difference is the same as the counterfactual difference. First, exchangeability. This one is by far the most important. It just says that your counterfactual outcome is independent of your observed treatment. There are a lot of other names for it. It's the one we will spend the most time on. **NEXT SLIDE**
+
+Then there's positivity. Everybody has some positive probability of either receiving or not receiving treatment. **NEXT SLIDE**
+
+SUTVA which actually has two assumptions in one. First, the treatment is stable — that is, if I say I'm going to administer medicine, I'm administering the same level to everybody. It's a homongeous treatment. Likewise, a homogenous control. Second, my treatment does not affect your outcome. **NEXT SLIDE**
+
+Lastly, there's consistency which isn't really an assumption as much as axiomatic. **NEXT SLIDE**
+--
+.right-column[
+- **Positivity**. Every unit has a positive probability of having any value of $a$.
+]
+--
+.right-column[
+- **Stable unit treatment value assumption (SUTVA)**. Two things. First, treatment and control are stable — there's only one form of each. Second, the assignment of one unit does not affect the outcome of another.
+]
+--
+.right-column[
+- **Consistency**..red[*] $Pr(Y^{a})=Pr(Y|A=a) \text{ for all } a$The observed outcome for treatment $a$ is equal to potential outcome under treatment $a$. "Well-defined" intervention.
+]
+
+.footnote[.red[*] There is debate about whether this is an assumption or an axiom.]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Exchangeability 
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
+
+- If each person's observed assignment $a$ is independent of their *counterfactual* outcome $Y^{A=a}$, then we call the groups $A=1$ and $A=0$ "exchangeable". 
+]
+
+???
+
+So exchangeability. If it turns out that the people in the control group are systematically different than the people in the experimental group, they cannot be considered the same — that is, they are not exchangeable. **NEXT SLIDE**
+
+This can only be assured if there is random assignment. Otherwise, we just make it as reasonable as possible and hope it is true. **NEXT SLIDE**
+--
+.right-column[
+- This is **only** ensured when the mechanism of assignment $A$ is random. Otherwise, we try to make this as reasonable as possible, but can never confirm it to be true. 
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Positivity 
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
+
+- Every person has to have a non-zero probability of being in any level of $A$.
+]
+--
+.right-column[
+- If we treated everybody ($A=1$), we would not be able to estimate a causal effect.
+]
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Versus Prediction
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Stability (SUTVA) 
+
+| Name  | $Y^{a=0}$ | $Y^{a=1}$ | $A$ | $Y$ |
+|-------|:---------:|:---------:|:---:|:---:|
+| Eddie | .red[_?_] |       1   |  1  |  1  |
+| Marla | .red[_?_] |       0   |  1  |  0  |
+| Bob   |       0   | .red[_?_] |  0  |  0  |
+| ...   |     ...   |     ...   | ... | ... |
+| Tyler |       1   | .red[_?_] |  0  |  1  |
+
+- We need a stable treatment (150mg of Advil) and stable control (no Advil). We cannot estimate a causal effect if we have varying doses of Advil within levels of $A$.
+]
+--
+.right-column[
+- One person taking Advil should not affect the outcome of another person.
+]
+--
+.right-column[
+- Important because it reduces the number of potential outcomes for ecah unit to two.
+]
+---
+## Caveat about Rubin Causal Model
+
+- Despite how it will feel when reading the literature, this is **not the only framework** of causal inference. 
+
+--
+
+- It is a very useful framework. But also limited — especially when evaluating things with no well-defined intervention. (For example, "Does obesity increase the risk of premature mortality?")
+
+--
+
+- Still an active debate. For an example, see debate in epidemiology between Nancy Krieger.red[*] et al. and Jamie Robins et al.
+
+---
+layout: false
+.left-column[
+  ## Causal Inference
+  ### Causal effect
+  ### Rubin causal model
+]
+.right-column[
+## Conclusion
+
+- Think of causal effects in terms of comparing **counterfactuals** or **potential outcomes**
+]--
+.right-column[
+- However, we can never observe both counterfactuals — fundamental problem of causal inference.
+]
+--
+.right-column[
+- That's what makes causal inference so hard.
+]
+--
+.right-column[
+- BUT! Under certain (often very strong) assumptions, we can still rigorously estimate causal effects within this framework.
+]
+--
+.right-column[
+- We can address these assumptions two ways: experimentally or structurally.
+]
+--
+.right-column[
+- Up next: Experimental ways of estimating causality.
+]
 ---
 class: center, middle
 # Thanks!
@@ -136,5 +819,21 @@ class: center, middle
 ---
 # Sources
 
+- [Wired Article](https://www.wired.com/2008/06/pb-theory/): https://www.wired.com/2008/06/pb-theory/
+- [eBay example](http://onlinelibrary.wiley.com/doi/10.3982/ECTA12423/abstract) - Blake, T., Nosko, C. and Tadelis, S. (2015), Consumer Heterogeneity and Paid Search Effectiveness: A Large-Scale Field Experiment. Econometrica, 83: 155–174. doi:10.3982/ECTA12423
+- [Jennifer Hill talk](http://cds.nyu.edu/wp-content/uploads/2014/04/causal-and-data-science-and-BART.pdf)
+- [Hormone replacement therapy](https://cdn1.sph.harvard.edu/wp-content/uploads/sites/1268/2014/11/Authors__Response_Part_I__Observational_Studies.6.pdf) - Hernán MA, Alonso A, Logan R, Grodstein F, Michels KB, Willett WC, Manson JE, Robins JM. Observational studies analyzed like randomized experiments: an application to postmenopausal hormone therapy and coronary heart disease (with discussion). Epidemiology 2008; 19:766-779
+- [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
+- [Causality chapter](http://www.ics.uci.edu/~sternh/courses/265/imbensrubin1.pdf) by Imbens and Rubin
+- [GOV 2001 Lecture Notes](http://projects.iq.harvard.edu/gov2001/book/lecture-notes-advanced-quantitative-political-methodology)
+
 ---
 # Additional Reading
+- [We are all data scientists now](https://stanford.edu/~jgrimmer/bd_2.pdf) - Grimer 2015 (doi:10.1017/S1049096514001784)
+- [More about HRT controvery](http://www.teachepi.org/documents/courses/bfiles/The%20B%20Files_File1_HRT_Final_Complete.pdf)
+- [Basic Concepts of Statistical Inference for Causal Effects](http://www.stat.columbia.edu/~cook/qr33.pdf) from Rubin himself
+- [Chapter 9 of Data Analysis Using Regression](http://www.stat.columbia.edu/~gelman/arm/chap9.pdf) by Gelman and Hill
+- [Statistical Models and Shoe Leather](http://www.sas.rochester.edu/psc/clarke/405/Freedman91.pdf)
+- [To Explain or To Predict](https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf)
+- [Don Rubin on Design vs Analysis](http://projecteuclid.org/download/pdfview_1/euclid.aoas/1223908042)
+- [Is the "well defined intervention" assumption politically conservative?](https://www.ncbi.nlm.nih.gov/pubmed/26777446)
