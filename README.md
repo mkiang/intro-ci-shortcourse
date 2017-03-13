@@ -8,7 +8,6 @@
 ### Requirements (R packages):
 - `xaringan`
 - `shiny`
-- `randomNames`
 
 ### Game plan:
 
