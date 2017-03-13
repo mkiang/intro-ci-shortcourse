@@ -30,6 +30,7 @@ class: center, middle, inverse
 # Introductions
 
 ???
+
 `\(\def\indep{\perp \! \! \perp}\)`
 
 Introduce ourselves. Thanks for opportunity. [Talk about our backgrounds and different approachs to causal inference.]
@@ -306,14 +307,79 @@ On the plus side, see Hernan et al. 2008 for how sophisticated analyses (and dom
 ]
 ---
 layout: false
+.footnote[Ho et al. PNAS (2017)]
 .left-column[
   ## Motivation
   ### Causal Inference Gone Bad
   ### Causal Inference Done Right
 ]
 .right-column[
-## TODO
-.red[We need one good example here.]
+## Yellow vs Blue Taxis
+
+Anecdotal evidence has suggested that darker colored cars have higher accident rates.
+]
+
+???
+
+TODO
+--
+.right-column[
+Researchers looked at a company in Singapore with blue and yellow taxis and found a causal link between car color and accident rate.
+]
+
+--
+.right-column[
+Different colors are a result of a merger between two companies. Otherwise, the cars are of identical make, model, and maintenance plan.
+]
+--
+.right-column[
+Hypothesis is that yellow is more visible and thus less likely to get in an accident.
+]
+---
+layout: false
+.footnote[Ho et al. PNAS (2017)]
+.left-column[
+  ## Motivation
+  ### Causal Inference Gone Bad
+  ### Causal Inference Done Right
+]
+.right-column[
+## Yellow vs Blue Taxis
+
+They performed a series of analyses to rule out other causal explanations:
+
+]
+
+???
+
+So to test the idea that visibility is what mattered, they tried a bunch of different things. **NEXT SLIDE**
+
+So first they did the logical thing which was compare demographics of drivers. Maybe more aggressive drivers choose blue. The hiring process is standardized and training is standardized across colors, but the assignment of the cab is done randomly. No demographic differences were found. They also compared driver behavior by looking at a random sample of car speed and found no difference in colors.
+
+Then compared differences in how the accident occured. Was the cab in front or behind the other car when there was an accident. If visibility is the main issue, you would expect yellow cabs to have lower rate of accidents when directly in front or behind but not when cars are in the blind spot and cannot be seen.
+
+Then they compared different lighting conditions. A yellow cab is visible in all lighting conditions except pitch dark so should have lower rate during day time and under street light but not on dark roads. 
+
+Then the interaction of the two.
+
+Finally, they found a small subset of drivers who drove both blue and yellow taxis and found the difference matched with the large sample.
+
+In total, if the company switched to yellow, would have had 6 fewer accidents per 1000 taxi months resulting in 900 fewer accidents per year and saving nearly 2million singapore dollars or (USD 1.4M or MXN 27.7M)
+--
+
+.right-column[
+
+1. Demographic comparison of blue vs yellow drivers
+2. Compared driver speeds — within +/- 1km/h
+3. Type of accident — directly in front or rear vs other
+4. Compared lighting conditions
+5. Interaction of lighting conditions and accident type,
+6. Subset analysis of drivers who drove both yellow and blue taxis.
+]
+--
+.right-column[
+
+All analyses indicate yellow cabs had about 6 fewer accidents per 1000 taxi-months. If yellow only, (1) about 900 fewer accidents per year and (2) savings of nearly SGD 2M.
 ]
 
 ---
@@ -645,7 +711,7 @@ layout: false
 ]
 --
 .right-column[
-So be careful with causal statements.
+- So be careful with causal statements.
 ]
 ---
 layout: false
@@ -827,6 +893,7 @@ class: center, middle
 - [Causal inference book](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/) by Miguel Hernan and Jamie Robins (free)
 - [Causality chapter](http://www.ics.uci.edu/~sternh/courses/265/imbensrubin1.pdf) by Imbens and Rubin
 - [GOV 2001 Lecture Notes](http://projects.iq.harvard.edu/gov2001/book/lecture-notes-advanced-quantitative-political-methodology)
+- [Yellow vs Blue Taxis](http://www.pnas.org/content/early/2017/02/28/1612551114)
 
 ---
 # Additional Reading
@@ -838,6 +905,7 @@ class: center, middle
 - [To Explain or To Predict](https://www.stat.berkeley.edu/~aldous/157/Papers/shmueli.pdf)
 - [Don Rubin on Design vs Analysis](http://projecteuclid.org/download/pdfview_1/euclid.aoas/1223908042)
 - [Is the "well defined intervention" assumption politically conservative?](https://www.ncbi.nlm.nih.gov/pubmed/26777446)
+- [Causal inference in economics and marketing](http://www.pnas.org/content/113/27/7310.full.pdf)
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
