@@ -357,9 +357,10 @@ Selection bias falls into two camps:
 - sometimes our features are non-linear too $\beta_i age + \beta_j age^2$
 - 0/1 outcome variable?
   - logistic regression is common
-  - Probit regression has a more economic interpretation, based on an individual's response to 
-  - Poisson regression for counts
+  - Probit regression has a more economic interpretation, based on an individual's utility functions 
+  - Poisson or negative-binomial regression for counts
 - Truncated/Censored Observation (e.g., test scores, wage)
+- Non-negative outcomes (Tobit regression, assumes a latent variable that can take negative values)
 - Attrition bias
 
 - *important to think critically about where the (potential) data comes from or would come from*
@@ -396,6 +397,12 @@ g_CEF
 set.seed(10)
 bad_fit_lm <- lm(weekly_wage ~ s, data = sample_n(df, size = 2000))
 plot(bad_fit_lm, which = 1)
+```
+
+---
+# Example: Regression Functional Form
+
+```{r}
 plot(bad_fit_lm, which = 5)
 ```
 

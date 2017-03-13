@@ -27,9 +27,9 @@ options(htmltools.dir.version = FALSE)
 ---
 # Review So Far
 
-- Emphasis on $\approx$ linear regression
-- Much potential bias, specifically OVB
-- Conditional indepdence assumption ("controls")
+- Emphasis on "linear" regression
+- Lots of potential bias, specifically OVB
+- Conditional independence assumption (CIA) ("controls")
 - Instrumental variables can generate (local) meaningful variation to study
 
 This lecture:  
@@ -55,24 +55,29 @@ comparing trends
 - purchasing activity at Amazon or chain store over time
 - physical activity measured over time
 - government-tracked records over time
-- lots of other cool examples... (potentially easier to get access to today)
+- lots of other cool examples... (today, easier to get time series data)
 
 ---
 # Fixed Effects
 
-Imagine that we're looking at 50 islands between 1999 - 2010. 
+Imagine that we're looking at 50 islands between 2000 - 2015. 
 
-What is the effect of better satellite internet?
+What is the effect of the introduction of satellite internet?
 
 --
-$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + \beta AvgTemp_i + \beta Beaches_i + \epsilon$$
+$$\log (Earnings_{it}) = \alpha + \gamma Internet_{it} + \beta AvgTemp_i + \beta Beaches_i + \epsilon$$
 
 --
 Actually:
 
-$$Earnings_it = \alpha + \gamma Usage_{Internet,it} + F\_Unobserved_i + \epsilon$$
+$$\log (Earnings_{it}) = \alpha + \delta Time_t + \gamma Internet_{it} + IslandSpecialty_i + \epsilon_i$$
 
-$$Earnings_it = \alpha_i + \gamma Usage_{Internet,it} + \epsilon$$
+--
+Use fixed effects to capture time-invariant island-specific attributes:
+
+$$\log (Earnings_{it}) = \alpha_i + \delta Time_t + \gamma Internet_{it} + \epsilon_i$$
+
+*Idea: islands naturally earn different earnings, but using FE, identified using "before" data, we can look at the additive boost from Internet access*
 
 ??
 First, we'll look at fixed effects
@@ -82,11 +87,32 @@ Idea here is that islands have specific attributes that are hard to capture adeq
 If we argue that these are fixed and how they affect island earnings are constant over time.
 
 ---
+# Introduction to Fixed Effects
+
+$$E[Y_{0i}|X_i,t,\alpha_i,T_i] = E[Y_{0i}|X_i,t,\alpha_i]$$
+
+$\alpha_i$ instead of $\alpha_{it}$.
+
+Important that conditional on an individual's unobservable specifics, outcome of treatment $T_i$ is uncorrelated with potential outcomes/counterfactual. *"as good as randomly assigned"*
+
+**Linear additive model here is important**
+
+---
+# How to estimate FE?
+
+Simply take the average for each person!
+
+- control for other time-varying controls
+- since $\alpha_i$ is time-invariant, it should not change across time periods. Estimate individual specific mean.
+
+$$\bar{Y}_i = \alpha_i + \gamma \bar{T}_i + \beta \bar{X}_i$$
+
+---
 # FE Concept is General
 
 Can include time and region FE too
 
-$$Earnings_it = \alpha_i + Region_i + Year_t + \gamma Usage_{Internet,it} + \epsilon$$
+$$\log (Earnings_{it}) = \alpha_i + Region_i + Year_t + \gamma Internet_{it} + \epsilon$$
 
 This is a loose approximation of a time-series model
 - capturing overall variation over time or time trends
@@ -99,27 +125,52 @@ This is a loose approximation of a time-series model
 - however, we may argue that this is constant over time
 - if so, then we can remove this constant using time series data and only look at deviations from that individual-constant
 
-- same thing could be argued for locations, or businesses
-
 **example**: effect of union status on worker wages, using worker specific fixed effects to control for ability (using panel data on worker wages and union status over time)
 
-???
-Could be an additive effect or a % effect of union status
+Consider workers who move between companies with and without union wages.
+
+Or consider CEOs who move between companies.
+
+Or consider using a family fixed effect to control for twins studies.
+
+Or consider fixed effects for businesses that work in different sectors.
+
+- same thing could be argued for location fixed effects, or business-specific fixed effects
+
+*with time series data, we almost always try to include unit-specific fixed effects if possible*
 
 ---
 # Diff-in-Diff
 
-- individual fixed effects are helpful, but not enough
+Fixed effects are helpful, but not enough. They can address individual, time-invariant OVB.
 
-- sometimes "meaningful variation" occurs for a group of individuals (state level, company-wide)
-- makes it hard to identify since there are state level unobserved attributes and aspects
+Sometimes though, there are region or group-wide unobservable variables. 
+  - Individual fixed effects cannot control for this. Why?
+
+--
+
+  - The change occurs at the group-level, so there are group-specific unique aspects and differences.
+  
+--
+
+Answer: *essentially, group-specific fixed effects*
+
+Assumes that group-level differences (though unobservable) are time-invariant.
+- Any time-specific effects are equal (and additive) across groups.
+
+---
+# Diff-in-Diff
 
 **Example**: employees all working for companies in state A receive a higher minimum wage
 
-*What can we estimate here?*
+**Example**: mobile apps across 4 platforms and across time, studying platform differences
+
+*How could we estimate a causal effect*
 
 --
-- We need to find a control group. Estimate the comparable trend / counterfactual.
+We need to replicate an experimental setting again!
+- Find an adequate control group. 
+- Estimate a defendable counterfactual / trend without treatment.
 
 ---
 # Diff-in-Diff Graphically
@@ -134,20 +185,17 @@ Could be an additive effect or a % effect of union status
 ---
 # Brief Math Overview of DiD
 
-Naive (ignores natural differences):
+Naive (ignores natural group-level differences):
 
-$$Y_{it} = Post_{it} + \beta X_{it} + \epsilon_{it}$$
+$$Y_{it} = \alpha_i + Time_t + Post_{it} + \beta X_{it} + \epsilon_{it}$$
 
 --
 
 With diff-in-diff:
 
-$$Y_{it} = Post_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$
+$$Y_{it} = \alpha_i + Time_t + Post_{it} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{it} + \beta X_{it}$$
 
-$$Y_{it} = Time_{t} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{t} + \beta X_{it}$$
-
-
-??
+???
 In the first setup, we control for individual level fixed effects and time fixed effect trends. We look at the post-treatment time period for the treated group.
 
 However, this suffers from the fact that the 
@@ -179,13 +227,9 @@ Idea is that you use the non-treated group to estimate the counterfactual estima
 - time-specific unobserveds? OK
 
 - Issue: unobserved variables are correlated with both the self-selection of treatment and the timing of the treatment
-  - individual income boost leads to adoption
-
---
-- "avg treatment effect on treated"
-
---
-- what if group fundamentals change as a function of treatment?
+  - *example:* individual income boost leads to adoption
+  - *example:* what if group demographics/fundamentals change as a function of treatment?
+  - "avg treatment effect on treated"
 
 ---
 # DiD Example Discussion 
@@ -194,6 +238,8 @@ Bertrand and Mullainathan (2003) looks at state-by-state differences in rules su
 
 DiD = wage differences across states pre-law change and post-law change.
 
+*Concerns:*
+
 1. Laws were changing when wages were growing nationally
 
 2. States that choose to change regulation had more unions.
@@ -201,7 +247,7 @@ DiD = wage differences across states pre-law change and post-law change.
 ??
 Unions have higher wages, so this is accounted for in time-invariant differences
 
-Unions have may time-varying trends though, so some self-selection in treatment here.
+States with unions have may time-varying growth trends though, so some self-selection in treatment here.
 
 ---
 # Improve on the Simple Diff-in-Diff Idea
@@ -211,7 +257,7 @@ Relative time indicators
 --
 - allows the use of variable post-treatment time periods
 - allows the estimation of dynamic treatment effects
-- reduces risk of time-varying omitted variables
+- more **robust** to the risk of location-specific time-varying omitted variables
 
 ![relative_time](./assets/DiD_nagaraj_relative_time.png)
 
@@ -220,6 +266,23 @@ Relative time indicators
 
 Use matching to limit the control group:
   - synthetically enforce parallel trends before treatment
+  
+![before_match](./assets/whole_core_sample_fooddrink.png)
+
+---
+# Improve on the Simple Diff-in-Diff Idea
+
+Use matching to limit the control group:
+  - synthetically enforce parallel trends before treatment
+  
+![after_match](./assets/basicmatch_metroA_allCities_perUser.png)
+
+---
+# Self-Selection Bias is Always a Concern
+
+- under FE, how can we control for the choice to adopt union membership?
+- under a DiD, how can we control for the state or business choosing to adopt a policy?
+
 
 ---
 # Improve on the Simple Diff-in-Diff Idea
@@ -234,9 +297,78 @@ Dig more into the argued causal mechanisms
 - pretend that treatment occurs in treated groups before actual treatment. Do we estimate an effect when it should not be there?
 
 ---
-# Private Impact of Public Maps
+# Private Impact of Public Maps (Nagaraj, 2017)
 
-[todo, go in-depth into Nagaraj reading, emphasize the robustness]
+**What is the impact of public goods on private revenues?**
+
+- e.g. Wikipedia, Yelp, various online circumstances, Large Hadron Collider, Human Genome Project
+
+- In this case: government-provided detailed maps on gold-mining revenues
+
+- Do these public goods just replicate private knowledge?
+
+*ideas on how to identify the impact?*
+
+--
+Identification strategy:
+- variation in available timing of maps
+- variation in available timing of "non-cloudy" maps
+- variation in the estimated effect that matches theorized mechanism (theory!)
+
+---
+# Nagaraj (2017) Diff-in-Diff
+
+$$Y_{it} = \alpha + \beta_1 Post_{it} + \gamma_i + \delta_t + \epsilon_{it}$$
+
+*Note: time indicators help remove fluctuations in gold price*
+*Note: Earth = 9493 blocks*
+*Note: clustered standard errors at the block level; additional robustness includes more general standard error clustering for spatial proximity*
+*Note: negative-binomial model also used for robustness*
+
+---
+# Nagaraj (2017) Diff-in-Diff
+
+![main_specification](./assets/nagaraj_basic_specification.png)
+
+---
+# Nagaraj Time-Varying Estimates
+
+$$Y_{it} = \alpha + \sum_{z} \beta_t 1 _{\left\{ z \right\}} + \gamma_i + \delta_t + \epsilon_{it}$$
+
+- Shows no pre-existing differences in trends between blocks (before mapping, whenever it occurred)
+- Large and persistent effects of discovery over time relative to unmapped places
+- $sim$ 7 year lag for the benefits to accrue
+
+--- 
+# Nagaraj IV Estimates
+
+IV in the probability of receiving a low-cloud cover, high quality mapping.
+
+DiD has a concern that the blocks mapped early are not random.
+
+![nagaraj_iv](./assets/nagaraj_iv_checks.png)
+
+---
+# Nagaraj IV Estimates
+
+![nagaraj_iv_results](./assets/nagaraj_iv_results.png)
+
+Why is this so much larger? LATE?
+
+---
+# Nagaraj Additional Robustness
+
+- Excluding certain regions, like USA or USSR regions.
+- Removing some of the early blocks, only using variation in blocks mapped later
+- Placebo test: Estimating Landsat mapping impact on high tree-cover blocks (theory should show no effect)
+- Placebo test: Randomizing fake mapping dates across blocks.
+- Removing time dimension and using cross-sectional data only (using delay in mapping as treatment of interest)
+
+Theory Robustness:
+- Shows that the effect is MUCH larger for small independent gold firms, than for larger firms, who could be expected to have better mapping investments. 
+- Shows that small, new independent firms are even better off in places with high property rights and low corruption levels. 
+
+*Mapping encourages new, smaller entrants; reducing the fixed cost*
 
 ---
 # Hands-On With DiD Data
@@ -258,6 +390,9 @@ Dig more into the argued causal mechanisms
 
 ---
 # PSM (if there's room)
+
+---
+# 
 
 ---
 # Sources

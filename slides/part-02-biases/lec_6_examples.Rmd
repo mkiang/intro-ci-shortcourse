@@ -25,8 +25,9 @@ options(htmltools.dir.version = FALSE)
 ```
 
 ---
-# Example of CIA
+# Impact of Tablet Adoption on Product Sales
 
+fdsf
 
 ---
 # Impact of Information on Markets
@@ -61,14 +62,6 @@ options(htmltools.dir.version = FALSE)
 
 - impact of quality disclosure and rankings?
 - impact of Yelp reviews?
-
----
-# Really good example on impact of public technology investment
-
-- very well written, explaining why they do what they do
-- DiD with controls and 
-- also an IV, with LATE
-- clarifies the argued mechanism using data too!
 
 ---
 # Wikipedia Effect?
