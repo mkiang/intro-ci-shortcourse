@@ -1,0 +1,247 @@
+---
+title: "Brief Overview of Experimental Design"
+subtitle: ""
+author: "Mathew Kiang and Zhe Zhang"
+date: "March 16, 2017"
+output:
+  xaringan::moon_reader:
+    css: ["./custom.css", "./../custom.css"]
+    # In order for the css file to work, you need to set your working directory
+    # to one above the slide directory ('./../') and then call moon_reader via
+    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
+    # Or just knit it into a browser and it should work immediately.
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Roadmap
+
+???
+$\def\indep{\perp \! \! \perp}$
+Well, for this talk we are going to take a step back and talk about study design. First, why should you care? After all, we just spent the last few hours together talking about observational data and causal inference. Why should you care about experimental design? **NEXT SLIDE**
+
+Then I'm going to talk a bit about running an experiment. They are obviously very complex, but they can ultimately be broken down into two parts. **NEXT SLIDE**
+
+Finally, we will go over an evaluation of Seguro Popular as an example of good design. **NEXT SLIDE**
+
+--
+
+### Motivation
+
+- Why should data scientists care about experimental design?
+--
+
+### Intro to Experimental Design in Two Steps
+
+1. **Sampling**. Get people in.
+1. **Design**. Perform the intervention(s).
+
+--
+
+### Example of Good Design
+
+- Evaluation of *Seguro Popular* as an example
+
+---
+# Motivation
+
+???
+
+So we start again with a bit of motivation. We've just spent the last few hours with you talking about observational data and using the Rubin causal model to draw good causal inference from observational data. So now why are we talking about experimental design? Why should we care? Well, to answer that, let's go to Rubin himself. **NEXT SLIDE**
+
+This is an article where Rubin himself articulates why design is better than analysis in making causal inference. If you have the option to make a study and you care about the causal estimates, you should seize that opportunity. **NEXT SLIDE**
+--
+
+.center[<img src="./assets/design_trumps_analysis.jpg" width="700">]
+
+---
+# Motivation
+.pull-right[<img src="./assets/ra_fisher.jpg" width="700">]
+
+.pull-left[.grey["To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of."] 
+
+— R.A. Fisher]
+
+???
+T
+This is RA Fisher who hopefully everybody is familiar with. Not only was he a founding father of modern statistics, he was the father of experimental designs. He was big on agricultural statistics and when we say "block" we are actually referring to blocks of land in his agricultural experiments. Here's what he says about experimental design. 
+
+---
+# Motivation
+
+- No amount of clever analysis can make up for poor design. 
+
+???
+
+All this to say that really good design is much more useful for causal inference than really good analyses. If you have poor design, you will never be able to make causal claims. **NEXT SLIDE**
+
+Conversely, if you have a great design, you can get away with a t-test and still make strong causal claims. **NEXT SLIDE**
+
+Nothing is free though or we would always have well designed experiments. Different study designs have different limitations. **NEXT SLIDE**
+
+Knowing a bit about study design allows you to better assess articles you read. **NEXT SLIDE**
+
+Lastly, your design drives the questions you can ask. If you have a specific question, it is better to make a specific experiment rather than hope you can find data and use clever techniques.
+
+--
+
+- Conversely, really good designs do not require advanced analyses. 
+
+--
+
+    - But often have their own limitations.
+    
+--
+
+- All designs have weakness and strengths — knowing them allows you to better assess the literature
+
+--
+
+- Your design drives the questions you can reasonably answer.
+
+---
+# Motivation
+
+- The purpose of study design is to operationalize a high-level, abstract question into an empirically testable hypothesis. 
+
+- Hopefully, you'll be able to design your own experiment one day.
+
+- Even in observational settings, it is useful to think about how you would set up a study:
+
+    - Ideal data?
+    - Intervention? 
+    - Mechanism of randomizaiton?
+    - Counterfactual / control group?
+
+---
+# Types of Study Designs
+
+- Study design differs by field, but main distinguishing question is:
+
+1. Did the researcher assign the treatment? 
+
+    - If yes, experimental. 
+        - Was treatment assigned randomly?
+            - If yes, randomized control trial. 
+            - If no, nonrandomized control trial.
+    - If no, nonexperimental or quasi-experimental.
+
+- We are only going to discuss randomized experimental designs.
+
+---
+# Benefits of Experiments
+
+- Control for important known covariates via *blocking* or *stratification*
+
+- Control for unknown confounders via *randomization*
+
+- Allow for generalizability through types of *random sampling*
+
+- Single well-defined intervention allows for isolated causal estimates
+
+# Weaknesses of Experiments
+
+- Expensive — large RCTs often cost thousands of dollars per observation
+
+- Feasibility and ethical concerns — some things cannot be randomized (e.g., smoking or poverty)
+
+- Generalizability — many experiments suffer from non-random sampling which hinders causal statements about the population at large
+
+---
+# A/B Testing
+
+- The most ubiquitous randomized experiment in data science/tech:
+
+    1. Make two versions of your app/website
+    1. Completely at random, send some users to Version A and some to Version B
+    1. After you have a large enough sample size, see which version got the higher conversion (e.g., click throughs, donations, sales, etc.)
+    
+- Randomization allows you to use very simple tests to compare means (e.g., Fisher's exact or *t*-test)
+
+- Simple set up allows for many tests to be performed — Google, New York Times, Amazon, etc. run hundreds of A/B tests *per week*.
+
+- From our perspective, A/B testing is just a less interesting randomized control experiment. 
+
+    - Unable to extrapolate outside of your sample
+    
+---
+# Sampling
+
+- We cannot perform a census on the entire population so we need to sample some number $n$ from the larger population of $N$. Usually $n << N$.
+
+- Broadly speaking, two types of sampling methods.
+
+???
+
+- How you perform sampling allows dictates the type of inference you can make on the larger population. **NEXT SLIDE**
+
+- Nonprobability sampling prevents you from estimating sampling error and making inferences about the larger population.
+
+- A/B testing is almost always nonprobability. So while you can make very good causal estimates within your sample, you cannot do so outside of your sample. Suppose you change the government website with new language to make it easier to understand. You perform an A/B test. You find your new email works 50% better than the previous one. You can say that it is much more effective in the people who came to your website, but you cannot say anything about people outside of that website. Perhaps the people who never use the government email would have had no preference for either email. **NEXT SLIDE**
+
+Meanwhile, probability sampling allows you to make statements about the entire population from which you sampled. For experiments, probability sampling is very hard. However, for well-done descriptive studies like surveys, probability sampling is extremely important. **NEXT SLIDE**
+
+--
+
+1. *Nonprobability sampling* means some subjects have a zero probability of being in your sample.
+
+--
+
+1. *Probability sampling* means you have a fully enumerated list of potential subjects and all of them have some positive probability of being in your sample.
+
+---
+# Probability Sampling
+
+1. **Simple random sampling.** Most basic of the probability sampling methods — every unit has an equal proportion of being selected in the study. Easiest to do.
+
+--
+
+1. **Systematic sampling.** Rarely used these days, but you start with a randomized list and then take every *k*th sample.
+
+--
+
+1. **Stratified sampling.** Sample each subpopulation of interest independently and then reweigh after data collection. Statistically efficient while allowing for adequately powered subgroup analyses.
+
+--
+
+1. **Cluster sampling.** Sample by a "cluster" such as geographical location or unit. For example, sampling entire schools at random. Statistically efficient if more variance between clusters than within clusters.
+
+--
+
+- Probability sampling may not always be possible for you, but it is useful to think about who the people in your dataset represent relative to the question you are trying to ask.
+
+???
+
+Simple random sampling is when you just essentially roll a gigantic die and that is how you select subjects. Everybody has an equal probability of being selected. Very convenient because it means every single person has equal probability but so does every pair and every triple, etc. However, can result in sampling error. Pretend we randomly pick 50 people and we end up with 30 females and 20 males even though the population has exactly a 50-50 ratio. **NEXT SLIDE**
+
+Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every $k$th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
+
+Stratified sampling is usually the type of sampling we are most familiar with in econ, policy, public health, etc. You first stratify into groups that you think are important and then you perform random or systematic sampling. Often used when certain groups are rare so you want to oversample in order to make sure you have enough power for your analyses. Also more efficient than random sampling because you can reduce samplinge error — from the example, above, what if instead of randomly sampling, I select only males and then sample 25 and then only females and sample 25? No sampling error on sex. When you work with survey data or government data, you often get importance weights — those weights are due to stratified sampling and getting the study sample back to the representative form of the population. **NEXT SLIDE**
+
+Cluster sampling is often used when it is easier to do things to groups of people or when groups are more similar. For example, suppose you perform an education reform. You randomly select schools first and then you sample students within the schools. This has logistical benefits (for example, driving to a rural school just once) but also means you don't need a fully enumerated list of students — instead, you just need a fully enumerated list of schools.
+
+Note that these sampling methods can be used together. You can stratify first, then perform cluster sampling, then perform random sampling. **NEXT SLIDE**
+
+Important to consider who the people in your data set represent and 
+
+
+---
+class: center, middle
+# Thanks!
+
+---
+# Sources
+
+https://www.wired.com/2012/04/ff_abtesting
+
+---
+class: center, middle
+# Additional slides
+
