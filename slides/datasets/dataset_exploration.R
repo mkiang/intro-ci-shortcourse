@@ -8,7 +8,7 @@ setwd('~/Dropbox/intro-ci-shortcourse/slides/')
 # Troost & Richardson (DD on bank failures in 1930)
 #   estimating the impact of 
 
-df <- read_csv('datasets/dd_banks.csv')
+df <- read_csv('./../datasets/dd_banks.csv')
 df <- df %>% 
   mutate(date_cal = as.Date(date, origin = "1900-01-01")) %>%
   select(-weekday, -day, -month, -year) %>%
@@ -62,3 +62,5 @@ ggplot(year_df, aes(x = s, y = mean_lw)) + geom_point() +
 a <- lm(reg_wage ~ s, data = df)
 # residuals plot on wages
 b <- lm(lnw ~ s, data = df)
+
+####
