@@ -5,3 +5,5 @@
 *.Rproj
 */.texpadtmp
 slides/**/.Rhistory
+
+slides/part-03-biases/.Rhistory
