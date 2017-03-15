@@ -97,7 +97,7 @@ As he suspected, only the group that had citrus fruits showed substantial improv
 - Only Group 6 (citrus fruit) showed substantial improvement.
 
 ---
-# Randomized Controlled Experiment
+# Randomized Controlled Experiments
 
 .center[&lt;img src="./assets/facebook_emotion_header.jpg" width="600"&gt;]
 
@@ -126,7 +126,7 @@ It was also incredibly controversial because they never got informed consent fro
 
 --
 
-- Also incredibly controversial due to manipulating emotions of real people on a large scale.
+- Also incredibly controversial due to manipulating emotions of real people on a large scale with no informed consent.
 
 ---
 # Randomized Controlled Trials/Experiments
@@ -146,7 +146,7 @@ Third, even though Lind was wildly wrong about **why** the RCT worked, he was ri
 
 --
 
-- Even with a very small sample size, Lind was able to show convincing causal effect
+- Even with a tiny sample, Lind was able to show convincing causal effect
 
 --
 
@@ -214,6 +214,13 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 - **Randomized**: The intervention is assigned randomly (not necessarily the same as the treatment is *received* randomly)
 
 ???
+Briefly, let's go over some definitions When people talk about randomized designs, they mean that the treatment was randomly assigned to groups — not that the people inside of the study are random (that's random sampling). Also note that assignment to treatment is not the same as receiving treamtnet. **NEXT SLIDE**
+
+Controlled just means there is at least one well-defined comparison group to act as your counterfactual. **NEXT SLIDE**
+
+An experiment just means investigators directly control the intervention. And a trial is just an experiment with the goal of studying the effect of some sort of medical intervention on humans. There's a distinction because trials have ethical requirements that experiments may or may not. **NEXT SLIDE**
+
+Lastly, let's define an IDEAL RCT as one with no loss to follow-up, so you see everybody's data for the entire study, perfect compliance — everybody does exactly as you ask them to, only one counterfactual group, and double blind.
 
 --
 
@@ -233,6 +240,16 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 # Randomized Controlled Trials
 
 - Recall from last lecture, because of the *Fundamental Problem of Causal Inference*, we can never observe both counterfactuals.
+
+???
+
+Ok. So why do people like randomized experiments? Recall that the fundamental problem of causal inference states we cannot observe both counterfactuals.  **NEXT SLIDE**
+
+So instead we try to approximate it. Under what scenarios would the difference in treatment groups be the same as the difference in counterfactuals? **NEXT SLIDE**
+
+Then recall our assumptions. Here they are. **NEXT SLIDE**
+
+These conditions are all met under a randomized experiment. The most important is exchangeability so we'll go over that now. **NEXT SLIDE**
 
 --
 
@@ -256,6 +273,17 @@ It's also important to note that RCTs are often very costly and have a smaller, 
 
 - Suppose we have a very large (nearly infinite) population of perfect compliers
 
+???
+
+So here's a simple thought experiment. Suppose you have a large population. Let's say everybody in Mexico and everybody has agreed to do exactly as you say. **NEXT SLIDE**
+
+You take them and you randomly assign them to two groups.  **NEXT SLIDE** By flipping a coin.  **NEXT SLIDE**
+
+Now decide that you're going to treat group Heads and not Group Tails. You run the experiment and at the end, you find that the risk of death in Group Heads is .25. **NEXT SLIDE**
+
+Now pretend you did it the other way. You decided to treat group Tails and not Group Heads. What would the risk of death be? **NEXT SLIDE**
+
+Still .25. Because we randomized, on average, our groups will be the same across all characteristics  **NEXT SLIDE**
 --
 
 - We divide them into two groups: (1) Group Heads and (2) Group Tails 
@@ -284,11 +312,19 @@ class: center, middle
 
 ## &amp;nbsp;
 
+???
+
+So exchangeability is a consequence of randomization and that's why experiments are so powerful.  **NEXT SLIDE**
+
 ---
 class: center, middle
 # Exchangeability is a consequence of randomization
 
 ## Unfortunately, we (usually) won't get to randomize
+
+???
+
+Unfortunately we don't get to randomize very often so instead we need to think of other ways that we can safely assume exchangeability. So let's define it formally.  **NEXT SLIDE**
 
 ---
 # Formal definition of exchangeability
@@ -296,6 +332,14 @@ class: center, middle
 
 The counterfactual outcome `\(Y^a\)` is independent of the actual treatment `\(A\)`.
 `$$Y^a \indep A \text{ for all } a$$`
+
+???
+
+Exchangeability means that your counterfactual outcome is independent of your treatment. **NEXT SLIDE**
+
+Not straightforward to express using statistical language. **NEXT SLIDE**
+
+Note that it is different from independence. We actually expect your actual outcome to be related to your actual assignment.  **NEXT SLIDE**
 
 --
 
@@ -311,6 +355,9 @@ Exchanagebility is not the same as independence. That is, `$$Y^a \indep A \neq Y
 class: center, middle
 # All design and analytic methods try to mimic randomization in order to "create" exchangeability
 
+???
+
+Ok so that section on experiments was just to emphasize the importance of exchangeability. All design and analytic methods we talk about are just efforts to mimic randomization and "create" exchangeability.
 
 ---
 class: center, middle, inverse
