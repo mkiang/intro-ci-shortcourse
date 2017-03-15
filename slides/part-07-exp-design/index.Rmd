@@ -111,6 +111,16 @@ Lastly, your design drives the questions you can ask. If you have a specific que
 
 - The purpose of study design is to operationalize a high-level, abstract question into an empirically testable hypothesis. 
 
+
+???
+So you have this really abstract questions. Does X change Y? Will my new education policy improve intelligence? Well, that's a pretty vague question but experimental design operationalizes it into something you can test. Will introducing a one-hour tutorial for the 25% lowest performers help improve their scores on the PISA? **NEXT SLIDE**
+
+I think more and more common data scientists get a chance to run experiments. Hopefully one day you'll be able to design your own and this will give you an idea of things to consider.  **NEXT SLIDE**
+
+Even if you never do, when using observational data, it is useful to think about how you would set up an experiment. Who is in your study? What does your ideal data look like? What is your perfect intervention? What is the mechanism of randomization? What is your counterfactual or control group? **NEXT SLIDE**
+
+--
+
 - Hopefully, you'll be able to design your own experiment one day.
 
 - Even in observational settings, it is useful to think about how you would set up a study:
@@ -135,6 +145,10 @@ Lastly, your design drives the questions you can ask. If you have a specific que
 
 - We are only going to discuss randomized experimental designs.
 
+???
+
+There are a lot of study designs but the are all pretty domain specific. For example, epidemiology has case control designs because some diseases are very rare and so you have to find the disease first and then try to retrospectively figure out what happened. But all designs really care about two the assignment of treatment. Was it experimental? Was it manipulated by the researcher?
+
 ---
 # Benefits of Experiments
 
@@ -146,6 +160,11 @@ Lastly, your design drives the questions you can ask. If you have a specific que
 
 - Single well-defined intervention allows for isolated causal estimates
 
+???
+
+What are the benefits of a well designed experiment? Well, if you know important covariates, you can use blocking or stratification which increases statistical efficiency and makes sure you have adequate power to answer your question of interest. Obviously, you get to control the type of randomization which controls for unknown (and known) confounders. Depending on your sampling, you may have good generalizability. Lastly, unlike observational studies where you may hvae competing interventions, a well designed experiment will have one well-defined experiment that allows for isolated causal estimates.
+--
+
 # Weaknesses of Experiments
 
 - Expensive — large RCTs often cost thousands of dollars per observation
@@ -154,33 +173,64 @@ Lastly, your design drives the questions you can ask. If you have a specific que
 
 - Generalizability — many experiments suffer from non-random sampling which hinders causal statements about the population at large
 
+???
+
+Also a lot of weaknesses. We went over this before but RCTs are expensive and hard to do. There are ethical and feasibility concerns. Because they are so expensive, we often can't do probability sampling and thus we have generalizability issues. 
+
 ---
 # A/B Testing
 
 - The most ubiquitous randomized experiment in data science/tech:
 
+???
+Ok. Let's talk about A/B testing — the most ubiquitous randomized experiment in all of data science / tech. **NEXT SLIDE**
+
+First, you just make two versions of your website or app. The New York Times uses two versions of headlines or two versions of photos. Google tweaks things to their search algorithms. Etc. **NEXT SLIDE**
+
+Then, at random you select some subset to go to one version and some subset to go to the other. **NEXT SLIDE**
+
+Then you collect data and count some objective. Number of sales, donations, click throughs, etc. **NEXT SLIDE**
+
+Because we randomized, we can use very simple tests to compare means. This is obviously very attractive because they are simple to set up and get running and so many large companies run hundreds of A/B tests every week. **NEXT SLIDE**
+
+From our perspective, A/B testing is just a really simple, and not that interesting randomized controlled trial. Biggest problem is that you cannot extrapolate outside of your sample. **NEXT SLIDE**
+
+--
+
     1. Make two versions of your app/website
     1. Completely at random, send some users to Version A and some to Version B
     1. After you have a large enough sample size, see which version got the higher conversion (e.g., click throughs, donations, sales, etc.)
     
+--
+
 - Randomization allows you to use very simple tests to compare means (e.g., Fisher's exact or *t*-test)
 
 - Simple set up allows for many tests to be performed — Google, New York Times, Amazon, etc. run hundreds of A/B tests *per week*.
+
+--
 
 - From our perspective, A/B testing is just a less interesting randomized control experiment. 
 
     - Unable to extrapolate outside of your sample
     
 ---
+class: middle, center
+
+# How to design a randomized experiment
+## Step 1: Sampling
+---
 # Sampling
 
-- We cannot perform a census on the entire population so we need to sample some number $n$ from the larger population of $N$. Usually $n << N$.
+- We cannot perform an intervention on the entire population so we need to sample some number $n$ from the larger population of $N$. Usually $n << N$.
 
-- Broadly speaking, two types of sampling methods.
+--
 
 ???
+Ok. So sampling is about how you get people into your intervention. And how you get people in determines what you can say about the people you did not get in. **NEXT SLIDE**
 
 - How you perform sampling allows dictates the type of inference you can make on the larger population. **NEXT SLIDE**
+
+- Broadly speaking, two types of sampling methods.
 
 - Nonprobability sampling prevents you from estimating sampling error and making inferences about the larger population.
 
@@ -201,6 +251,20 @@ Meanwhile, probability sampling allows you to make statements about the entire p
 
 1. **Simple random sampling.** Most basic of the probability sampling methods — every unit has an equal proportion of being selected in the study. Easiest to do.
 
+???
+
+Simple random sampling is when you just essentially roll a gigantic die and that is how you select subjects. Everybody has an equal probability of being selected. Very convenient because it means every single person has equal probability but so does every pair and every triple, etc. However, can result in sampling error. Pretend we randomly pick 50 people and we end up with 30 females and 20 males even though the population has exactly a 50-50 ratio. **NEXT SLIDE**
+
+Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every $k$th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
+
+Stratified sampling is usually the type of sampling we are most familiar with in econ, policy, public health, etc. You first stratify into groups that you think are important and then you perform random or systematic sampling. Often used when certain groups are rare so you want to oversample in order to make sure you have enough power for your analyses. Also more efficient than random sampling because you can reduce samplinge error — from the example, above, what if instead of randomly sampling, I select only males and then sample 25 and then only females and sample 25? No sampling error on sex. When you work with survey data or government data, you often get importance weights — those weights are due to stratified sampling and getting the study sample back to the representative form of the population. **NEXT SLIDE**
+
+Cluster sampling is often used when it is easier to do things to groups of people or when groups are more similar. For example, suppose you perform an education reform. You randomly select schools first and then you sample students within the schools. This has logistical benefits (for example, driving to a rural school just once) but also means you don't need a fully enumerated list of students — instead, you just need a fully enumerated list of schools.
+
+Note that these sampling methods can be used together. You can stratify first, then perform cluster sampling, then perform random sampling. **NEXT SLIDE**
+
+Important to consider who the people in your data set represent and 
+
 --
 
 1. **Systematic sampling.** Rarely used these days, but you start with a randomized list and then take every *k*th sample.
@@ -217,19 +281,14 @@ Meanwhile, probability sampling allows you to make statements about the entire p
 
 - Probability sampling may not always be possible for you, but it is useful to think about who the people in your dataset represent relative to the question you are trying to ask.
 
-???
+---
+class: middle, center
 
-Simple random sampling is when you just essentially roll a gigantic die and that is how you select subjects. Everybody has an equal probability of being selected. Very convenient because it means every single person has equal probability but so does every pair and every triple, etc. However, can result in sampling error. Pretend we randomly pick 50 people and we end up with 30 females and 20 males even though the population has exactly a 50-50 ratio. **NEXT SLIDE**
+# How to design a randomized experiment
+## Step 2: Randomize
 
-Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every $k$th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
-
-Stratified sampling is usually the type of sampling we are most familiar with in econ, policy, public health, etc. You first stratify into groups that you think are important and then you perform random or systematic sampling. Often used when certain groups are rare so you want to oversample in order to make sure you have enough power for your analyses. Also more efficient than random sampling because you can reduce samplinge error — from the example, above, what if instead of randomly sampling, I select only males and then sample 25 and then only females and sample 25? No sampling error on sex. When you work with survey data or government data, you often get importance weights — those weights are due to stratified sampling and getting the study sample back to the representative form of the population. **NEXT SLIDE**
-
-Cluster sampling is often used when it is easier to do things to groups of people or when groups are more similar. For example, suppose you perform an education reform. You randomly select schools first and then you sample students within the schools. This has logistical benefits (for example, driving to a rural school just once) but also means you don't need a fully enumerated list of students — instead, you just need a fully enumerated list of schools.
-
-Note that these sampling methods can be used together. You can stratify first, then perform cluster sampling, then perform random sampling. **NEXT SLIDE**
-
-Important to consider who the people in your data set represent and 
+---
+# Probability Sampling
 
 
 ---
