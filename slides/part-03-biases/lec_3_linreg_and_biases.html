@@ -46,11 +46,9 @@ Linear regression is interpretable. We would like better prediction, but that's 
 - `\(Y\)` = Outcome of Interest
 
 - `\(T\)` = Treatment
-
 `$$Y = f(T)?$$`
 
 --
-
 `$$Y = E[Y|T=t] + \epsilon = CEF + \epsilon$$`
 
 *First, we discuss the CEF; second, when is the CEF causal?*
@@ -77,6 +75,8 @@ Instead, we're looking at the systematic pattern between education and wages.
 
 ---
 # Recreate Graphic
+
+Data: &lt;http://goo.gl/fGVelu&gt;
 
 
 ```r
@@ -113,10 +113,10 @@ print(g_CEF)
 
 CEF with no functional form assumption: `\(Y = E[Y|T,X] + \epsilon\)`
 
-- main assumption: assume `\(E[Y|T,X]\)` is **linear** (and additive)
+### main assumption: assume `\(E[Y|T,X]\)` is **linear** (and additive)
 
 Using data, we then estimate:
-`$$\hat{Y_i} = [\hat{\beta}_0 + \hat{\gamma} T_i] + \hat{\epsilon_i}$$`
+`$$\hat{Y_i} = \hat{E}[Y|T,X] + \hat{\epsilon} = [\hat{\beta}_0 + \hat{\gamma} T_i] + \hat{\epsilon_i}$$`
 --
 Or with additional covariates:
 `$$\hat{Y_i} = [\hat{\beta}_0 + \hat{\gamma} T_i + \hat{\mathbf{\beta}} \mathbf{X_i}] + \hat{\epsilon_i}$$`
@@ -141,16 +141,19 @@ not limited to simple linear possibilities (interactions, feature transformation
 ---
 # Causal CEF = Causal Linear Regression
 
-So far, this applies for all linear regression.
+So far, this is prediction, and fits for all linear regression.
 
-When can we argue that the CEF is *causal*?
+When can we argue that the `\(\hat{\gamma}\)`, (or CEF) is *causal*?
 
-Ask: *does the treatment variable, in the linear CEF, have (conditional) independence from the potential outcomes? i.e., can we consider the treatment to be random*
+--
+
+Ask: *does the treatment variable, `\(T_i\)`, in the linear CEF, have (conditional) independence from the potential outcomes? i.e., can we consider the treatment to be random*
 
 --
 
 Consider observations `\(Y_i, T_i\)` where `\(T_i\)` is a binary treatment.
-`$$\left\{ Y_{0i} \equiv Y_i|_{T_i=0}, \quad Y_{1i} \equiv Y_i|_{T_i=1} \right\}$$` `$$Y_{ i,observed } = Y_{0i} + (Y_{1i}-Y_{0i})T_i$$`
+`$$\left\{ Y_{0i} \equiv Y_i|_{T_i=0}, \quad Y_{1i} \equiv Y_i|_{T_i=1} \right\}$$`
+`$$Y_{ i,observed } = Y_{0i} + (Y_{1i}-Y_{0i})T_i$$`
 
 Simple linear regression: `\(Y_i \sim \gamma T_i + \epsilon_i\)`
 
@@ -164,14 +167,13 @@ Simple linear regression: `\(Y_i \sim \gamma T_i + \epsilon_i\)`
 Is this causal?
 
 --
-
 Use the potential outcomes formula `\(Y_{ i,observed } = Y_{0i} + (Y_{1i}-Y_{0i})T_i\)` and expand the observed effect.
-`$$\begin{eqnarray*} avgObservedEffect=\hat{\gamma} &amp; = &amp; E[Y_{i}|T_{i}=1]-E[Y_{i}|T_{i}=0]\\ &amp; = &amp; E[Y_{0i}+(Y_{1i}-Y_{0i})T_{i}|T_{i}=1]\\ &amp;  &amp; -E[Y_{0i}+(Y_{1i}-Y_{0i})T_{i}|T_{i}=0]\\ &amp; = &amp; E[Y_{0i}|T_{i}=1]+E[Y_{1i}-Y_{0i}|T_{i}=1]\\ &amp;  &amp; -E[Y_{0i}|T_{i}=0]\\ &amp; = &amp; E[Y_{1i}-Y_{0i}|T_{i}=1]+\left\{ \underbrace{E[Y_{0i}|T_{i}=1]-E[Y_{0i}|T_{i}=0]}_{bias}\right\} \end{eqnarray*}$$` How do we ensure the second term is zero?
+`$$\begin{eqnarray*} avgObservedEffect=\hat{\gamma} &amp; = &amp; E[Y_{i}|T_{i}=1]-E[Y_{i}|T_{i}=0]\\ &amp; = &amp; E[Y_{0i}+(Y_{1i}-Y_{0i})T_{i}|T_{i}=1]\\ &amp;  &amp; -E[Y_{0i}+(Y_{1i}-Y_{0i})T_{i}|T_{i}=0]\\ &amp; = &amp; E[Y_{0i}|T_{i}=1]+E[Y_{1i}-Y_{0i}|T_{i}=1]\\ &amp;  &amp; -E[Y_{0i}|T_{i}=0]\\ &amp; = &amp; E[Y_{1i}-Y_{0i}|T_{i}=1]+\left\{ \underbrace{E[Y_{0i}|T_{i}=1]-E[Y_{0i}|T_{i}=0]}_{possible\_bias}\right\} \end{eqnarray*}$$` How do we ensure the second term is zero?
 `$$CIA \equiv \left\{ Y_{0i}, Y_{1i} \right\} \bot T_i$$` 
 
 ???
-This is the potential outcomes change that we want.
-And this is the indepdence that we want.
+Independence of Y_0i is obvious why it's an issue.
+Indepdence of Y_1i is less mathematically clear, but perhaps only those who benefit will accept treatment.
 
 ---
 # Conditional Independence Assumption (CIA)
@@ -181,10 +183,12 @@ And this is the indepdence that we want.
 Previous example works for an RCT, with binary treatment.
 - comes with built-in conditional independence assumption (CIA)
 
+--
+
 In observation data, we usually need to manipulate data to get CIA
   - "conditional on other covariates, `\(\mathbf{X_i}\)`, we get CIA" 
 
-`$$\left\{ Y_{0i}, Y_{1i} \right\} \neg\bot T_i \qquad \left\{ Y_{0i}, Y_{1i} \right\} \bot T_i|\mathbf{X_i}$$`
+`$$\left\{ Y_{0i}, Y_{1i} \right\} \neg\bot T_i; \qquad \left\{ Y_{0i}, Y_{1i} \right\} \bot T_i|\mathbf{X_i}$$`
 
 ???
 Obvious to avoid that good people go to good schools.
@@ -195,18 +199,19 @@ Also, avoid that people who are bad go to good schools.
 
 If our CIA is: `\(\left\{ Y_{0i}, Y_{1i} \right\} \bot T_i|\mathbf{X_i}\)`
 
+*e.g. conditioning on neighborhood wealth, whether you go to a 'good' school or a 'bad' school is independent of your counterfactuals*
+
 Do we need to estimate a causal effect for each possible value of `\(\mathbf{X_i}\)`?
 
 --
 
-Linearity assumption of the CEF makes things simpler: *binary treatment has additive effect, independent of other covarites*.
+Linearity assumption of the CEF makes things simpler: *binary treatment has additive effect, independent of other covariates*.
 
 --
 
-In math:
+The assumed linear model
 `$$\hat{Y_i} = [\hat{\beta}_0 + \hat{\gamma} T_i + \hat{\mathbf{\beta}} \mathbf{X_i}] + \hat{\epsilon_i}$$`
-`$$E[Y_i|T_i=1,X_i] - E[Y_i|T_i=0,X_i] = \gamma (1 - 0) + (\beta X_i - \beta X_i)$$`
-*e.g. conditioning on neighborhood wealth, whether you go to a 'good' school or a 'bad' school is independent of your counterfactuals*
+`$$avgEffect = E[Y_i|T_i=1,X_i] - E[Y_i|T_i=0,X_i] = \gamma (1 - 0) + (\beta X_i - \beta X_i)$$`
 
 ---
 # What about non-binary treatments?
@@ -215,7 +220,8 @@ Consider the treatment effect of different years of schooling.
 
 ![CEF_example](./assets/mhe_cef_regression.png)
 
-Linearity assumption again simplifies things: each year of schooling has a constant, additive effect.
+Linearity assumption again simplifies things:  
+*each year of schooling has a constant, additive effect.*
 `$$CIA \equiv \left\{ Y_{t_1,i}, Y_{t_2,i} \right\} \bot t|\mathbf{X_i} \quad \forall t$$`
 
 ---
@@ -230,7 +236,7 @@ The estimation of a treatment effect is simple in a linear form:
 - In the linear regression, `\(\mathbf{X_i}\)` controls for the other variation
 
 - In other notation, the linear assumption easily gives us:
-`$$\hat{\gamma} = \frac{\partial{Y}}{\partial{T}}$$`
+`$$\hat{\gamma} = \frac{\partial{Y}}{\partial{T}}|_{X_i} = \frac{\partial{Y}}{\partial{T}}|_{\forall i}$$`
 
 ???
 Important to be cognizant that this is what you're estimating however.
@@ -247,9 +253,10 @@ If you think you have an experiment, it's probably still observational data.
 - what can we do: "estimating systematic randomness"
   - we know we can't explain (close to) everything
   - instead, we want *unbiased* estimates of particular causal patterns
-    - how does the distribution of `\(Y_i\)` change *wrt* `\(T_i\)`?
-  - (best) linear approximation to the true CEF, with interpretable coefficients
+      - how does the distribution of `\(Y_i\)` change *wrt* `\(T_i\)`?
+  - (best) linear approximation to the true CEF, with **interpretable** coefficients
   - the **average** treatment effect
+  - (anecdotally robust)
   
 --
 
@@ -281,17 +288,26 @@ Even if truly non-linear, there is value in having a robust linear approximation
 
 {"related with", "pattern", "correlation", "tends to move with", "observed"}
 
+## Note on Data
+
+### be careful where your data comes from!!
+
 ---
 # Attacks on the CIA assumption
 
 - omitted variable bias, selection bias
 - regression functional form
+
+&lt;br/&gt;
+
 - external validity
 - measurement noise/error
-- reverse causality
+- reverse causality, simultaneous causality
 
 ---
 # Omitted Variable Bias: concerns in `\(\epsilon\)` term
+
+Related to, but not necessarily *self-selection bias*
 
 Consider a treatment bringing people from `\(T_b\)` to `\(T_a\)`.
 
@@ -303,7 +319,10 @@ But we ignore location effects.
 
 `$$Reg_{estimate} \equiv Y_i = \gamma T_i + \beta \mathbf{X_i} + \epsilon_i$$`
 
-What is the `\(E[\hat{\epsilon_i}]\)`? What is the `\(E[\epsilon_i]\)` ?
+What if `\(Location\)` is correlated with `\(X_i\)`?  
+What if `\(Location\)` is correlated with `\(T_i\)`?  
+
+What is `\(E[\epsilon_i|T_i]\)`? What is `\(E[\hat{\epsilon}_i|T_i]\)`?
 
 ---
 # Omitted Variable Bias: concerns in `\(\epsilon\)` term
@@ -312,7 +331,8 @@ We omitted location in our estimation, so `\(E[\epsilon_i] = \delta Location_i +
 
 --
 
-`$$E[\epsilon_{i,true}|T_i,X_i] \ne 0$$`
+Correlation is what hurts us:
+`$$E[\epsilon_{i,true}] = 0 \\ E[\epsilon_{i,true}|T_i,X_i] \ne 0$$`
 In other words,
 `$$\epsilon_{i} \not\bot T_i$$`
 
@@ -320,16 +340,17 @@ In other words,
 # Omitted Variable Bias: Results in biased estimates
 
 Consider a treatment bringing people from `\(T_b\)` to `\(T_a\)`.
-
 `$$\begin{eqnarray*}avgObservedEffect &amp; = &amp; E[Y_{i}|T=T_{a},X_{i}]-E[Y_{i}|T=T_{b},X_{i}]\\ &amp; = &amp; \gamma(T_{a}-T_{b})+\beta X_{i}-\beta X_{i}\\ &amp;  &amp; +E[\epsilon_{i}|T_{a}]-E[\epsilon_{i}|T_{b}] \end{eqnarray*}$$`
 If `\(E[\epsilon_i|T_a] &gt;&gt; E[\epsilon_i|T_b]\)`:
 
 - Omitted variable bias is "hidden" inside `\(\epsilon_i\)` between those treated and untreated.
 
-$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = (\gamma + Bias_{OVB})(T_a - T_b) $$
+`$$E[Y_i|T=T_a] - E[Y_i|T=T_b] = (\gamma + Bias_{OVB})(T_a - T_b)$$`
 
-`\(E[\epsilon_i|Loc_A]\)` could be **positive** because of the wealthy parents and peers effect
-`\(E[\epsilon_i|Loc_B]\)` could be **negative** because of nearby crime and travel time.
+`\(E[\epsilon_i|T_i=T_a]\)` could be **positive** if wealthy locations have peer effects both for future earnings and on encouraging extra treatment.  
+`\(E[\epsilon_i|T_i=T_b]\)` could be **negative** if low-income locations have nearby crime and travel time that reduces both future earnings and treatment.
+
+*if there were location effects, uncorrelated with treatment, we could still estimate treatment effects*
 
 ---
 # OVB Example: 
@@ -343,14 +364,13 @@ Estimated relationship between schooling and wages:
 
 
 ```r
-library(tidyverse)
-nobs = 500
+library(tidyverse); nobs = 500
 df_educ &lt;- 
   data_frame(iq = runif(nobs, min = 1, max = 100),
              school_years = round(16 - 0.05*iq + rnorm(nobs)),
              income = 20000 + 5000*school_years + 
                5000*rnorm(nobs) + 500*iq)
-ggplot(df_educ, 
+ggplot(df_educ,
        aes(x = factor(school_years), y = income)) + 
   geom_boxplot()
 ```
@@ -370,19 +390,19 @@ summary(lm(income ~ school_years, data = df_educ))
 ## lm(formula = income ~ school_years, data = df_educ)
 ## 
 ## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -25258  -6850     25   6425  26536 
+##      Min       1Q   Median       3Q      Max 
+## -29965.6  -6306.5    266.4   6462.8  27067.9 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)    135833       3325  40.855  &lt; 2e-16 ***
-## school_years    -1700        243  -6.996 8.55e-12 ***
+## (Intercept)  130851.6     3295.0  39.712  &lt; 2e-16 ***
+## school_years  -1369.7      243.5  -5.626 3.08e-08 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 9587 on 498 degrees of freedom
-## Multiple R-squared:  0.08948,	Adjusted R-squared:  0.08765 
-## F-statistic: 48.94 on 1 and 498 DF,  p-value: 8.554e-12
+## Residual standard error: 9485 on 498 degrees of freedom
+## Multiple R-squared:  0.05976,	Adjusted R-squared:  0.05787 
+## F-statistic: 31.65 on 1 and 498 DF,  p-value: 3.079e-08
 ```
 
 ---
@@ -399,19 +419,19 @@ summary(lm(income ~ school_years + iq, data = df_educ))
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -13998.3  -3338.4     26.9   3329.3  13415.0 
+## -16896.0  -3413.0     -9.2   3532.2  14328.2 
 ## 
 ## Coefficients:
 ##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   16648.8     3551.0   4.689 3.56e-06 ***
-## school_years   5227.0      219.4  23.823  &lt; 2e-16 ***
-## iq              510.4       13.4  38.102  &lt; 2e-16 ***
+## (Intercept)  15722.84    3726.17    4.22 2.91e-05 ***
+## school_years  5304.17     230.69   22.99  &lt; 2e-16 ***
+## iq             504.44      14.37   35.10  &lt; 2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 4847 on 497 degrees of freedom
-## Multiple R-squared:  0.7678,	Adjusted R-squared:  0.7669 
-## F-statistic: 821.6 on 2 and 497 DF,  p-value: &lt; 2.2e-16
+## Residual standard error: 5090 on 497 degrees of freedom
+## Multiple R-squared:  0.7298,	Adjusted R-squared:  0.7287 
+## F-statistic:   671 on 2 and 497 DF,  p-value: &lt; 2.2e-16
 ```
 
 ---
@@ -475,6 +495,7 @@ Return to schooling and future earnings example.
 df &lt;- readRDS('../datasets/ak_91_iv_qob.rds')
 
 year_df &lt;- df %&gt;% group_by(s) %&gt;%
+  # use nominal wage here, instead of log_wage before
   summarise(mean_wage = mean(weekly_wage))
 
 g_CEF &lt;- ggplot(year_df, aes(x = s, y = mean_wage)) + 
@@ -517,7 +538,7 @@ plot(bad_fit_lm, which = 1)
 
 
 ```r
-plot(bad_fit_lm, which = 4)
+plot(bad_fit_lm, which = 5)
 ```
 
 ![](lec_3_linreg_and_biases_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
@@ -541,15 +562,16 @@ plot(bad_fit_lm, which = 4)
   - Tobit regression, assumes a latent variable that can take negative values)
   - Attrition bias
 
-- flexible semi-parametric methods: $Y_i = \beta_0 + \gamma T_i + f(\mathbf{X_i}) + \epsilon_i $
+- flexible semi-parametric methods: `\(Y_i = \beta_0 + \gamma T_i + f(\mathbf{X_i}) + \epsilon_i\)`
 
-*important to think critically about where the (potential) data comes from or would come from*
-*almost all interesting data comes from human decisions, which is complex and may have several things affecting it*
+*Note: important to think critically about where the (potential) data comes from*  
+
+*Note: almost all interesting data comes from human decisions*
 
 ---
 # Despite Caution, Causal Work Still Useful
 
-- Raj Chetty, policy impact
+- Raj Chetty et al., policy impact
 - Work on piracy affecting movie studios
 - Health insurance studies
 - Air quality impact studies

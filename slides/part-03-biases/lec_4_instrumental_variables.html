@@ -33,7 +33,9 @@ class: center, middle, inverse, title-slide
 - Conditional Independance Assumption (CIA)
 - "potential outcomes are uncorrelated with *Treatment* outcomes, after controlling for other, observed covariates"
 
-We can't always get this argument to be believable though.
+&lt;br/&gt;
+
+**We can't always get this argument to be believable though.**
 
 ???
 Some things are quite hard to measure, such as genetic influence, choices for why people move to particular neighborhoods, IQ, motivation, involvement in other related activities
@@ -43,7 +45,7 @@ Ultimately, we're often left with omitted variable bias.
 ---
 # Instrumental Variables
 
-- can we find some real world experiments?
+### Can we find some real world experiments?
 
 --
 
@@ -51,14 +53,14 @@ Ultimately, we're often left with omitted variable bias.
 
 - by leveraging this information, we can remove self-selection biases
 
-- denote such instruments with `\(z_i\)` variables for each observation `\(i\)`
+- measure such scenarios with **instrumental variables**, `\(z_i\)`, for each observation `\(i\)`
 
 &lt;br/&gt;
 
 --
-- Different from a control variable. Does not enable conditional independence assumption (CIA).
+- Note: Different from a control variable. Does not enable conditional independence assumption (CIA).
 
-- When effects are plausibly constant, we cleanly estimate the effect; otherwise, a little more complicated.
+- Note: When effects are plausibly constant, we cleanly estimate the effect; otherwise, a little more complicated.
 
 ---
 # Instrumental Variables Graphically
@@ -90,7 +92,8 @@ Ultimately, we're often left with omitted variable bias.
 
 Answer: identify a variable that is predictive of only the "random" variation!
 
-- Get `\(\hat{T_i} = f(Z_i, X_i)\)` where `\(\hat{T_i} \bot u_i\)`. So `\(\hat{T_i}\)` is only influenced by `\(Z_i\)` and `\(X_i\)` (which we already control for). 
+- Get `\(\hat{T_i} = f(Z_i, X_i)\)` where `\(\hat{T_i} \bot u_i\)`.  
+Variation in `\(\hat{T_i}\)` is only influenced by `\(Z_i\)` and `\(X_i\)` (which is already controlled for).     
   - Instead of just `\(T_{i,observed}\)`.
 
 ---
@@ -106,15 +109,15 @@ Answer: identify a variable that is predictive of only the "random" variation!
 
 `\(Z_i\)` only works if it does NOT look like `\(U_i\)` in the graphic.
 
-- `\(Z_i\)` must be essentially randomly assigned, conditional on other covariates `\(X_i\)`
-- it cannot influence the outcome `\(Y_i\)` except through `\(T_i\)`
+1. `\(Z_i\)` must be essentially randomly assigned, conditional on other covariates `\(X_i\)`
+2. it cannot influence the outcome `\(Y_i\)` except through `\(T_i\)`
 
 &lt;br/&gt;
 
-- "Exclusion restriction" = only one single causal channel
+- Exclusion restriction = "only one single causal channel"
 
   - could use randomized draft eligibility, unless being draft eligible changes other behaviors
-  - could use random weather to instrument for predicting business revenue, unless bad weather affects other environmental aspects (like food supply)
+  - could use random weather to instrument for predicting consumer demand and business revenue, unless bad weather affects other environmental aspects (like food supply)
   - could use distance from a hospital, unless the choice of location is concerning
 
 
@@ -276,17 +279,18 @@ Instruments can take many (creative) forms
 - legal variation (bigger benefits between states)
 - geographic/natural aspects (housing location, rivers)
 - actions taken by third parties (court systems)
+- product changes
 
 ---
 
-![list_of_iv](./assets/angrist_list_of_iv.png)
+.center[&lt;img src = "./assets/angrist_list_of_iv.png" height = "850"&gt;]
 
 ---
 # Various Types of Instruments
 
 "good instruments come from a combination of institutional knowledge and ideas about the processes determining the variables of interest" (Angrist &amp; Pischke)
 
-- some ML work to search for instruments
+- Note: some ML work to search for instruments
 
 ???
 Basically, it's not just about data
@@ -298,15 +302,14 @@ Any conceptual concerns?
 
 --
 
-We can never "prove" that an IV is valid, it has to be argued
+1. We can never "prove" that an IV is valid, it has to be argued
 
-Causality estimate is driven by "meaningful variation"
+--
 
-&lt;br/&gt;
-
-- an IV may have meaningful RCT variation for only a small population
-
-- acknowledge that the true casual effects are usually heterogeneous amongst groups
+2. Causality estimate is driven by "meaningful variation"
+  - an IV may have meaningful RCT variation for only a small population
+  
+  - acknowledge that the true casual effects are usually heterogeneous amongst groups
 
 &lt;br/&gt;
 
@@ -321,7 +324,7 @@ IV only estimates a **"Local** Average Treatment Effect"
   - a hypothetical measure
 
 ---
-# LATE Basic Example
+# LATE Basic Motivational Example
 
 Imagine we randomly offer 50% of students a job training program.
 - this group is the "intention to treat" (ITT) group
@@ -331,17 +334,14 @@ What do we have?
 
 --
 
-We can do a random experiment measuring the ITT effect.
+We can consider the random experiment measuring the ITT effect.
 
 For the causal effect of job training, we suffer from the self-selection challenge.
 
 --
 
-Instead, we could *also* use the ITT as an instrument for Job Training.
-
-Intuitively, the ITT instrument only has a "local" effect though. 
-
-Why? 
+Instead, we could *also* use the ITT as an instrument for Job Training.  
+Intuitively, the ITT instrument only has a "local" effect though. Why? 
 
 *does this matter if treatment effects are constant?*
 
@@ -350,22 +350,29 @@ Why?
 
 treated people = {"compliers", "always takers"}
 
-untreated people = {"never takers"}
+untreated people = {"never takers", *"defiers"* (assumed none)}
 
 --
-# More on Compliers
+## More on Compliers
 
 Avg Observed Effect of Training =  
 Effect on Always Takers +  
 Effect on Compliers*
 
-- sometimes, the effect on compliers is the causal effect of interest
-  - this is local only to those who comply with the instrument though!
+- the effect on compliers is usually the causal effect of interest
+  - this estimate is local only to those who complied with the instrument!
+  - sometimes, we can care about both complier and always-takers
 
 ---
 # Example of ITT vs Causal Treatment Effect
 
 ![iv_itt_effects](./assets/iv_rct_itt_effects_regression.png)
+
+&lt;br/&gt;
+
+Left = comparing treated to the control + never-takers  
+Middle = estimates effect of assignment
+Right = estimates effect of compliance to treatment
 
 ???
 On the left is the average Training effect.
@@ -384,9 +391,11 @@ Schooling laws: only those who would have dropped out of school otherwise
 
 Children policy: only those who would not have had (additional) children
 
-Online Signup: only those who would not have signed up otherwise
+Online signup: only those who would not have signed up otherwise
 
-Surgery Impact: only those who are borderline surgery patients
+Surgery impact: only those who are borderline surgery patients
+
+Product changes: only those affected by product changes
 
 ---
 # LATE w/ Potential Outcomes Notation
@@ -398,7 +407,10 @@ Consider `\(T_{zi}\)` where `\(z \in \left\{ 0, 1 \right\}\)`:
 `\(T_{0i}\)` is a person's (potential) treatment choice WITHOUT the instrument
 `\(T_{1i}\)` is a person's (potential) treatment choice WITH the instrument
 
-`$$\gamma_{2SLS} = E[Y_{1i} - Y_{0i}|T_{1i} &gt; T_{0i}]$$`
+`$$\hat{\gamma}_{2SLS} = E[Y_{1i} - Y_{0i}|T_{1i} &gt; T_{0i}]$$`
+
+--
+`$$\hat{\gamma}_{naive} = E[Y_{1i}|T_{1i} &gt; T_{0i} | T_0i = 1] - E[Y_{0i}|\{ T_{0i}, T_{1i} \} = 0]$$`
 
 ---
 # More on LATE
@@ -407,7 +419,9 @@ Consider `\(T_{zi}\)` where `\(z \in \left\{ 0, 1 \right\}\)`:
 - must assume that those affected by instrument are affected in the same direction
 - *skipping math on instruments and standard errors*
 
-"IV solves the problem of causal inference in a randomized trial with partial compliance" 
+&lt;br/&gt;
+
+"IV solves the problem of causal inference in a randomized trial with partial compliance"  
 "There is nothing in IV formulas to explain *why* Vietnam-era [military] service affects earnings; for that, you need theory." (Angrist, Pischke)
 
 
@@ -426,6 +440,9 @@ Key assumptions around IV cannot be tested. Other aspects can be tested however.
 # Example Complier Characteristics
 
 ![iv_size_of_compliers](./assets/iv_size_of_compliers.png)
+
+Column 6 = Additional % of people who have treatment because of instrument
+Column 8 = % of Treated people who are compliers
 
 ???
 Column 5 = observed treated percent
@@ -448,22 +465,24 @@ Column 9 = Percent of Non-Treated people who are compliers.
 - math of instruments with covariates (some IVs are only valid after conditioning)
 - IVs for continuous treatment variables
 - IVs in non-linear models
+- continuous IVs
 - correcting bias from weak instruments
 
 ---
 # IV Overview
 
-key overall idea: 
+### look for things in the world/nature/policies that results in interesting random variation!
 
-look for things in the world/nature/policies that results in some interesting random variation! Finding that is the most difficult part. Once you find it, you can refer to math and textbooks and references to nail the correct interpretation/identification. (product line changes)
+*Finding that is the most difficult part.*  
+Once you find it, you can refer to math and textbooks and references to nail the correct interpretation/identification.
 
 - "key source of variation"
 - "what's your identification (strategy)"
-- be excited but cautious though, there are a lot of ways things can go wrong
+- be excited but cautious; there are a lot of ways things can go wrong
   - different functional forms for the instrument
   - lots of statistical subtlety
 
-- overall key advice: always be cautious and recognizing the assumptions that go into causal work. Valuable exercise to think through skeptically.
+- overall key advice: always be cautious and recognizing the assumptions that go into causal work. Valuable exercise to think skeptically.
 
 
 ---
@@ -501,7 +520,7 @@ Examples:
 *alternative*  
 modern RD: semi-parametric local kernel methods around the discontinuity, using only nearby data*
 
-**LATE** ($\gamma$ is estimated using variation around only a small area)
+**LATE** ( `\(\gamma\)` is estimated using variation around only a small area)
 
 ---
 # RD Example on Political Incumbency
@@ -514,7 +533,7 @@ The bottom image reassures us with proof that the discontinutity is essentially 
 ---
 # Fuzzy RD
 
-*discontinuity that leads to a jump in probability of treatment, with `\(\epsilon\)` change*
+*discontinuity that leads to a __jump__ in probability of treatment, with `\(\epsilon\)` change*
 
 &lt;br/&gt;
 
@@ -523,14 +542,13 @@ Options:
   - non-parametric IV LATE estimates around the discontinuity
 
 ---
-# Fuzzy RD (Popular) Example on Class Size Effects
+# Fuzzy RD (Popular) Example on Class Size
 
 .center[&lt;img src = "./assets/rd_fuzzy_example.png" height = "500"&gt;]
 
 ---
 # Sources
 
-- Cameron &amp; Triveti textbook
 - Mostly Harmless Econometrics
 - Osea Giuntella, slides
     </textarea>
