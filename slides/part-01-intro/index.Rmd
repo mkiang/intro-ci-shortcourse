@@ -1,5 +1,5 @@
 ---
-title: "Causal Inference for Data Science"
+title: "Introduction to Causal Inference<br> for Data Science"
 subtitle: "ITAM Short Workshop"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
 date: "March 15, 2017"
