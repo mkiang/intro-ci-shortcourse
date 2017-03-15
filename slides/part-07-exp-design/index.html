@@ -281,6 +281,54 @@ Important to consider who the people in your data set represent and
 - Probability sampling may not always be possible for you, but it is useful to think about who the people in your dataset represent relative to the question you are trying to ask.
 
 ---
+class: middle, center
+
+# How to design a randomized experiment
+## Step 2: Randomize
+
+???
+
+Now that you've collected samples, it's time to decide how to randomize them.
+
+---
+# Basic, post-test only
+- Single intervention
+`$$\begin{align*}
+R &amp;\quad&amp; X &amp;\quad&amp; O \\
+R &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard comparison
+`$$\begin{align*}
+R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; X_b &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard and placebo
+`$$\begin{align*}
+R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; X_b &amp;\quad&amp; O \\
+R &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+---
+# Factorial Designs — `\(2 x 2\)`
+- Test two interventions on a single sample
+`$$\begin{align*}
+R &amp;\enspace&amp; X_{a1b1} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{a1b2} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{a2b1} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{a2b2} &amp;\enspace&amp; O 
+\end{align*}$$`
+
+- Randomize twice: (1) once to intervention `\(A\)` `\((n_{a*})\)` or control `\(A\)` `\((n_{c*})\)` and then again to intervention `\(B\)` `\((n_{*b})\)` or control `\(B\)` `\((n_{*c})\)`.
+
+- Effect of intervention A: `\(\text{mean}(n_{ab}+n_{ac})-\text{mean}(n_{cb}+n_{cc})\)`
+- Effect of intervention B: `\(\text{mean}(n_{ab}+n_{cb})-\text{mean}(n_{ac}+n_{cc})\)`
+
+- Essential two RCTs with just a single experiment (half the sample size)
+
+---
 class: center, middle
 # Thanks!
 
