@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Instrumental Variables to Identify Experimental Situations</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="date" content="2017-03-15" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Instrumental Variables to Identify Experimental Situations
+## ITAM Short Workshop
+### Mathew Kiang, Zhe Zhang, Monica Alexander
+### March 15, 2017
+
+---
+
+
+# Reminder: Omitted Variables &amp; Self-Selection in Treatment
+
+- potential outcomes **influence** observations
+- we rarely "prove" causality
+- instead, we argue based on domain expertise and theory that we are not facing biases
+- often, a good analysis adjusts a lot of the assumptions to ensure the results are "robust" to possible biases
+
+---
+# Reminder: Control Variables To Get CIA
+
+- Conditional Independance Assumption (CIA)
+- "potential outcomes are uncorrelated with *Treatment* outcomes, after controlling for other, observed covariates"
+
+&lt;br/&gt;
+
+**We can't always get this argument to be believable though.**
+
+???
+Some things are quite hard to measure, such as genetic influence, choices for why people move to particular neighborhoods, IQ, motivation, involvement in other related activities
+
+Ultimately, we're often left with omitted variable bias.
+
+---
+# Instrumental Variables
+
+### Can we find some real world experiments?
+
+--
+
+- Yes! There are situations, rules, and behaviors that encourage real-world **"quasi-experiments"**
+
+- by leveraging this information, we can remove self-selection biases
+
+- measure such scenarios with **instrumental variables**, `\(z_i\)`, for each observation `\(i\)`
+
+&lt;br/&gt;
+
+--
+- Note: Different from a control variable. Does not enable conditional independence assumption (CIA).
+
+- Note: When effects are plausibly constant, we cleanly estimate the effect; otherwise, a little more complicated.
+
+---
+# Instrumental Variables Graphically
+
+![iv_base](./assets/iv_no_issue.png) 
+
+--
+
+![iv_base](./assets/iv_confound.png)
+
+--
+
+![iv_base](./assets/iv_with_z.png)
+
+---
+# Instrumental Variable Key Idea
+
+### all about "meaningful variation"
+
+- the observed variation `\(T_i\)` is not meaningful
+  - influenced by unobserved confounders and self-selection
+
+- can we keep *only* the meaningful, "random" variation in `\(T_i\)`?
+  - *observed variation = "random/natural" variation + systematic variation from unobservables*
+
+&lt;br/&gt;
+
+--
+
+Answer: identify a variable that is predictive of only the "random" variation!
+
+- Get `\(\hat{T_i} = f(Z_i, X_i)\)` where `\(\hat{T_i} \bot u_i\)`.  
+Variation in `\(\hat{T_i}\)` is only influenced by `\(Z_i\)` and `\(X_i\)` (which is already controlled for).     
+  - Instead of just `\(T_{i,observed}\)`.
+
+---
+# Relevance Condition (First Stage)
+
+- Show that `\(Z_i\)` is predictive of the treatment of interest
+  - Check statistical significance of prediction
+  - Check an F-test of relevance
+  - Other more sophisticated F-tests exist
+
+---
+# Exclusion Restriction (Second Stage)
+
+`\(Z_i\)` only works if it does NOT look like `\(U_i\)` in the graphic.
+
+1. `\(Z_i\)` must be essentially randomly assigned, conditional on other covariates `\(X_i\)`
+2. it cannot influence the outcome `\(Y_i\)` except through `\(T_i\)`
+
+&lt;br/&gt;
+
+- Exclusion restriction = "only one single causal channel"
+
+  - could use randomized draft eligibility, unless being draft eligible changes other behaviors
+  - could use random weather to instrument for predicting consumer demand and business revenue, unless bad weather affects other environmental aspects (like food supply)
+  - could use distance from a hospital, unless the choice of location is concerning
+
+
+???
+We're not looking at the math here, but we trust that if you get the idea, you can look up a textbook or an online source to clarify the math for why this works.
+
+---
+# Key Instrumental Variable Checks
+
+Constant Effect Assumptions:
+- Relevance condition / weak instrument?
+- "Exclusion restriction" = only one single causal channel
+
+&lt;br/&gt;
+
+Heterogenous Effects Additional Assumption:
+- Monotonicity: instrument must have uni-directional effect on treatment status
+- *impossible to check!*
+
+---
+# How to Use an Instrumental Variable
+
+1. Get `\(\hat{T_i}\)` predicted on the instrument + other covariates. 
+  - "First Stage"
+  - check for *weak instruments*
+  
+2. Predict everyone's treatment status (on/off, treatment amount)
+  - "Second Stage" regression
+
+`$$Y_i = \gamma \hat{T_i}|_{(Z_i,X_i)} + \beta X_i + \epsilon_i$$`
+
+---
+# Example: Birthdate as an IV
+
+Angrist, Kreuger 1991; study of school years on future earnings
+
+--
+
+```r
+library(tidyverse); library(stringr); library(haven)
+df &lt;- readRDS('./../datasets/ak_91_iv_qob.rds')
+
+agg_df &lt;- df %&gt;% unite(yob_qob, yob, qob, remove = F) %&gt;%
+  group_by(yob_qob) %&gt;%
+  summarise(mean_s = mean(s), qob = mean(qob),
+            yob = mean(yob), mean_log_wage = mean(log_wage))
+
+first_stage &lt;- 
+  ggplot(agg_df, aes(x = yob_qob, y = mean_s, group = NA)) + 
+  geom_point(aes(color = factor(qob)), size = 3) + 
+  geom_line() + geom_label(aes(label = qob,
+                               fill = factor(qob))) +
+  scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")]) +
+  ggtitle("Visual for First Stage Relevance")
+```
+
+---
+# First Stage: Relevance Condition
+
+
+```r
+print(first_stage)
+```
+
+![](lec_4_instrumental_variables_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+
+---
+# First Stage: Loose Check for Causal Relevance
+
+
+```r
+ggplot(agg_df, aes(x = yob_qob, y = mean_log_wage, group = NA)) + 
+  geom_point(aes(color = factor(qob)), size = 3) + 
+  geom_line() + geom_label(aes(label = qob, 
+                               fill = factor(qob))) +
+  scale_x_discrete(breaks = agg_df$yob_qob[str_detect(agg_df$yob_qob, "_1")]) +
+  ggtitle("Approximate Visual Check for Causal Relevance")
+```
+
+![](lec_4_instrumental_variables_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+
+---
+# Try 2SLS By Hand
+
+
+```r
+library(tidyverse)
+df &lt;- read_dta('../datasets/ak_91_iv_qob.dta') %&gt;%
+  mutate_at(.funs = as.factor, .cols = c("yob", "sob", "qob")) %&gt;%
+  mutate(q4 = ifelse(qob == 4, 1, 0))
+# check first stage
+no_instrument &lt;- lm(s ~ yob + sob, data = df)
+first_stage &lt;- lm(s ~ yob + sob + qob, data = df)
+anova(no_instrument, first_stage)
+```
+
+---
+# Try 2SLS by Hand
+
+
+```r
+# run manual second stage
+df &lt;- df %&gt;% mutate(s_hat = predict(first_stage))
+second_stage &lt;- lm(log_wage ~ s_hat + yob + sob, data = df)
+```
+
+---
+# Use Built in 2SLS Packages
+
+`ivreg` function from `AER` package
+
+
+```r
+library(AER)
+no_iv_reg &lt;- lm(lnw ~ s, data = df)
+no_iv_reg_full &lt;- lm(lnw ~ s + yob + sob, data = df)
+iv_q4_reg &lt;- ivreg(lnw ~ yob + s | . - s + q4, data = df)
+iv_q4_reg_full &lt;- ivreg(lnw ~ yob + sob + s | . - s + q4, data = df)
+iv_allQ_reg &lt;- ivreg(lnw ~ yob + sob + s | . - s + qob, data = df)
+```
+
+
+---
+# Outputting Regression Results
+
+
+```r
+library(stargazer)
+a &lt;- capture.output(
+  stargazer(no_iv_reg, no_iv_reg_full, second_stage, 
+            iv_q4_reg, iv_q4_reg_full, iv_allQ_reg,
+            type = "text", # no.space = T,
+            out = "ak91_iv_regs.txt",
+            omit = c("sob", "yob"),
+            # omit.labels = c("sob", "yob"),
+            omit.stat = c("F", "ser"),
+            add.lines = list(c("State Fixed Effects?",
+                               "No", "Yes", "Yes", 
+                               "No", "Yes", "Yes"),
+                             c("Instrument", 
+                               "None", "QOB", "QOB",
+                               "Q4", "Q4", "QOB")))
+)
+```
+
+---
+# Outputting Regression Results
+
+![iv_results](./assets/stargazer_iv_schooling.png)
+
+---
+# More Examples of IV: 
+
+Instruments can take many (creative) forms
+
+- natural experiments
+- policy variation
+- legal variation (bigger benefits between states)
+- geographic/natural aspects (housing location, rivers)
+- actions taken by third parties (court systems)
+- product changes
+
+---
+
+.center[&lt;img src = "./assets/angrist_list_of_iv.png" height = "850"&gt;]
+
+---
+# Various Types of Instruments
+
+"good instruments come from a combination of institutional knowledge and ideas about the processes determining the variables of interest" (Angrist &amp; Pischke)
+
+- Note: some ML work to search for instruments
+
+???
+Basically, it's not just about data
+
+---
+# Is an IV magic?
+
+Any conceptual concerns?
+
+--
+
+1. We can never "prove" that an IV is valid, it has to be argued
+
+--
+
+2. Causality estimate is driven by "meaningful variation"
+  - an IV may have meaningful RCT variation for only a small population
+  
+  - acknowledge that the true casual effects are usually heterogeneous amongst groups
+
+&lt;br/&gt;
+
+*What do you think about the schooling IV?*
+
+---
+
+# Local Average Treatment Effect
+
+IV only estimates a **"Local** Average Treatment Effect"
+  - internal vs external (causal) validity
+  - a hypothetical measure
+
+---
+# LATE Basic Motivational Example
+
+Imagine we randomly offer 50% of students a job training program.
+- this group is the "intention to treat" (ITT) group
+- but only 75% of students accept the Job Training
+
+What do we have?
+
+--
+
+We can consider the random experiment measuring the ITT effect.
+
+For the causal effect of job training, we suffer from the self-selection challenge.
+
+--
+
+Instead, we could *also* use the ITT as an instrument for Job Training.  
+Intuitively, the ITT instrument only has a "local" effect though. Why? 
+
+*does this matter if treatment effects are constant?*
+
+---
+# LATE Compliers
+
+treated people = {"compliers", "always takers"}
+
+untreated people = {"never takers", *"defiers"* (assumed none)}
+
+--
+## More on Compliers
+
+Avg Observed Effect of Training =  
+Effect on Always Takers +  
+Effect on Compliers*
+
+- the effect on compliers is usually the causal effect of interest
+  - this estimate is local only to those who complied with the instrument!
+  - sometimes, we can care about both complier and always-takers
+
+---
+# Example of ITT vs Causal Treatment Effect
+
+![iv_itt_effects](./assets/iv_rct_itt_effects_regression.png)
+
+&lt;br/&gt;
+
+Left = comparing treated to the control + never-takers  
+Middle = estimates effect of assignment
+Right = estimates effect of compliance to treatment
+
+???
+On the left is the average Training effect.
+It's quite high, because it only compares those who chose to adopt against the control + the never-takers. Thus, this estimate is not accounting for potential outcomes. Includes people with unobserved motivation/ambition. Even without the offer of Training, they would've sought out Training anyways.
+
+In the middle is the ITT effect, it's lowered because some people never take.
+
+On the right is the 2SLS, IV estimate of the causal effect of Training. It only captures those who were convinced by the instrument (offer) to join Training.
+
+In this simple case, this is essentially, the ITT but divided by the compliance percentage. This is simple because of the RCT scenario and because very few people adopt treatment on their own, without the treatment.
+
+---
+# Other Examples of LATE
+
+Schooling laws: only those who would have dropped out of school otherwise
+
+Children policy: only those who would not have had (additional) children
+
+Online signup: only those who would not have signed up otherwise
+
+Surgery impact: only those who are borderline surgery patients
+
+Product changes: only those affected by product changes
+
+---
+# LATE w/ Potential Outcomes Notation
+
+LATE represents potential outcomes framework
+
+Consider `\(T_{zi}\)` where `\(z \in \left\{ 0, 1 \right\}\)`:
+
+`\(T_{0i}\)` is a person's (potential) treatment choice WITHOUT the instrument
+`\(T_{1i}\)` is a person's (potential) treatment choice WITH the instrument
+
+`$$\hat{\gamma}_{2SLS} = E[Y_{1i} - Y_{0i}|T_{1i} &gt; T_{0i}]$$`
+
+--
+`$$\hat{\gamma}_{naive} = E[Y_{1i}|T_{1i} &gt; T_{0i} | T_0i = 1] - E[Y_{0i}|\{ T_{0i}, T_{1i} \} = 0]$$`
+
+---
+# More on LATE
+
+- estimates the avg causal effect for those who are affected by instrument
+- must assume that those affected by instrument are affected in the same direction
+- *skipping math on instruments and standard errors*
+
+&lt;br/&gt;
+
+"IV solves the problem of causal inference in a randomized trial with partial compliance"  
+"There is nothing in IV formulas to explain *why* Vietnam-era [military] service affects earnings; for that, you need theory." (Angrist, Pischke)
+
+
+---
+# Characterizing Instruments
+
+Key assumptions around IV cannot be tested. Other aspects can be tested however.
+  
+- what proportion of our observed treated are "compliers"/"affected" by instrument?
+
+`$$size_{absolute} = E[T_i|Z_i = 1] - E[T_i|Z_i = 0]$$`
+`$$size_{ratio} = P(T_{1i} &gt; T_{0i}|T_i = 1)$$`
+`$$P(T_{1i} &gt; T_{0i}|T_i = 1) = \frac{P(Z_i = 1)\left( size_{absolute} \right)}{P(D_i = 1)}$$`
+
+---
+# Example Complier Characteristics
+
+![iv_size_of_compliers](./assets/iv_size_of_compliers.png)
+
+Column 6 = Additional % of people who have treatment because of instrument
+Column 8 = % of Treated people who are compliers
+
+???
+Column 5 = observed treated percent
+Column 6 = Additional percent of people who have treatment because of instrument
+Column 7 = Probability of Instrument being active
+Column 8 = Percent of Treated people who are compliers
+Column 9 = Percent of Non-Treated people who are compliers.
+
+---
+# Interpreting IV Characteristics 
+
+- a small group of "compliers"" is not necessarily bad (like only those on the margin of usefulness)
+
+- can also compare the composition of demographic/descriptive variables of the compliers to the general population
+
+--- 
+# Lots more Details on IV
+
+- multiple instruments
+- math of instruments with covariates (some IVs are only valid after conditioning)
+- IVs for continuous treatment variables
+- IVs in non-linear models
+- continuous IVs
+- correcting bias from weak instruments
+
+---
+# IV Overview
+
+### look for things in the world/nature/policies that results in interesting random variation!
+
+*Finding that is the most difficult part.*  
+Once you find it, you can refer to math and textbooks and references to nail the correct interpretation/identification.
+
+- "key source of variation"
+- "what's your identification (strategy)"
+- be excited but cautious; there are a lot of ways things can go wrong
+  - different functional forms for the instrument
+  - lots of statistical subtlety
+
+- overall key advice: always be cautious and recognizing the assumptions that go into causal work. Valuable exercise to think skeptically.
+
+
+---
+# Regression Discontinuity
+
+### More natural quasi-experiments!!
+
+Idea: sometimes, in the world, we get, **approximately random**, outcome shocks.
+
+--
+
+&lt;br/&gt;
+
+Examples:
+- score-based cutoffs for scholarships, acceptance, government benefits
+- size-based cutoffs for class size
+
+---
+# (Sharp) RD Visual Example
+
+.center[&lt;img src = "./assets/rd_example.png" height = "500"&gt;]
+
+---
+# RD Math
+
+`$$Y_i = \alpha + \beta X_i + \gamma D_i + \epsilon_i$$`
+`$$Y_i = \alpha + f(X_i) + \gamma D_i + \epsilon_i$$`
+
+*important to check regression diagnostics, since model specification is important here*
+
+--
+
+&lt;br/&gt;
+
+*alternative*  
+modern RD: semi-parametric local kernel methods around the discontinuity, using only nearby data*
+
+**LATE** ( `\(\gamma\)` is estimated using variation around only a small area)
+
+---
+# RD Example on Political Incumbency
+
+.center[&lt;img src = "./assets/rd_incumbents.png" height = "500"&gt;]
+
+???
+The bottom image reassures us with proof that the discontinutity is essentially random
+
+---
+# Fuzzy RD
+
+*discontinuity that leads to a __jump__ in probability of treatment, with `\(\epsilon\)` change*
+
+&lt;br/&gt;
+
+Options:
+  - parametric 2SLS IV LATE estimates
+  - non-parametric IV LATE estimates around the discontinuity
+
+---
+# Fuzzy RD (Popular) Example on Class Size
+
+.center[&lt;img src = "./assets/rd_fuzzy_example.png" height = "500"&gt;]
+
+---
+# Sources
+
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
