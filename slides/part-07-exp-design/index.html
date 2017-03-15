@@ -122,27 +122,31 @@ Even if you never do, when using observational data, it is useful to think about
 
 - Hopefully, you'll be able to design your own experiment one day.
 
+--
+
 - Even in observational settings, it is useful to think about how you would set up a study:
 
-    - Ideal data?
-    - Intervention? 
-    - Mechanism of randomizaiton?
-    - Counterfactual / control group?
+    - Ideal data vs data you have?
+    - Construct you wanted vs intervention performed 
+    - Mechanism of randomization
+    - Comparison group you have vs ideal counterfactual
 
 ---
 # Types of Study Designs
 
-- Study design differs by field, but main distinguishing question is:
+- Study design differs by field, but main distinguishing questions:
 
 1. Did the researcher assign the treatment? 
-
     - If yes, experimental. 
-        - Was treatment assigned randomly?
-            - If yes, randomized control trial. 
-            - If no, nonrandomized control trial.
-    - If no, nonexperimental or quasi-experimental.
+    - If no, nonexperimental.
 
-- We are only going to discuss randomized experimental designs.
+1. If assignment was manipulated, was it done randomly?
+
+    - If yes, RCT.
+    - If no, nonrandomized controlled trial.
+
+&lt;br&gt;
+### .center[We are only going to discuss randomized experimental designs.]
 
 ???
 
@@ -151,11 +155,11 @@ There are a lot of study designs but the are all pretty domain specific. For exa
 ---
 # Benefits of Experiments
 
-- Control for important known covariates via *blocking* or *stratification*
-
 - Control for unknown confounders via *randomization*
 
-- Allow for generalizability through types of *random sampling*
+- Control for important known covariates via *blocking* or *stratification*
+
+- Allow for generalizability through types of *probability sampling*
 
 - Single well-defined intervention allows for isolated causal estimates
 
@@ -190,19 +194,23 @@ Then, at random you select some subset to go to one version and some subset to g
 
 Then you collect data and count some objective. Number of sales, donations, click throughs, etc. **NEXT SLIDE**
 
-Because we randomized, we can use very simple tests to compare means. This is obviously very attractive because they are simple to set up and get running and so many large companies run hundreds of A/B tests every week. **NEXT SLIDE**
+Because we randomized, we can use very simple tests to compare means. **NEXT SLIDE** 
+
+This is obviously very attractive because they are simple to set up and get running and so many large companies run hundreds of A/B tests every week. **NEXT SLIDE**
 
 From our perspective, A/B testing is just a really simple, and not that interesting randomized controlled trial. Biggest problem is that you cannot extrapolate outside of your sample. **NEXT SLIDE**
 
 --
 
-    1. Make two versions of your app/website
-    1. Completely at random, send some users to Version A and some to Version B
+    1. Make two versions of your app/website/email
+    1. Randomly send some users to Version A, others to Version B
     1. After you have a large enough sample size, see which version got the higher conversion (e.g., click throughs, donations, sales, etc.)
     
 --
 
 - Randomization allows you to use very simple tests to compare means (e.g., Fisher's exact or *t*-test)
+
+--
 
 - Simple set up allows for many tests to be performed — Google, New York Times, Amazon, etc. run hundreds of A/B tests *per week*.
 
@@ -210,7 +218,7 @@ From our perspective, A/B testing is just a really simple, and not that interest
 
 - From our perspective, A/B testing is just a less interesting randomized control experiment. 
 
-    - Unable to extrapolate outside of your sample
+    - Unable to extrapolate outside of your sample and really only designed for minor variations
     
 ---
 class: middle, center
@@ -218,11 +226,10 @@ class: middle, center
 # How to design a randomized experiment
 ## Step 1: Sampling
 ---
+
 # Sampling
 
 - We cannot perform an intervention on the entire population so we need to sample some number `\(n\)` from the larger population of `\(N\)`. Usually `\(n &lt;&lt; N\)`.
-
---
 
 ???
 Ok. So sampling is about how you get people into your intervention. And how you get people in determines what you can say about the people you did not get in. **NEXT SLIDE**
@@ -248,7 +255,7 @@ Meanwhile, probability sampling allows you to make statements about the entire p
 ---
 # Probability Sampling
 
-1. **Simple random sampling.** Most basic of the probability sampling methods — every unit has an equal proportion of being selected in the study. Easiest to do.
+1. **Simple random sampling.** Most basic of the probability sampling methods — every unit has an equal probability of being selected in the study. Easiest to do.
 
 ???
 
@@ -315,10 +322,10 @@ R &amp;\quad&amp;  &amp;\quad&amp; O
 # Factorial Designs — `\(2 x 2\)`
 - Test two interventions on a single sample
 `$$\begin{align*}
-R &amp;\enspace&amp; X_{a1b1} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{a1b2} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{a2b1} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{a2b2} &amp;\enspace&amp; O 
+R &amp;\enspace&amp; X_{ab} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{ac} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{cb} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{cc} &amp;\enspace&amp; O 
 \end{align*}$$`
 
 - Randomize twice: (1) once to intervention `\(A\)` `\((n_{a*})\)` or control `\(A\)` `\((n_{c*})\)` and then again to intervention `\(B\)` `\((n_{*b})\)` or control `\(B\)` `\((n_{*c})\)`.
@@ -326,7 +333,7 @@ R &amp;\enspace&amp; X_{a2b2} &amp;\enspace&amp; O
 - Effect of intervention A: `\(\text{mean}(n_{ab}+n_{ac})-\text{mean}(n_{cb}+n_{cc})\)`
 - Effect of intervention B: `\(\text{mean}(n_{ab}+n_{cb})-\text{mean}(n_{ac}+n_{cc})\)`
 
-- Essential two RCTs with just a single experiment (half the sample size)
+- Essentially running two RCTs with just a single experiment
 
 ---
 class: center, middle
