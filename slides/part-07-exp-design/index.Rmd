@@ -41,7 +41,7 @@ Finally, we will go over an evaluation of Seguro Popular as an example of good d
 ### Intro to Experimental Design in Two Steps
 
 1. **Sampling**. Get people in.
-1. **Design**. Perform the intervention(s).
+1. **Design**. Perform the randomization and intervention(s).
 
 --
 
@@ -70,7 +70,7 @@ This is an article where Rubin himself articulates why design is better than ana
 — R.A. Fisher]
 
 ???
-T
+
 This is RA Fisher who hopefully everybody is familiar with. Not only was he a founding father of modern statistics, he was the father of experimental designs. He was big on agricultural statistics and when we say "block" we are actually referring to blocks of land in his agricultural experiments. Here's what he says about experimental design. 
 
 ---
@@ -143,8 +143,8 @@ Even if you never do, when using observational data, it is useful to think about
 
 1. If assignment was manipulated, was it done randomly?
 
-    - If yes, RCT.
-    - If no, nonrandomized controlled trial.
+    - If yes, randomized controlled trial/experiment.
+    - If no, nonrandomized controlled trial/experiment.
 
 <br>
 ### .center[We are only going to discuss randomized experimental designs.]
@@ -154,6 +154,7 @@ Even if you never do, when using observational data, it is useful to think about
 There are a lot of study designs but the are all pretty domain specific. For example, epidemiology has case control designs because some diseases are very rare and so you have to find the disease first and then try to retrospectively figure out what happened. But all designs really care about two the assignment of treatment. Was it experimental? Was it manipulated by the researcher?
 
 ---
+
 # Benefits of Experiments
 
 - Control for unknown confounders via *randomization*
@@ -300,7 +301,7 @@ Now that you've collected samples, it's time to decide how to randomize them.
 
 ---
 # Basic, post-test only
-- Single intervention
+- Single intervention, control
 $$\begin{align*}
 R &\quad& X &\quad& O \\
 R &\quad&  &\quad& O 
@@ -312,7 +313,7 @@ R &\quad& X_a &\quad& O \\
 R &\quad& X_b &\quad& O 
 \end{align*}$$
 
-- Gold-standard and placebo
+- Gold-standard and control
 $$\begin{align*}
 R &\quad& X_a &\quad& O \\
 R &\quad& X_b &\quad& O \\
@@ -337,13 +338,116 @@ R &\enspace& X_{cc} &\enspace& O
 - Essentially running two RCTs with just a single experiment
 
 ---
+# Basic, pre-post
+- Single intervention, control
+$$\begin{align*}
+R &\quad& O &\quad& X &\quad& O \\
+R &\quad& O &\quad&  &\quad& O 
+\end{align*}$$
+
+- Gold-standard comparison
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O 
+\end{align*}$$
+
+- Gold-standard and control
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O \\
+R &\quad& O &\quad&  &\quad& O 
+\end{align*}$$
+
+---
+# Crossover and Longitudinal
+- Two intervention, crossover
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O &\quad& X_b &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O &\quad& X_a &\quad& O
+\end{align*}$$
+
+- Longitudinal
+$$\begin{align*}
+R &\quad& O &\quad& O &\quad& X  &\quad& O &\quad& O \\
+R &\quad& O  &\quad& O &\quad& &\quad& O &\quad& O 
+\end{align*}$$
+
+---
+# *Seguro Popular*
+
+- *Seguro Popular* provides health coverage to over 55 million uninsured Mexicans. 
+
+- Main goal is to prevent catastrophic health expenditures
+
+- Provides a set of well-defined benefits and medicines
+
+- Funds state health ministries in proportion to the number of families that are in the program and links federal support to quality of care.
+
+- Like all large policy changes, it is hard to perform a rigorous assessment of the program:
+
+    - Politics at multiple levels
+    - Changing administrations
+    - Changing political and economic climate
+    - If the program is too good, others will try to select in. 
+    - If the program is bad, people will drop out. 
+
+---
+# *Seguro Popular*
+
+.center[<img src="./assets/seguro_popular_2.jpg" width="600">]
+.center[<img src="./assets/seguro_popular.jpg" width="600">]
+
+
+---
+# Design of *Seguro Popular* Evaluation
+
+1. Fully enumerated list.
+    - 12,284 "health clusters". Areas with a health clinic or facility and the entire catchment area around it. 
+
+1. Match these health clusters to form pairs.
+    - Based on size and background characteristics.
+    
+1. After figuring out who could actually participate, they took each pair and performed simple random sampling within the pair. One to treatment and one to control.
+
+1. Once they had a list of treatment clusters, they attempted to perform the intervention on every single family within the cluster.
+
+1. Collected data pre- and several times post-intervention
+
+---
+.center[<img src="./assets/example_pairing.jpg" width="700">]
+
+---
+# Design of *Seguro Popular* Evaluation
+
+- Evaluation used is called "matched-pair cluster randomization design"
+
+- Design-based estimator — allows you to estimate causal effects *without a model*.
+
+- "Triply robust"
+    - Matched cluster pairs
+    - Randomized within pairs
+    - Model-based adjustment
+
+- Any two of the three above features can fail and we would still get unbiased causal estimate.
+
+---
+# Results of *Seguro Popular* evaluation
+.center[<img src="./assets/seguro_results.jpg" width="600">]
+
+- ITT estimate overall: 23% reduction in catastrophic expenditure
+- ITT estimate poor HH: 30% reduction
+- ATT estimate poor HH: 59% reduction (!!)
+- **No difference** in medical spending, health outcomes, or medical utilization.
+
+---
 class: center, middle
 # Thanks!
 
 ---
 # Sources
 
-https://www.wired.com/2012/04/ff_abtesting
+[Wired A/B Testing](https://www.wired.com/2012/04/ff_abtesting)
+[Seguro Popular papers](http://gking.harvard.edu/category/research-interests/applications/mexican-health-care-evaluation) by Gary King
 
 ---
 class: center, middle
