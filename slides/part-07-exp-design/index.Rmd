@@ -142,10 +142,6 @@ options(htmltools.dir.version = FALSE)
 
 --
 
-- Now estimating ATT instead of ATE, but that's ok because ATE would have been dependent on correct model specification
-
---
-
 - We can do this same idea in design. We purposely pick two people of similar age and education and then we randomly assign one of them to treatment and control (blocking or stratified sampling)
 
     - This then ensures balance in our dataset and is more statistically efficient as well as robust.
