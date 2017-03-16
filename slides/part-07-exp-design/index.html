@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Brief Overview of Experimental Design</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang and Zhe Zhang" />
+    <meta name="date" content="2017-03-16" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Brief Overview of Experimental Design
+### Mathew Kiang and Zhe Zhang
+### March 16, 2017
+
+---
+
+
+
+# Roadmap
+
+???
+`\(\def\indep{\perp \! \! \perp}\)`
+Well, for this talk we are going to take a step back and talk about study design. First, why should you care? After all, we just spent the last few hours together talking about observational data and causal inference. Why should you care about experimental design? **NEXT SLIDE**
+
+Then I'm going to talk a bit about running an experiment. They are obviously very complex, but they can ultimately be broken down into two parts. **NEXT SLIDE**
+
+Finally, we will go over an evaluation of Seguro Popular as an example of good design. **NEXT SLIDE**
+
+--
+
+### Motivation
+
+- Why should data scientists care about experimental design?
+--
+
+### Intro to Experimental Design in Two Steps
+
+1. **Sampling**. Get people in.
+1. **Design**. Perform the randomization and intervention(s).
+
+--
+
+### Example of Good Design
+
+- Evaluation of *Seguro Popular* as an example
+
+---
+# Motivation
+
+???
+
+So we start again with a bit of motivation. We've just spent the last few hours with you talking about observational data and using the Rubin causal model to draw good causal inference from observational data. So now why are we talking about experimental design? Why should we care? Well, to answer that, let's go to Rubin himself. **NEXT SLIDE**
+
+This is an article where Rubin himself articulates why design is better than analysis in making causal inference. If you have the option to make a study and you care about the causal estimates, you should seize that opportunity. **NEXT SLIDE**
+--
+
+.center[&lt;img src="./assets/design_trumps_analysis.jpg" width="700"&gt;]
+
+---
+# Motivation
+.pull-right[&lt;img src="./assets/ra_fisher.jpg" width="700"&gt;]
+
+.pull-left[.grey["To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of."] 
+
+— R.A. Fisher]
+
+???
+
+This is RA Fisher who hopefully everybody is familiar with. Not only was he a founding father of modern statistics, he was the father of experimental designs. He was big on agricultural statistics and when we say "block" we are actually referring to blocks of land in his agricultural experiments. Here's what he says about experimental design. 
+
+---
+# Motivation
+
+- No amount of clever analysis can make up for poor design. 
+
+???
+
+All this to say that really good design is much more useful for causal inference than really good analyses. If you have poor design, you will never be able to make causal claims. **NEXT SLIDE**
+
+Conversely, if you have a great design, you can get away with a t-test and still make strong causal claims. **NEXT SLIDE**
+
+Nothing is free though or we would always have well designed experiments. Different study designs have different limitations. **NEXT SLIDE**
+
+Knowing a bit about study design allows you to better assess articles you read. **NEXT SLIDE**
+
+Lastly, your design drives the questions you can ask. If you have a specific question, it is better to make a specific experiment rather than hope you can find data and use clever techniques.
+
+--
+
+- Conversely, really good designs do not require advanced analyses. 
+
+--
+
+    - But often have their own limitations.
+    
+--
+
+- All designs have weakness and strengths — knowing them allows you to better assess the literature
+
+--
+
+- Your design drives the questions you can reasonably answer.
+
+---
+# Motivation
+
+- The purpose of study design is to operationalize a high-level, abstract question into an empirically testable hypothesis. 
+
+
+???
+So you have this really abstract questions. Does X change Y? Will my new education policy improve intelligence? Well, that's a pretty vague question but experimental design operationalizes it into something you can test. Will introducing a one-hour tutorial for the 25% lowest performers help improve their scores on the PISA? **NEXT SLIDE**
+
+I think more and more common data scientists get a chance to run experiments. Hopefully one day you'll be able to design your own and this will give you an idea of things to consider.  **NEXT SLIDE**
+
+Even if you never do, when using observational data, it is useful to think about how you would set up an experiment. Who is in your study? What does your ideal data look like? What is your perfect intervention? What is the mechanism of randomization? What is your counterfactual or control group? **NEXT SLIDE**
+
+--
+
+- Hopefully, you'll be able to design your own experiment one day.
+
+--
+
+- Even in observational settings, it is useful to think about how you would set up a study:
+
+    - Ideal data vs data you have?
+    - Construct you wanted vs intervention performed 
+    - Mechanism of randomization
+    - Comparison group you have vs ideal counterfactual
+
+---
+# Types of Study Designs
+
+- Study design differs by field, but main distinguishing questions:
+
+1. Did the researcher assign the treatment? 
+    - If yes, experimental. 
+    - If no, nonexperimental.
+
+1. If assignment was manipulated, was it done randomly?
+
+    - If yes, randomized controlled trial/experiment.
+    - If no, nonrandomized controlled trial/experiment.
+
+&lt;br&gt;
+### .center[We are only going to discuss randomized experimental designs.]
+
+???
+
+There are a lot of study designs but the are all pretty domain specific. For example, epidemiology has case control designs because some diseases are very rare and so you have to find the disease first and then try to retrospectively figure out what happened. But all designs really care about two the assignment of treatment. Was it experimental? Was it manipulated by the researcher?
+
+---
+
+# Benefits of Experiments
+
+- Control for unknown confounders via *randomization*
+
+- Control for important known covariates via *blocking* or *stratification*
+
+- Allow for generalizability through types of *probability sampling*
+
+- Single well-defined intervention allows for isolated causal estimates
+
+???
+
+What are the benefits of a well designed experiment? Well, if you know important covariates, you can use blocking or stratification which increases statistical efficiency and makes sure you have adequate power to answer your question of interest. Obviously, you get to control the type of randomization which controls for unknown (and known) confounders. Depending on your sampling, you may have good generalizability. Lastly, unlike observational studies where you may hvae competing interventions, a well designed experiment will have one well-defined experiment that allows for isolated causal estimates.
+--
+
+# Weaknesses of Experiments
+
+- Expensive — large RCTs often cost thousands of dollars per observation
+
+- Feasibility and ethical concerns — some things cannot be randomized (e.g., smoking or poverty)
+
+- Generalizability — many experiments suffer from non-random sampling which hinders causal statements about the population at large
+
+???
+
+Also a lot of weaknesses. We went over this before but RCTs are expensive and hard to do. There are ethical and feasibility concerns. Because they are so expensive, we often can't do probability sampling and thus we have generalizability issues. 
+
+---
+# A/B Testing
+
+- The most ubiquitous randomized experiment in data science/tech:
+
+???
+Ok. Let's talk about A/B testing — the most ubiquitous randomized experiment in all of data science / tech. **NEXT SLIDE**
+
+First, you just make two versions of your website or app. The New York Times uses two versions of headlines or two versions of photos. Google tweaks things to their search algorithms. Etc. **NEXT SLIDE**
+
+Then, at random you select some subset to go to one version and some subset to go to the other. **NEXT SLIDE**
+
+Then you collect data and count some objective. Number of sales, donations, click throughs, etc. **NEXT SLIDE**
+
+Because we randomized, we can use very simple tests to compare means. **NEXT SLIDE** 
+
+This is obviously very attractive because they are simple to set up and get running and so many large companies run hundreds of A/B tests every week. **NEXT SLIDE**
+
+From our perspective, A/B testing is just a really simple, and not that interesting randomized controlled trial. Biggest problem is that you cannot extrapolate outside of your sample. **NEXT SLIDE**
+
+--
+
+    1. Make two versions of your app/website/email
+    1. Randomly send some users to Version A, others to Version B
+    1. After you have a large enough sample size, see which version got the higher conversion (e.g., click throughs, donations, sales, etc.)
+    
+--
+
+- Randomization allows you to use very simple tests to compare means (e.g., Fisher's exact or *t*-test)
+
+--
+
+- Simple set up allows for many tests to be performed — Google, New York Times, Amazon, etc. run hundreds of A/B tests *per week*.
+
+--
+
+- From our perspective, A/B testing is just a less interesting randomized control experiment. 
+
+    - Unable to extrapolate outside of your sample and really only designed for minor variations
+    
+---
+class: middle, center
+
+# How to design a randomized experiment
+## Step 1: Sampling
+---
+
+# Sampling
+
+- We cannot perform an intervention on the entire population so we need to sample some number `\(n\)` from the larger population of `\(N\)`. Usually `\(n &lt;&lt; N\)`.
+
+???
+Ok. So sampling is about how you get people into your intervention. And how you get people in determines what you can say about the people you did not get in. **NEXT SLIDE**
+
+- How you perform sampling allows dictates the type of inference you can make on the larger population. **NEXT SLIDE**
+
+- Broadly speaking, two types of sampling methods.
+
+- Nonprobability sampling prevents you from estimating sampling error and making inferences about the larger population.
+
+- A/B testing is almost always nonprobability. So while you can make very good causal estimates within your sample, you cannot do so outside of your sample. Suppose you change the government website with new language to make it easier to understand. You perform an A/B test. You find your new email works 50% better than the previous one. You can say that it is much more effective in the people who came to your website, but you cannot say anything about people outside of that website. Perhaps the people who never use the government email would have had no preference for either email. **NEXT SLIDE**
+
+Meanwhile, probability sampling allows you to make statements about the entire population from which you sampled. For experiments, probability sampling is very hard. However, for well-done descriptive studies like surveys, probability sampling is extremely important. **NEXT SLIDE**
+
+--
+
+1. *Nonprobability sampling* means some subjects have a zero probability of being in your sample.
+
+--
+
+1. *Probability sampling* means you have a fully enumerated list of potential subjects and all of them have some positive probability of being in your sample.
+
+---
+# Probability Sampling
+
+1. **Simple random sampling.** Most basic of the probability sampling methods — every unit has an equal probability of being selected in the study. Easiest to do.
+
+???
+
+Simple random sampling is when you just essentially roll a gigantic die and that is how you select subjects. Everybody has an equal probability of being selected. Very convenient because it means every single person has equal probability but so does every pair and every triple, etc. However, can result in sampling error. Pretend we randomly pick 50 people and we end up with 30 females and 20 males even though the population has exactly a 50-50 ratio. **NEXT SLIDE**
+
+Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every `\(k\)`th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
+
+Stratified sampling is usually the type of sampling we are most familiar with in econ, policy, public health, etc. You first stratify into groups that you think are important and then you perform random or systematic sampling. Often used when certain groups are rare so you want to oversample in order to make sure you have enough power for your analyses. Also more efficient than random sampling because you can reduce samplinge error — from the example, above, what if instead of randomly sampling, I select only males and then sample 25 and then only females and sample 25? No sampling error on sex. When you work with survey data or government data, you often get importance weights — those weights are due to stratified sampling and getting the study sample back to the representative form of the population. **NEXT SLIDE**
+
+Cluster sampling is often used when it is easier to do things to groups of people or when groups are more similar. For example, suppose you perform an education reform. You randomly select schools first and then you sample students within the schools. This has logistical benefits (for example, driving to a rural school just once) but also means you don't need a fully enumerated list of students — instead, you just need a fully enumerated list of schools.
+
+Note that these sampling methods can be used together. You can stratify first, then perform cluster sampling, then perform random sampling. **NEXT SLIDE**
+
+Important to consider who the people in your data set represent and 
+
+--
+
+1. **Systematic sampling.** Rarely used these days, but you start with a randomized list and then take every *k*th sample.
+
+--
+
+1. **Stratified sampling.** Sample each subpopulation of interest independently and then reweigh after data collection. Statistically efficient while allowing for adequately powered subgroup analyses.
+
+--
+
+1. **Cluster sampling.** Sample by a "cluster" such as geographical location or unit. For example, sampling entire schools at random. Statistically efficient if more variance between clusters than within clusters.
+
+--
+
+- Probability sampling may not always be possible for you, but it is useful to think about who the people in your dataset represent relative to the question you are trying to ask.
+
+---
+class: middle, center
+
+# How to design a randomized experiment
+## Step 2: Randomize
+
+???
+
+Now that you've collected samples, it's time to decide how to randomize them.
+
+---
+# Basic, post-test only
+- Single intervention, control
+`$$\begin{align*}
+R &amp;\quad&amp; X &amp;\quad&amp; O \\
+R &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard comparison
+`$$\begin{align*}
+R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; X_b &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard and control
+`$$\begin{align*}
+R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; X_b &amp;\quad&amp; O \\
+R &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+---
+# Factorial Designs — `\(2 x 2\)`
+- Test two interventions on a single sample
+`$$\begin{align*}
+R &amp;\enspace&amp; X_{ab} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{ac} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{cb} &amp;\enspace&amp; O \\
+R &amp;\enspace&amp; X_{cc} &amp;\enspace&amp; O 
+\end{align*}$$`
+
+- Randomize twice: (1) once to intervention `\(A\)` `\((n_{a*})\)` or control `\(A\)` `\((n_{c*})\)` and then again to intervention `\(B\)` `\((n_{*b})\)` or control `\(B\)` `\((n_{*c})\)`.
+
+- Effect of intervention A: `\(\text{mean}(n_{ab}+n_{ac})-\text{mean}(n_{cb}+n_{cc})\)`
+- Effect of intervention B: `\(\text{mean}(n_{ab}+n_{cb})-\text{mean}(n_{ac}+n_{cc})\)`
+
+- Essentially running two RCTs with just a single experiment
+
+---
+# Basic, pre-post
+- Single intervention, control
+`$$\begin{align*}
+R &amp;\quad&amp; O &amp;\quad&amp; X &amp;\quad&amp; O \\
+R &amp;\quad&amp; O &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard comparison
+`$$\begin{align*}
+R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O 
+\end{align*}$$`
+
+- Gold-standard and control
+`$$\begin{align*}
+R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O \\
+R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O \\
+R &amp;\quad&amp; O &amp;\quad&amp;  &amp;\quad&amp; O 
+\end{align*}$$`
+
+---
+# Crossover and Longitudinal
+- Two intervention, crossover
+`$$\begin{align*}
+R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O \\
+R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O
+\end{align*}$$`
+
+- Longitudinal
+`$$\begin{align*}
+R &amp;\quad&amp; O &amp;\quad&amp; O &amp;\quad&amp; X  &amp;\quad&amp; O &amp;\quad&amp; O \\
+R &amp;\quad&amp; O  &amp;\quad&amp; O &amp;\quad&amp; &amp;\quad&amp; O &amp;\quad&amp; O 
+\end{align*}$$`
+
+---
+# *Seguro Popular*
+
+- *Seguro Popular* provides health coverage to over 55 million uninsured Mexicans. 
+
+- Main goal is to prevent catastrophic health expenditures
+
+- Provides a set of well-defined benefits and medicines
+
+- Funds state health ministries in proportion to the number of families that are in the program and links federal support to quality of care.
+
+- Like all large policy changes, it is hard to perform a rigorous assessment of the program:
+
+    - Politics at multiple levels
+    - Changing administrations
+    - Changing political and economic climate
+    - If the program is too good, others will try to select in. 
+    - If the program is bad, people will drop out. 
+
+---
+# *Seguro Popular*
+
+.center[&lt;img src="./assets/seguro_popular_2.jpg" width="600"&gt;]
+.center[&lt;img src="./assets/seguro_popular.jpg" width="600"&gt;]
+
+
+---
+# Design of *Seguro Popular* Evaluation
+
+1. Fully enumerated list.
+    - 12,284 "health clusters". Areas with a health clinic or facility and the entire catchment area around it. 
+
+1. Match these health clusters to form pairs.
+    - Based on size and background characteristics.
+    
+1. After figuring out who could actually participate, they took each pair and performed simple random sampling within the pair. One to treatment and one to control.
+
+1. Once they had a list of treatment clusters, they attempted to perform the intervention on every single family within the cluster.
+
+1. Collected data pre- and several times post-intervention
+
+---
+.center[&lt;img src="./assets/example_pairing.jpg" width="700"&gt;]
+
+---
+# Design of *Seguro Popular* Evaluation
+
+- Evaluation used is called "matched-pair cluster randomization design"
+
+- Design-based estimator — allows you to estimate causal effects *without a model*.
+
+- "Triply robust"
+    - Matched cluster pairs
+    - Randomized within pairs
+    - Model-based adjustment
+
+- Any two of the three above features can fail and we would still get unbiased causal estimate.
+
+---
+# Results of *Seguro Popular* evaluation
+.center[&lt;img src="./assets/seguro_results.jpg" width="600"&gt;]
+
+- ITT estimate overall: 23% reduction in catastrophic expenditure
+- ITT estimate poor HH: 30% reduction
+- ATT estimate poor HH: 59% reduction (!!)
+- **No difference** in medical spending, health outcomes, or medical utilization.
+
+---
+class: center, middle
+# Thanks!
+
+---
+# Sources
+
+[Wired A/B Testing](https://www.wired.com/2012/04/ff_abtesting)
+[Seguro Popular papers](http://gking.harvard.edu/category/research-interests/applications/mexican-health-care-evaluation) by Gary King
+
+---
+class: center, middle
+# Additional slides
+    </textarea>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
