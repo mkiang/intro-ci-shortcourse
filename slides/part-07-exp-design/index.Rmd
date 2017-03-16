@@ -1,6 +1,6 @@
 ---
 title: "Brief Overview of Experimental Design"
-subtitle: ""
+subtitle: "(And a tiny but about matching)"
 author: "Mathew Kiang and Zhe Zhang"
 date: "March 16, 2017"
 output:
@@ -20,6 +20,143 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 ```
+
+# Matching
+
+- Recall that our main concern with causal inference is exchangeability. 
+
+- In experiments, we ensure exchangeability through randomization, but even then, we sometimes get imbalance between treatment and control groups due to random sampling.
+
+--
+
+- In observational data, we often get into situations where our control and our treatment do not look the same at extreme values. In other words, we lack "common support" on some covariates. 
+
+    - For example, our controls have a wide range of age but our treatments are limited to 24-50 year olds.
+    - Can we make any causal statements about people outside of this age range?
+
+--
+
+- Note that matching doesn't help with *causal identification*. Instead, matching helps make your data look more like an experiment and more robust to different model specification.
+
+---
+# Matching
+.footnote[King and Zeng (2006)]
+
+.center[<img src="./assets/matching_1.jpg" width="600">]
+
+---
+# Matching
+.footnote[King and Zeng (2006)]
+
+.pull-right[<img src="./assets/matching_1.jpg" width="600">]
+
+### So what do we do?
+
+1. Remove the areas of extrapolation
+
+1. Match the remain observations to the remaining controls
+
+1. Then just run the model like before
+
+---
+# Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_2.jpg" width="600">]
+
+---
+# Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_3.jpg" width="600">]
+
+---
+# Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_4.jpg" width="600">]
+
+---
+# Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_5.jpg" width="600">]
+
+---
+# Matching: Mahalanobis Distance
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_mah_1.jpg" width="600">]
+
+---
+# Matching: Mahalanobis Distance
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_mah_2.jpg" width="600">]
+
+---
+# Matching: Mahalanobis Distance
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_mah_3.jpg" width="600">] 
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_1.jpg" width="500">]
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_2.jpg" width="600">]
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_3.jpg" width="600">]
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_4.jpg" width="600">]
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_5.jpg" width="600">]
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_6.jpg" width="600">]
+
+---
+# Matching Conclusion
+
+- Matching reduces imbalance between your treatment and control groups (on other covariates) and thus results in a dataset that is more robust to model specification
+
+--
+
+- Now estimating ATT instead of ATE, but that's ok because ATE would have been dependent on correct model specification
+
+--
+
+- We can do this same idea in design. We purposely pick two people of similar age and education and then we randomly assign one of them to treatment and control (blocking or stratified sampling)
+
+    - This then ensures balance in our dataset and is more statistically efficient as well as robust.
+
+--
+
+- PSM is **very** popular (~55,000 papers). Researchers consider it magic. 
+
+- Before doing it yourself, read "Why Propensity Scores Should Not Be Used For Matching" by Gary King.
+
+---
 
 # Roadmap
 
@@ -446,10 +583,7 @@ class: center, middle
 ---
 # Sources
 
-[Wired A/B Testing](https://www.wired.com/2012/04/ff_abtesting)
-[Seguro Popular papers](http://gking.harvard.edu/category/research-interests/applications/mexican-health-care-evaluation) by Gary King
-
----
-class: center, middle
-# Additional slides
-
+- [Wired A/B Testing](https://www.wired.com/2012/04/ff_abtesting)
+- [Seguro Popular papers](http://gking.harvard.edu/category/research-interests/applications/mexican-health-care-evaluation) by Gary King
+- [King and Zeng 2006](http://gking.harvard.edu/files/counterft.pdf)
+- [GOV 2001 Course Notes](http://projects.iq.harvard.edu/files/gov2001/files/matchingfrontier_2.pdf)
