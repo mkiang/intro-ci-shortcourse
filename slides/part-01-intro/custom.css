@@ -15,7 +15,8 @@ a, a > code {
   position: absolute;
   bottom: 3em;
   padding-right: 4em;
-  font-size: 90%;
+  font-size: 60%;
+  opacity: 0.5;
 }
 .remark-code, .remark-inline-code { 
 	font-family: 'Source Code Pro', 'Lucida Console', Monaco, monospace; 
@@ -44,6 +45,10 @@ code {
   width: 20%;
   height: 92%;
   float: left;
+  opacity: 0.5;
+}
+.left-column p {
+	color: #000;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
   color: #000;
@@ -63,6 +68,8 @@ code {
 .pull-right {
   float: right;
   width: 47%;
+  padding-left: .1em;
+  text-align: right;
 }
 .pull-right ~ * {
   clear: both;
@@ -93,4 +100,8 @@ ul {
 }
 .red {
 	color: red;
+}
+
+ul li ul {
+	padding-left: 1em;
 }

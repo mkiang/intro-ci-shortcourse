@@ -1,0 +1,63 @@
+---
+title: "Causal Inference for Data Science"
+subtitle: "ITAM Short Workshop"
+author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+date: "March 16, 2017"
+output:
+  xaringan::moon_reader:
+    css: ["custom.css", "./../custom.css", ]
+    # In order for the css file to work, you need to set your working directory
+    # to one above the slide directory ('./../') and then call moon_reader via
+    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
+    # Or just knit it into a browser and it should work immediately.
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+# Additional Topics
+
+- structural econometric modeling
+
+---
+# Theory is Important Always
+
+- important even in the more simple applied micro setting
+- useful sometimes when it's impossible to create a quasi-experimental setting
+
+---
+# Case Study: Gentzkow (AER, 2011)
+
+- Effect of new goods on demand for existing goods? 
+  - e.g., online news effect on existing physical newspaper demands? how would charging for online content affect physical sales?
+  - e.g., radio airplay on record sales?
+  - e.g., file-sharing and live concert revenues?
+  - e.g., benefit of free-samples?
+
+---
+# Existing Structural Models
+
+- discrete-choice demand models (<- utility choice theory)
+  - assumes that individuals can only choose one good though
+- Gentzkow demand model to allow "consumers to choose multiple goods simultaneously and allows the demand-side relationship between each pair of products to be freely estimated from the data"
+
+---
+# Walk Through Simple Structural Model
+
+
+---
+# Sources
+
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides
+- Todd Gormley, slides

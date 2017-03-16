@@ -1,0 +1,102 @@
+---
+title: "Causal Inference for Data Science"
+subtitle: "ITAM Short Workshop"
+author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+date: "March 16, 2017"
+output:
+  xaringan::moon_reader:
+    css: ["custom.css", "./../custom.css", ]
+    # In order for the css file to work, you need to set your working directory
+    # to one above the slide directory ('./../') and then call moon_reader via
+    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
+    # Or just knit it into a browser and it should work immediately.
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+---
+# Impact of Tablet Adoption on Product Sales
+
+fdsf
+
+---
+# Impact of Information on Markets
+
+- "The Digital Provide: Information (Technology), Market Performance, and Welfare in the South Indian Fisheries Sector" (Robert Jensen, QJE 2007)
+
+- Special:
+  - entry of cell phones is arguably exogenous to the fisherman and the fish markets
+  - usual studies of impact of cell phones is macroeconomic and difficult to tease out cause and effect
+  - important to look at the impact of information enabled by technology
+
+![jensen_phones](./assets/jensen_phone_adoption.png)
+![jensen_prices](./assets/jensen_price_changes.png)
+
+---
+# Impact of Additional Education?
+
+![iv_AA_labor_laws](./assets/ang_acem_labor_laws_iv.png)
+
+---
+# Amazon Q&A Impact
+
+- Newegg, etc.
+- Imagine you work at Amazon
+- Product specific controls by comparing two platforms (one with Q&A, one without)
+- Scraped the data, comparing the sales ranks, controls
+- Have to argue that Platform 2 & Amazon have similar time trends (e.g. what about Amazon sales being all on the first day and dropping off after that, while Platform 2 is stable) and track each other similarly
+- Using video games, they can identify "new" product entries and measure uniqueness across platforms.
+
+---
+# Michael Luca
+
+- impact of quality disclosure and rankings?
+- impact of Yelp reviews?
+
+---
+# Wikipedia Effect?
+
+- What is effect of Wikipedia? Hard Question; Georgia Tech econ on translation variety
+
+---
+# AirBnB in Austin
+
+---
+# Impact of Yelp in Seattle
+
+---
+# Diff in Diff on Impact of Fake Hotel Reviews
+
+- initial consistent difference between TripAdvisors and Expedia
+- use 2nd variation on nearby value of independent hotels
+
+---
+# Reddit Random Voting
+
+(Science paper, Muchnik et al 2013)
+Effects, very diverse
+Do we believe it though? It's not clear that down-voting can be triggered though.
+Also upvotes affect the chance a posting is viewed, difficult.
+
+---
+# Marketplace RCTs
+
+Testing treatment groups can affect availability for the other control group
+Or affecting only a portion of a seller's categories of goods
+
+---
+# Sources
+
+- Cameron & Triveti textbook
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides

@@ -1,5 +1,5 @@
 ---
-title: "Causal Inference for Data Science"
+title: "Introduction to Causal Inference<br> for Data Science"
 subtitle: "ITAM Short Workshop"
 author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
 date: "March 15, 2017"
@@ -12,30 +12,19 @@ output:
       highlightLines: true
       countIncrementalSlides: false
 ---
-name: inverse
 layout: true
-class: center, middle, inverse
+class: center, middle
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
-xaringan::summon_remark()
 ```
-
----
-
-# Introductions
-
-???
-
-$\def\indep{\perp \! \! \perp}$
-
-Introduce ourselves. Thanks for opportunity. [Talk about our backgrounds and different approachs to causal inference.]
 
 ---
 
 # Roadmap
 
 ???
+$\def\indep{\perp \! \! \perp}$
 
 [Quickly talk about the structure and goals of the workshop (2 days, 8 topics, 4 topics per day, about 50-55 minutes for each topic and then 5-10 minutes for a break / questions.)]
 
@@ -47,11 +36,11 @@ layout: false
 ]
 .right-column[
 ## Overarching goal
-- **Rubin causal model.** Establish a rigorous framework for evaluating and understanding causality
+- **Rubin Causal Model.** Establish a rigorous framework for evaluating and understanding causality
 ]
 ???
 
-So this is kind of the roadmap of where we want to be by the end of the two days. First, the overarching goals of the workshop. Causal inference is a huge field with lots of different approaches and we can't cover it all, but we want to hit the main points that will be most useful for data science. First, we want to establish a foundation in the Rubin causal model or the **counterfactual model** / **potential outcomes model**, which is by far the most popular causal framework in social science. It's not the only one, but it is the one that is most commonly used for observational data. **NEXT SLIDE**
+So this is kind of the roadmap of where we want to be by the end of the two days. First, the overarching goals of the workshop. Causal inference is a huge field with lots of different approaches and we can't cover it all, but we want to hit the main points that will be most useful for data science. First, we want to establish a foundation in the Rubin Causal Model or the **counterfactual model** / **potential outcomes model**, which is by far the most popular causal framework in social science. It's not the only one, but it is the one that is most commonly used for observational data. **NEXT SLIDE**
 
 Then, within this framework, we will talk about the ideal situation. Like all frameworks and models, there are fundamental assumptions that must be met for us to make valid inference. So as a starting point, we'll go over an experimental design which is when these assumptions are guaranteed to be met. This will help us understand why experiments and RCTs are considered the gold standard and why all our analytical and design-based methods are focused on trying to mimic an RCT. **NEXT SLIDE**
 
@@ -93,15 +82,15 @@ Third, we'll talk about different obstacles to estimating causal effects. In the
 And then we'll introduce a method to overcome some of these obstacles called instrumental variables and talk about how it attempts to mimic an RCT.
 --
 .right-column[
-- **Estimating Causal Effects.** Within this framework, how do we estimate a "causal effect" in the ideal case — a randomized control trial.
+- **Ideal Design and Structure of Bias.** Within this framework, how do we estimate a "causal effect" in the ideal case — a randomized control trial.
 ]
 --
 .right-column[
-- **Obstacles to Estimation.** In the real world, we have a variety of biases. What do we do?
+- **Obstacles to Estimation.** Mathetmatical view of bias using linear regression.
 ]
 --
 .right-column[
-- **Instrumental variables.** First example of overcoming biases and how IV relates to our ideal case.
+- **Instrumental variables and Regression Discontinuity.** First example of overcoming biases and how IV relates to our ideal case.
 ]
 
 ---
@@ -126,7 +115,7 @@ Ok. Are there any questions about today or the overarching theme of the workshop
 ]
 --
 .right-column[
-- **Rubin causal model.** A framework for evaluating causality
+- **Rubin Causal Model.** A framework for evaluating causality
 ]
 
 ---
@@ -152,13 +141,15 @@ Yet our tools are correlation based. And no matter how much data you have, it wi
 
 --
 
-1. What is the effect of Drug B on the population?
+1. What is the effect of Drug B on the blood pressure?
 
 1. How will increasing minimum wage affect the employment rate?
 
 1. Do unconditional cash transfer programs help relieve poverty?
 
 1. Will stricter gun laws reduce gun-related homocide?
+
+1. Does universal health coverage improve health outcomes?
 
 --
 
@@ -263,7 +254,7 @@ In 1990's, HRT was incredily popular medication for women.
 
 Ok. So that's a cute little example, but bad causal inference also has pretty serious consequences. Back in the 90s, there was a treatment called hormone replacement therapy for women who had reached menopause. So when you hit menopause, there's a shift in your estrogen and testosterone levels and the idea was you could replace these hormones and hopefully see positive health effects. **NEXT SLIDE**
 
-So all observational studies, including NHS, indicated HRT was really good. It reduced levels of heart disease by 35-45% and in public health 2-3% if really good. You're taking about millions of people so even tiny positive effects are really good overall. **NEXT SLIDE**
+So all observational studies, including NHS, indicated HRT was really good. It reduced levels of heart disease by 35-45% and in public health 2-3% is really good. You're taking about millions of people so even tiny positive effects are really good overall. **NEXT SLIDE**
 
 But then in the late 90s and early 00s, two RCTs came out and found that RCT increased CVD risk. **NEXT SLIDE**
 --
@@ -317,15 +308,16 @@ Anecdotal evidence has suggested that darker colored cars have higher accident r
 
 ???
 
-TODO
+Here's an example of what I think was a very carefully done analysis with many steps to eliminate other explanations. It was a recent paper in Proceedings of NAS, many of you might have read it. And the paper lays out a theory for why yellow taxis get in fewer accidents than blue taxis. Anecdotally, we've assumed different colored cars got into different accident rates but that could be explained because different people are attracted to different cars. **NEXT SLIDE**
+
+These researchers found a company in Singapore that recently merged with a different taxi company. So now the fleet of cars has two colors — yellow and blue. The benefit of it being a single company means the cars have the same maintenance and training regime. **NEXT SLIDE** 
+
+So they hypothesized that yellow is more visible and thus less likely to get in an accident. **NEXT SLIDE**
 --
 .right-column[
 Researchers looked at a company in Singapore with blue and yellow taxis and found a causal link between car color and accident rate.
-]
 
---
-.right-column[
-Different colors are a result of a merger between two companies. Otherwise, the cars are of identical make, model, and maintenance plan.
+Different colors are a result of a merger between two companies. Otherwise, the cars are of identical make, model, maintenance plan, and driver training.
 ]
 --
 .right-column[
@@ -379,17 +371,16 @@ All analyses indicate yellow cabs had about 6 fewer accidents per 1000 taxi-mont
 ]
 
 ---
-template: inverse
+class: inverse, center, middle
 
 # Definition
 ## What is causal inference?
 
-???
-
-Not going to keep you in suspense. Let's just define it and then we will break it down.
 ---
 class: center, middle
-# Causal inference is the process of estimating a comparison of counterfactual or potential outcomes under different treatment conditions on the same set of units.
+# Causal inference is the process of estimating a comparison of counterfactuals.red[*] under different treatment conditions on the same set of units.
+
+.footnote[.red[*]Also called "potential outcomes."]
 ---
 layout: false
 .left-column[
@@ -416,15 +407,15 @@ In contrast, causal inference cares about manipulation on the same person. We wa
 One easy example is carrying matches in your pocket and lung cancer. Turns out that carrying matches is highly predictive of lung cancer risk. If all you care about is finding people who have lung cancer or predicting who will have lung cancer, this is enough data for you. However, people who carry matches are more likely to smoke and smoking causes lung cancer. If you want to reduce the chances of somebody getting lung cancer, you can't just say "don't carry matches", you need to know the causal pathway and reduce smoking.
 --
 .right-column[
-- In prediction, we are only concerned with maximizing our ability to estimate $y$ given some input $x$
+- In prediction, we are only concerned with maximizing our ability to estimate $Y$ given some input $X$
 ]
 --
 .right-column[
-- In causal inference, we care about how $y$ will change if we manipulate $x$
+- In causal inference, we care about how $Y$ will *change* if we manipulate $X$
 ]
 --
 .right-column[
-- (Even when manipulating $x$ is not possible — the impossible counterfactual. For example, does race have a causal effect on mortality?)
+- Even when manipulating $x$ is not possible — the impossible counterfactual. For example, does race have a causal effect on mortality?
 ]
 
 ---
@@ -491,10 +482,10 @@ It only caused my headache if we knew I wouldn't have gotten the headache, had I
 
 Right? If Eddie would have gotten the headache anyways, then the drug did not cause his headache. **NEXT SLIDE**
 
-So we are comparing two scenarios on the same person. One in which Eddie takes the drug and one in which he doesn't. If you somehow could see the two outcomes of the same exact person, you'd be able to estimate a causal effect. **NEXT SLIDE**
+So we are comparing two scenarios on the same person. One in which Eddie takes the drug and one in which he doesn't. If you somehow could see the two outcomes of the same exact person, you'd be able to estimate a causal effect. Some people prefer **potential outcomes** to emphasize that two different outcomes could potentially be observed depending on the treatment while others prefer **counterfactuals** to emphasize that each outcome represents situations that may not actually occur. The point is though, that we can never observe both things and nobody says it better than causal inference expect, Yeezy. **NEXT SLIDE**
 --
 .right-column[
-Implicitly, Drug B only caused the headache if Eddie would *not* have received the headache if Eddie had not taken Drug B.
+Implicitly, Drug B only caused the headache if Edward would *not* have received the headache if Edward had not taken Drug B.
 ]
 --
 .right-column[
@@ -518,16 +509,16 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Rubin Causal Model
-- This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin causal model. 
+- This framework of *counterfactual* or *potential outcomes* is the basis of the Rubin Causal Model. 
 ]
 
 ???
 
-So this idea of counterfactuals is really important. It's the centerpiece of the Rubin causal model. **NEXT SLIDE** 
+So this idea of counterfactuals is really important. It's the centerpiece of the Rubin Causal Model. **NEXT SLIDE** 
 
 It's what separates RCM from many other frameworks of causality. **NEXT SLIDE** 
 
@@ -535,7 +526,7 @@ Further, it is what allows us to estimate causal effects in observational data. 
 --
 
 .right-column[
-- Counterfactual thinking separates the Rubin causal model from other causal frameworks like Bradford-Hill, Rothman, or Koch's postulates. 
+- Counterfactual thinking separates the Rubin Causal Model from other causal frameworks like Bradford-Hill, Rothman, or Koch's postulates. 
 ]
 --
 .right-column[
@@ -547,7 +538,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Counterfactuals
@@ -562,13 +553,11 @@ So, we define our counterfactuals:
 
 So let's formalize this with a little bit of notation.
 
-Some people prefer **potential outcomes** to emphasize that two different outcomes could potentially be observed depending on the treatment while others prefer **counterfactuals** to emphasize that each outcome represents situations that may not actually occur. 
-
 Let A be a binary treatment where 1 indicates you received treatment and 0 indicates you did not. Then Y^{a=1} is your potential outcome if you receive treatment and Y^{a=0} is your potential outcome if you did not. **NEXT SLIDE** 
 
 Then, your causal effect exists only if those two things are different, right? **NEXT SLIDE** 
 
-And if it exists, we can estiamte it by taking the different between the two (or the ratio or the odds ratio). 
+And if it exists, we can estiamte it by taking the difference between the two (or the ratio or the odds ratio). 
 --
 .right-column[
 Then, Drug B has a causal effect if and only if $Y^{a=0}\neq Y^{a=1}$
@@ -583,7 +572,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Data we .red[_want_]
@@ -612,7 +601,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Data we .red[_have_]
@@ -640,14 +629,14 @@ class: center, middle
 
 ???
 
-You'll often hear people say that causal inference is just a missing data problem and this is what they mean by it. In fact, Rubin, Little, and other giants in the field are also people who specialize in missing data.
+You'll often hear people say that causal inference is just a missing data problem and this is what they mean by it. In fact, Rubin, Little, and other giants in the field are also people who specialize in missing data. But it also emphasizes the importance of understanding your mechanism of "missingness" or randomization. The best possible case is noninformative missingness or missing completely at random.
 ---
 layout: false
 .left-column[
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Fundamental Problem of CI
@@ -680,7 +669,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Linking Association to Causality
@@ -715,7 +704,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Assumptions
@@ -725,7 +714,7 @@ layout: false
 
 ???
 
-And the answer is when all these assumptions hold. If these assumptions are true, then in the Rubin causal model, the observed difference is the same as the counterfactual difference. First, exchangeability. This one is by far the most important. It just says that your counterfactual outcome is independent of your observed treatment. There are a lot of other names for it. It's the one we will spend the most time on. **NEXT SLIDE**
+And the answer is when all these assumptions hold. If these assumptions are true, then in the Rubin Causal Model, the observed difference is the same as the counterfactual difference. First, exchangeability. This one is by far the most important. It just says that your counterfactual outcome is independent of your observed treatment. There are a lot of other names for it. It's the one we will spend the most time on. **NEXT SLIDE**
 
 Then there's positivity. Everybody has some positive probability of either receiving or not receiving treatment. **NEXT SLIDE**
 
@@ -752,7 +741,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Exchangeability 
@@ -783,7 +772,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Positivity 
@@ -800,7 +789,7 @@ layout: false
 ]
 --
 .right-column[
-- If we treated everybody ($A=1$), we would not be able to estimate a causal effect.
+- If we treated everybody $(A=1)$, we would not be able to estimate a causal effect.
 ]
 ---
 layout: false
@@ -808,7 +797,7 @@ layout: false
   ## Causal Inference
   ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Stability (SUTVA) 
@@ -829,7 +818,7 @@ layout: false
 ]
 --
 .right-column[
-- Important because it reduces the number of potential outcomes for ecah unit to two.
+- Important because it reduces the number of potential outcomes for each unit to two.
 ]
 ---
 ## Caveat about Rubin Causal Model
@@ -848,8 +837,9 @@ layout: false
 layout: false
 .left-column[
   ## Causal Inference
+  ### Versus Prediction
   ### Causal effect
-  ### Rubin causal model
+  ### Rubin Causal Model
 ]
 .right-column[
 ## Conclusion
