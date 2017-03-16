@@ -1,24 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Intro to Causal Inference for Data Science</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="date" content="2017-03-16" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Intro to Causal Inference for Data Science
+## ITAM Short Workshop
+### Mathew Kiang, Zhe Zhang, Monica Alexander
+### March 16, 2017
+
 ---
-title: "Intro to Causal Inference for Data Science"
-subtitle: "ITAM Short Workshop"
-author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
-date: "March 16, 2017"
-output:
-  xaringan::moon_reader:
-    css: ["custom.css", "./../custom.css", ]
-    # In order for the css file to work, you need to set your working directory
-    # to one above the slide directory ('./../') and then call moon_reader via
-    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
-    # Or just knit it into a browser and it should work immediately.
-    lib_dir: libs
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
----
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-```
+
+
 
 # Group Brainstorm Exercise
 
@@ -34,7 +35,7 @@ Questions:
 2. Identify the ideal RCT to run (how to get participants, how to randomize, how to test)
 3. Describe the ideal observational dataset
 4. Describe a more realistic observational data, and how you might identify a causal effect of interest
-5. Discuss with class (3-4 mins + time for class discussion & feedback)
+5. Discuss with class (3-4 mins + time for class discussion &amp; feedback)
 
 ---
 # Additional Topics
@@ -62,7 +63,7 @@ Questions:
 - more interestingly, the effect is driven by independent restaurants, rather than chains
 - chain restaurants have declined in market share as Yelp penetration increased
 
-.center[<img src = "./assets/luca_yelp.png" height = "400">]
+.center[&lt;img src = "./assets/luca_yelp.png" height = "400"&gt;]
 
 ---
 # Impact of Tablet Adoption on Product Sales (Xu et al 2017)
@@ -84,12 +85,12 @@ Questions:
 ---
 # Impact of Information on Markets
 
-.center[<img src = "./assets/jensen_phone_adoption.png" height = "550">]
+.center[&lt;img src = "./assets/jensen_phone_adoption.png" height = "550"&gt;]
 
 ---
 # Impact of Information on Markets
 
-.center[<img src = "./assets/jensen_price_changes.png" height = "550">]
+.center[&lt;img src = "./assets/jensen_price_changes.png" height = "550"&gt;]
 
 ---
 # Urban Agglomeration Impacts
@@ -100,12 +101,12 @@ Greenstone, Hornbeck, Moretti (JPE 2010)
 - very long paper, lots of robustness checks and model specification checks
 
 ---
-# Amazon Q&A Section Impact
+# Amazon Q&amp;A Section Impact
 
 - Also fits for Newegg, etc.
-- Product specific controls by comparing two platforms (one with Q&A, one without)
+- Product specific controls by comparing two platforms (one with Q&amp;A, one without)
 - Scraped the data, comparing the sales ranks, controls
-- Have to argue that Platform 2 & Amazon have similar time trends (e.g. what about Amazon sales being all on the first day and dropping off after that, while Platform 2 is stable) and track each other similarly
+- Have to argue that Platform 2 &amp; Amazon have similar time trends (e.g. what about Amazon sales being all on the first day and dropping off after that, while Platform 2 is stable) and track each other similarly
 - Using video games, they can identify "new" product entries and measure uniqueness across platforms.
 
 ---
@@ -125,7 +126,7 @@ Greenstone, Hornbeck, Moretti (JPE 2010)
 # Reddit Random Voting
 
 (Science paper, Muchnik et al 2013)
-
+Effects, very diverse
 Do we believe it though? It's not clear that down-voting can be triggered though.
 Also upvotes affect the chance a posting is viewed, difficult.
 
@@ -144,6 +145,7 @@ Or affecting only a portion of a seller's categories of goods
 - their theory is robust, because they see less strong effects for newspapers without a classifieds manager increased prices substantially.
 - and there is a larger reduction in display ads for these newspapers too
 - use of Web Archive
+
 
 ---
 # Impact of Airbnb on Hotel Revenues
@@ -192,3 +194,32 @@ Telang, Smith (2009)
 - quantile regressions
 - heterogenous treatment effects (use of ML techniques, or subset search techniques)
 - standard errors calculation (correlated errors across region or time, standard error corrections)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

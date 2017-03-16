@@ -161,7 +161,7 @@ Individual FE cannot control for this because things are happening at the broade
   
 --
 
-### Answer --- *group-specific fixed effects and controls*
+### Answer --- *(1) group-specific fixed effects and (2) adequate control group*
 
 *Assumes that*  
 - group-level (unobservable) differences are also time-invariant.
@@ -173,6 +173,8 @@ Individual FE cannot control for this because things are happening at the broade
 **Example**: employees all working for companies in state A receive a higher minimum wage
 
 **Example**: mobile apps across 4 platforms and across time, studying platform differences
+
+**Example**: effect of a product change across states
 
 *How could we estimate a causal effect*
 
@@ -188,23 +190,25 @@ We need to replicate an experimental setting again!
 
 ![mhe_DiD_image](./assets/mhe_DiD_image.png)
 
+.footnote[ref: Mostly Harmless Econometrics]
+
 ---
 # DiD Example:
 
 ![mhe_DiD_image](./assets/mhe_DiD_table.png)
+
+.footnote[ref: Mostly Harmless Econometrics]
 
 ---
 # Brief Math Overview of DiD
 
 Consider studying fast-food restaurants.  
 Naive (ignores natural group-level differences):
-
 `$$Y_{it} = \alpha_i + \delta_t + Post_{it} + \beta X_{it} + \epsilon_{it}$$`
 
 --
 
 Use **group-specific FE** and **interaction effect** for a diff-in-diff:
-
 `$$Y_{it} = \alpha_i + \delta_t + Post_{it} + \delta TreatedRegion_{i} + \gamma TreatedRegion_{i}\cdot Post_{it} + \beta X_{it}$$`
 
 ???
@@ -217,10 +221,14 @@ However, this suffers from the fact that the
 
 ![good_trend](./assets/DiD_gormley_parallel.png)
 
+.footnote[ref: Todd Gormley slides]
+
 ---
 # Parallel Trend is a Must
 
 ![good_trend](./assets/DiD_gormley_no_parallel.png)
+
+.footnote[ref: Todd Gormley slides]
 
 ??
 Idea is that you use the non-treated group to estimate the counterfactual estimate
@@ -233,10 +241,12 @@ Idea is that you use the non-treated group to estimate the counterfactual estima
   - i.e. local-specific time trends, time shocks
   - "time varying omitted variables"
 
---  
+--
 
 - group-specific unobserveds? OK
 - time-specific unobserveds? OK
+
+--
 
 - Issue: unobserved variables are correlated with both the self-selection of treatment and the timing of the treatment
   - *example:* individual income boost leads to adoption
@@ -273,6 +283,8 @@ Relative time indicators
 
 .center[&lt;img src = "./assets/DiD_nagaraj_relative_time.png" height = "350"&gt;]
 
+.footnote[ref: Nagaraj 2017]
+
 ---
 # Improve on the Simple Diff-in-Diff Idea
 
@@ -281,6 +293,8 @@ Use matching to limit the control group:
   
 .center[&lt;img src = "./assets/whole_core_sample_fooddrink.png" height = "350"&gt;]  
 
+.footnote[ref: Zhang Li 2017]
+
 ---
 # Improve on the Simple Diff-in-Diff Idea
 
@@ -288,6 +302,15 @@ Use matching to limit the control group:
   - synthetically enforce parallel trends before treatment
 
 .center[&lt;img src = "./assets/basicmatch_metroA_allCities_perUser.png" height = "350"&gt;]  
+
+.footnote[ref: Zhang Li 2017]
+
+---
+# Checking the Matching Support
+
+.center[&lt;img src = "./assets/propensity_density.png" height = "350"&gt;]  
+
+.footnote[ref: Zhang Li 2017]
 
 ---
 # Self-Selection Bias is Always a Concern
@@ -321,6 +344,7 @@ Dig more into the argued causal mechanisms
 *ideas on how to identify the impact?*
 
 --
+
 Identification strategy:
 - variation in available timing of maps
 - variation in available timing of "non-cloudy" maps
@@ -329,17 +353,21 @@ Identification strategy:
 ---
 # Nagaraj (2017) Diff-in-Diff
 
-`$$Y_{it} = \alpha + \beta_1 Post_{it} + \gamma_i + \delta_t + \epsilon_{it}$$`
+`$$Y_{it} = \alpha_i + \gamma_1 Post_{it} + \delta_t + \epsilon_{it}$$`
 
-*Note: time indicators help remove fluctuations in gold price*
-*Note: Earth = 9493 blocks*
-*Note: clustered standard errors at the block level; additional robustness includes more general standard error clustering for spatial proximity*
+*Note: time indicators help remove fluctuations in gold price*  
+*Note: Earth = 9493 blocks*  
+*Note: clustered standard errors at the block level; additional robustness includes more general standard error clustering for spatial proximity*  
 *Note: negative-binomial model also used for robustness*
+
+.footnote[ref: Nagaraj 2017]
 
 ---
 # Nagaraj (2017) Diff-in-Diff
 
 ![main_specification](./assets/nagaraj_basic_specification.png)
+
+.footnote[ref: Nagaraj 2017]
 
 ---
 # Nagaraj Time-Varying Estimates
@@ -351,12 +379,19 @@ Identification strategy:
 - `\(\sim\)` 7 year lag for the benefits to accrue
 
 ---
+# Nagaraj Time-Varying Estimates
+
+.center[&lt;img src = "./assets/DiD_nagaraj_relative_time.png" height = "450"&gt;]
+
+---
 # Nagaraj IV Estimates
 
-IV in the probability of receiving a low-cloud cover, high quality mapping.  
+IV = the probability of receiving a low-cloud cover, high quality mapping.  
 DiD has a concern that the blocks mapped early are not random.
 
-.center[&lt;img src = "./assets/nagaraj_iv_checks.png" height = "450"&gt;]  
+.center[&lt;img src = "./assets/nagaraj_iv_checks.png" height = "450"&gt;]
+
+.footnote[ref: Nagaraj 2017]
 
 ---
 # Nagaraj IV Estimates
@@ -365,6 +400,8 @@ DiD has a concern that the blocks mapped early are not random.
 
 **Why is this so much larger? LATE?**
 
+.footnote[ref: Nagaraj 2017]
+
 ---
 # Nagaraj Additional Robustness
 
@@ -372,7 +409,9 @@ DiD has a concern that the blocks mapped early are not random.
 - Removing some of the early blocks, only using variation in blocks mapped later
 - Placebo test: Estimating Landsat mapping impact on high tree-cover blocks (theory should show no effect)
 - Placebo test: Randomizing fake mapping dates across blocks.
-- Removing time dimension and using cross-sectional data only (using delay in mapping as treatment of interest)
+- Removing time dimension and using cross-sectional data only (using delay in mapping as the treatment effect of interest)
+
+--
 
 Theory Robustness:
 - Shows that the effect is MUCH larger for small independent gold firms, than for larger firms, who could be expected to have better mapping investments. 
@@ -383,20 +422,12 @@ Theory Robustness:
 *Mapping encourages new, smaller entrants; reducing the fixed cost*
 
 ---
-# Hands-On With DiD Data
+# Hands-On Examples
 
-[todo, find a dataset to use]
+Schooling &amp; Wages Data (Angrist, Kreuger 1991): &lt;http://goo.gl/fGVelu&gt;
 
----
-# Emphasis on General Meaningful Variation
-
-- Turo changes a product, looking at geographic diffusion
-
-- Scientists do experiment design. 
-- Observational causal inference people do experiment design afterwards.
-
----
-# PSM
+NJ/PA Min Wage Data (Card, Kreuger 1993): &lt;https://www.dropbox.com/s/j6efjp030znl1aq/minwage.csv?dl=0&gt;  
+&lt;http://masteringmetrics.com/wp-content/uploads/2014/12/Pischke-PS-for-MM.pdf&gt;
 
 ---
 # Sources
