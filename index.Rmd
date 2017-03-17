@@ -21,15 +21,15 @@ The first section of the course is focused on understanding the fundamental issu
 ### Topics
 1. [Why should we care about causal inference? Motivation, examples, intro to Rubin Causal Model.](./slides/part-01-intro/index.html)
 1. [RCTs, Causal DAGs, and the structure of bias](./slides/part-02-rcts-dags/index.html)
-1. [Linear regression and bias](./part-03-07/lec_3_linreg_and_biases.html)
-1. [Instrumental variables (aka Magic) and Regression Discontinuity](./part-03-07/lec_4_instrumental_variables.html)
-1. [Fixed Effects, Difference in differences, and Panel](./part-03-07/lec_5_panel_data.html)
-1. [Experimental Design (and a tiny bit on matching)](./part-08-exp-design/index.html)
+1. [Linear regression and bias](./slides/part-03-07/lec_3_linreg_and_biases.html)
+1. [Instrumental variables (aka Magic) and Regression Discontinuity](./slides/part-03-07/lec_4_instrumental_variables.html)
+1. [Fixed Effects, Difference in differences, and Panel](./slides/part-03-07/lec_5_panel_data.html)
+1. [Experimental Design (and a tiny bit on matching)](./slides/part-08-exp-design/index.html)
 
 ### Additional topics
-1. [Group exercises](./part-03-07/lec_6_class_participation.html)
-1. [Talking over examples](./part-03-07/lec_6_examples.html)
-1. [Additional topics (we didn't cover)](./part-03-07/lec_7_extensions.html)
+1. [Group exercises](./slides/part-03-07/lec_6_class_participation.html)
+1. [Talking over examples](./slides/part-03-07/lec_6_examples.html)
+1. [Additional topics (we didn't cover)](./slides/part-03-07/lec_7_extensions.html)
 
 ### Lecturers
 - [Mathew Kiang](https://mathewkiang.com) ([GitHub](https://github.com/mkiang))
