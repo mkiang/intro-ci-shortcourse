@@ -1,25 +1,25 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Brief Overview of Experimental Design</title>
-    <meta charset="utf-8">
-    <meta name="author" content="Mathew Kiang and Zhe Zhang" />
-    <meta name="date" content="2017-03-16" />
-    <link rel="stylesheet" href="custom.css" type="text/css" />
-    <link rel="stylesheet" href="../custom.css" type="text/css" />
-  </head>
-  <body>
-    <textarea id="source">
-class: center, middle, inverse, title-slide
-
-# Brief Overview of Experimental Design
-## (And a tiny but about matching)
-### Mathew Kiang and Zhe Zhang
-### March 16, 2017
-
 ---
-
-
+title: "Brief Overview of Experimental Design"
+subtitle: "(And a tiny bit about matching)"
+author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+date: "March 16, 2017"
+output:
+  xaringan::moon_reader:
+    css: ["./custom.css", "./../custom.css"]
+    # In order for the css file to work, you need to set your working directory
+    # to one above the slide directory ('./../') and then call moon_reader via
+    # `xaringan::inf_mr('./part-01-intro/index.Rmd')`
+    # Or just knit it into a browser and it should work immediately.
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
 
 # Matching
 
@@ -42,13 +42,13 @@ class: center, middle, inverse, title-slide
 # Matching
 .footnote[King and Zeng (2006)]
 
-.center[&lt;img src="./assets/matching_1.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_1.jpg" width="600">]
 
 ---
 # Matching
 .footnote[King and Zeng (2006)]
 
-.pull-right[&lt;img src="./assets/matching_1.jpg" width="600"&gt;]
+.pull-right[<img src="./assets/matching_1.jpg" width="600">]
 
 ### So what do we do?
 
@@ -62,78 +62,78 @@ class: center, middle, inverse, title-slide
 # Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_2.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_2.jpg" width="600">]
 
 ---
 # Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_3.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_3.jpg" width="600">]
 
 ---
 # Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_4.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_4.jpg" width="600">]
 
 ---
 # Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_5.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_5.jpg" width="600">]
 
 ---
 # Matching: Mahalanobis Distance
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_mah_1.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_mah_1.jpg" width="600">]
 
 ---
 # Matching: Mahalanobis Distance
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_mah_2.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_mah_2.jpg" width="600">]
 
 ---
 # Matching: Mahalanobis Distance
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_mah_3.jpg" width="600"&gt;] 
+.center[<img src="./assets/matching_mah_3.jpg" width="600">] 
 
 ---
 # Matching: Propensity Score Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_psm_1.jpg" width="500"&gt;]
+.center[<img src="./assets/matching_psm_1.jpg" width="500">]
 
 ---
 # Matching: Propensity Score Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_psm_2.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_psm_2.jpg" width="600">]
 ---
 # Matching: Propensity Score Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_psm_3.jpg" width="600"&gt;]
-
----
-# Matching: Propensity Score Matching
-.footnote[GOV 2001 Lecture Notes]
-
-.center[&lt;img src="./assets/matching_psm_4.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_psm_3.jpg" width="600">]
 
 ---
 # Matching: Propensity Score Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_psm_5.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_psm_4.jpg" width="600">]
 
 ---
 # Matching: Propensity Score Matching
 .footnote[GOV 2001 Lecture Notes]
 
-.center[&lt;img src="./assets/matching_psm_6.jpg" width="600"&gt;]
+.center[<img src="./assets/matching_psm_5.jpg" width="600">]
+
+---
+# Matching: Propensity Score Matching
+.footnote[GOV 2001 Lecture Notes]
+
+.center[<img src="./assets/matching_psm_6.jpg" width="600">]
 
 ---
 # Matching Conclusion
@@ -157,7 +157,7 @@ class: center, middle, inverse, title-slide
 # Roadmap
 
 ???
-`\(\def\indep{\perp \! \! \perp}\)`
+$\def\indep{\perp \! \! \perp}$
 Well, for this talk we are going to take a step back and talk about study design. First, why should you care? After all, we just spent the last few hours together talking about observational data and causal inference. Why should you care about experimental design? **NEXT SLIDE**
 
 Then I'm going to talk a bit about running an experiment. They are obviously very complex, but they can ultimately be broken down into two parts. **NEXT SLIDE**
@@ -192,11 +192,11 @@ So we start again with a bit of motivation. We've just spent the last few hours 
 This is an article where Rubin himself articulates why design is better than analysis in making causal inference. If you have the option to make a study and you care about the causal estimates, you should seize that opportunity. **NEXT SLIDE**
 --
 
-.center[&lt;img src="./assets/design_trumps_analysis.jpg" width="700"&gt;]
+.center[<img src="./assets/design_trumps_analysis.jpg" width="700">]
 
 ---
 # Motivation
-.pull-right[&lt;img src="./assets/ra_fisher.jpg" width="700"&gt;]
+.pull-right[<img src="./assets/ra_fisher.jpg" width="700">]
 
 .pull-left[.grey["To consult the statistician after an experiment is finished is often merely to ask him to conduct a post mortem examination. He can perhaps say what the experiment died of."] 
 
@@ -279,7 +279,7 @@ Even if you never do, when using observational data, it is useful to think about
     - If yes, randomized controlled trial/experiment.
     - If no, nonrandomized controlled trial/experiment.
 
-&lt;br&gt;
+<br>
 ### .center[We are only going to discuss randomized experimental designs.]
 
 ???
@@ -364,7 +364,7 @@ class: middle, center
 
 # Sampling
 
-- We cannot perform an intervention on the entire population so we need to sample some number `\(n\)` from the larger population of `\(N\)`. Usually `\(n &lt;&lt; N\)`.
+- We cannot perform an intervention on the entire population so we need to sample some number $n$ from the larger population of $N$. Usually $n << N$.
 
 ???
 Ok. So sampling is about how you get people into your intervention. And how you get people in determines what you can say about the people you did not get in. **NEXT SLIDE**
@@ -396,7 +396,7 @@ Meanwhile, probability sampling allows you to make statements about the entire p
 
 Simple random sampling is when you just essentially roll a gigantic die and that is how you select subjects. Everybody has an equal probability of being selected. Very convenient because it means every single person has equal probability but so does every pair and every triple, etc. However, can result in sampling error. Pretend we randomly pick 50 people and we end up with 30 females and 20 males even though the population has exactly a 50-50 ratio. **NEXT SLIDE**
 
-Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every `\(k\)`th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
+Systematic sampling is sort of this old school way of doing it. Back when you had paper lists to sample from, it would be easier to just take every $k$th subject such as every 5 inches of a telephone book. Today it is rarely ever used, but if worth mentioning. If you ever have a dataset so large you cannot enumerate all of it to randomly sample, it is possibly to perform systematic sampling (if we assume entry into the dataset is itself random). **NEXT SLIDE**
 
 Stratified sampling is usually the type of sampling we are most familiar with in econ, policy, public health, etc. You first stratify into groups that you think are important and then you perform random or systematic sampling. Often used when certain groups are rare so you want to oversample in order to make sure you have enough power for your analyses. Also more efficient than random sampling because you can reduce samplinge error — from the example, above, what if instead of randomly sampling, I select only males and then sample 25 and then only females and sample 25? No sampling error on sex. When you work with survey data or government data, you often get importance weights — those weights are due to stratified sampling and getting the study sample back to the representative form of the population. **NEXT SLIDE**
 
@@ -435,75 +435,75 @@ Now that you've collected samples, it's time to decide how to randomize them.
 ---
 # Basic, post-test only
 - Single intervention, control
-`$$\begin{align*}
-R &amp;\quad&amp; X &amp;\quad&amp; O \\
-R &amp;\quad&amp;  &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& X &\quad& O \\
+R &\quad&  &\quad& O 
+\end{align*}$$
 
 - Gold-standard comparison
-`$$\begin{align*}
-R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
-R &amp;\quad&amp; X_b &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& X_a &\quad& O \\
+R &\quad& X_b &\quad& O 
+\end{align*}$$
 
 - Gold-standard and control
-`$$\begin{align*}
-R &amp;\quad&amp; X_a &amp;\quad&amp; O \\
-R &amp;\quad&amp; X_b &amp;\quad&amp; O \\
-R &amp;\quad&amp;  &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& X_a &\quad& O \\
+R &\quad& X_b &\quad& O \\
+R &\quad&  &\quad& O 
+\end{align*}$$
 
 ---
-# Factorial Designs — `\(2 x 2\)`
+# Factorial Designs — $2 x 2$
 - Test two interventions on a single sample
-`$$\begin{align*}
-R &amp;\enspace&amp; X_{ab} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{ac} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{cb} &amp;\enspace&amp; O \\
-R &amp;\enspace&amp; X_{cc} &amp;\enspace&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\enspace& X_{ab} &\enspace& O \\
+R &\enspace& X_{ac} &\enspace& O \\
+R &\enspace& X_{cb} &\enspace& O \\
+R &\enspace& X_{cc} &\enspace& O 
+\end{align*}$$
 
-- Randomize twice: (1) once to intervention `\(A\)` `\((n_{a*})\)` or control `\(A\)` `\((n_{c*})\)` and then again to intervention `\(B\)` `\((n_{*b})\)` or control `\(B\)` `\((n_{*c})\)`.
+- Randomize twice: (1) once to intervention $A$ $(n_{a*})$ or control $A$ $(n_{c*})$ and then again to intervention $B$ $(n_{*b})$ or control $B$ $(n_{*c})$.
 
-- Effect of intervention A: `\(\text{mean}(n_{ab}+n_{ac})-\text{mean}(n_{cb}+n_{cc})\)`
-- Effect of intervention B: `\(\text{mean}(n_{ab}+n_{cb})-\text{mean}(n_{ac}+n_{cc})\)`
+- Effect of intervention A: $\text{mean}(n_{ab}+n_{ac})-\text{mean}(n_{cb}+n_{cc})$
+- Effect of intervention B: $\text{mean}(n_{ab}+n_{cb})-\text{mean}(n_{ac}+n_{cc})$
 
 - Essentially running two RCTs with just a single experiment
 
 ---
 # Basic, pre-post
 - Single intervention, control
-`$$\begin{align*}
-R &amp;\quad&amp; O &amp;\quad&amp; X &amp;\quad&amp; O \\
-R &amp;\quad&amp; O &amp;\quad&amp;  &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& O &\quad& X &\quad& O \\
+R &\quad& O &\quad&  &\quad& O 
+\end{align*}$$
 
 - Gold-standard comparison
-`$$\begin{align*}
-R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O \\
-R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O 
+\end{align*}$$
 
 - Gold-standard and control
-`$$\begin{align*}
-R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O \\
-R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O \\
-R &amp;\quad&amp; O &amp;\quad&amp;  &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O \\
+R &\quad& O &\quad&  &\quad& O 
+\end{align*}$$
 
 ---
 # Crossover and Longitudinal
 - Two intervention, crossover
-`$$\begin{align*}
-R &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O \\
-R &amp;\quad&amp; O &amp;\quad&amp; X_b &amp;\quad&amp; O &amp;\quad&amp; X_a &amp;\quad&amp; O
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& O &\quad& X_a &\quad& O &\quad& X_b &\quad& O \\
+R &\quad& O &\quad& X_b &\quad& O &\quad& X_a &\quad& O
+\end{align*}$$
 
 - Longitudinal
-`$$\begin{align*}
-R &amp;\quad&amp; O &amp;\quad&amp; O &amp;\quad&amp; X  &amp;\quad&amp; O &amp;\quad&amp; O \\
-R &amp;\quad&amp; O  &amp;\quad&amp; O &amp;\quad&amp; &amp;\quad&amp; O &amp;\quad&amp; O 
-\end{align*}$$`
+$$\begin{align*}
+R &\quad& O &\quad& O &\quad& X  &\quad& O &\quad& O \\
+R &\quad& O  &\quad& O &\quad& &\quad& O &\quad& O 
+\end{align*}$$
 
 ---
 # *Seguro Popular*
@@ -527,8 +527,8 @@ R &amp;\quad&amp; O  &amp;\quad&amp; O &amp;\quad&amp; &amp;\quad&amp; O &amp;\q
 ---
 # *Seguro Popular*
 
-.center[&lt;img src="./assets/seguro_popular_2.jpg" width="600"&gt;]
-.center[&lt;img src="./assets/seguro_popular.jpg" width="600"&gt;]
+.center[<img src="./assets/seguro_popular_2.jpg" width="600">]
+.center[<img src="./assets/seguro_popular.jpg" width="600">]
 
 
 ---
@@ -547,7 +547,7 @@ R &amp;\quad&amp; O  &amp;\quad&amp; O &amp;\quad&amp; &amp;\quad&amp; O &amp;\q
 1. Collected data pre- and several times post-intervention
 
 ---
-.center[&lt;img src="./assets/example_pairing.jpg" width="700"&gt;]
+.center[<img src="./assets/example_pairing.jpg" width="700">]
 
 ---
 # Design of *Seguro Popular* Evaluation
@@ -565,7 +565,7 @@ R &amp;\quad&amp; O  &amp;\quad&amp; O &amp;\quad&amp; &amp;\quad&amp; O &amp;\q
 
 ---
 # Results of *Seguro Popular* evaluation
-.center[&lt;img src="./assets/seguro_results.jpg" width="600"&gt;]
+.center[<img src="./assets/seguro_results.jpg" width="600">]
 
 - ITT estimate overall: 23% reduction in catastrophic expenditure
 - ITT estimate poor HH: 30% reduction
@@ -583,32 +583,3 @@ class: center, middle
 - [Seguro Popular papers](http://gking.harvard.edu/category/research-interests/applications/mexican-health-care-evaluation) by Gary King
 - [King and Zeng 2006](http://gking.harvard.edu/files/counterft.pdf)
 - [GOV 2001 Course Notes](http://projects.iq.harvard.edu/files/gov2001/files/matchingfrontier_2.pdf)
-    </textarea>
-<script src="libs/remark-latest.min.js"></script>
-<script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
-});
-if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  tex2jax: {
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
-  }
-});
-</script>
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-(function () {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
-  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
-    script.src  = script.src.replace(/^https?:/, '');
-  document.getElementsByTagName('head')[0].appendChild(script);
-})();
-</script>
-  </body>
-</html>

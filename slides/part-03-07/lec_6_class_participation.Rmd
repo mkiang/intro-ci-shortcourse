@@ -1,7 +1,7 @@
 ---
-title: "Intro to Causal Inference for Data Science"
+title: "Small Group Causal Inference Exercise"
 subtitle: "ITAM Short Workshop"
-author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+author: "Zhe Zhang, Mathew Kiang, Monica Alexander"
 date: "March 16, 2017"
 output:
   xaringan::moon_reader:

@@ -1,7 +1,7 @@
 ---
 title: "Instrumental Variables to Identify Experimental Situations"
 subtitle: "ITAM Short Workshop"
-author: "Mathew Kiang, Zhe Zhang, Monica Alexander"
+author: "Zhe Zhang, Mathew Kiang, Monica Alexander"
 date: "March 15, 2017"
 output:
   xaringan::moon_reader:

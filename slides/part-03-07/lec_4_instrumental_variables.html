@@ -3,7 +3,7 @@
   <head>
     <title>Instrumental Variables to Identify Experimental Situations</title>
     <meta charset="utf-8">
-    <meta name="author" content="Mathew Kiang, Zhe Zhang, Monica Alexander" />
+    <meta name="author" content="Zhe Zhang, Mathew Kiang, Monica Alexander" />
     <meta name="date" content="2017-03-15" />
     <link rel="stylesheet" href="custom.css" type="text/css" />
     <link rel="stylesheet" href="../custom.css" type="text/css" />
@@ -14,7 +14,7 @@ class: center, middle, inverse, title-slide
 
 # Instrumental Variables to Identify Experimental Situations
 ## ITAM Short Workshop
-### Mathew Kiang, Zhe Zhang, Monica Alexander
+### Zhe Zhang, Mathew Kiang, Monica Alexander
 ### March 15, 2017
 
 ---
@@ -74,6 +74,8 @@ Ultimately, we're often left with omitted variable bias.
 --
 
 ![iv_base](./assets/iv_with_z.png)
+
+.footnote[Source: Cameron Triveti textbook]
 
 ---
 # Instrumental Variable Key Idea
@@ -215,6 +217,8 @@ first_stage &lt;- lm(s ~ yob + sob + qob, data = df)
 anova(no_instrument, first_stage)
 ```
 
+.footnote[Data provided by Mastering Metrics]
+
 ---
 # Try 2SLS by Hand
 
@@ -284,6 +288,8 @@ Instruments can take many (creative) forms
 ---
 
 .center[&lt;img src = "./assets/angrist_list_of_iv.png" height = "850"&gt;]
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ---
 # Various Types of Instruments
@@ -371,8 +377,10 @@ Effect on Compliers*
 &lt;br/&gt;
 
 Left = comparing treated to the control + never-takers  
-Middle = estimates effect of assignment
+Middle = estimates effect of assignment  
 Right = estimates effect of compliance to treatment
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ???
 On the left is the average Training effect.
@@ -444,6 +452,8 @@ Key assumptions around IV cannot be tested. Other aspects can be tested however.
 Column 6 = Additional % of people who have treatment because of instrument
 Column 8 = % of Treated people who are compliers
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ???
 Column 5 = observed treated percent
 Column 6 = Additional percent of people who have treatment because of instrument
@@ -505,6 +515,8 @@ Examples:
 
 .center[&lt;img src = "./assets/rd_example.png" height = "500"&gt;]
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ---
 # RD Math
 
@@ -527,13 +539,15 @@ modern RD: semi-parametric local kernel methods around the discontinuity, using 
 
 .center[&lt;img src = "./assets/rd_incumbents.png" height = "500"&gt;]
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ???
 The bottom image reassures us with proof that the discontinutity is essentially random
 
 ---
 # Fuzzy RD
 
-*discontinuity that leads to a __jump__ in probability of treatment, with `\(\epsilon\)` change*
+*discontinuity that leads to a __(sharp) jump__ in probability of treatment, with `\(\epsilon\)` change*
 
 &lt;br/&gt;
 
@@ -545,6 +559,8 @@ Options:
 # Fuzzy RD (Popular) Example on Class Size
 
 .center[&lt;img src = "./assets/rd_fuzzy_example.png" height = "500"&gt;]
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ---
 # Sources

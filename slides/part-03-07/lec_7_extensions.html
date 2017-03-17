@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Additional Topics for Causal Inference</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Zhe Zhang, Mathew Kiang, Monica Alexander" />
+    <meta name="date" content="2017-03-16" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+    <link rel="stylesheet" href="../custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Additional Topics for Causal Inference
+## ITAM Short Workshop
+### Zhe Zhang, Mathew Kiang, Monica Alexander
+### March 16, 2017
+
+---
+
+name: inverse
+layout: true
+class: center, middle, inverse
+
+
+
+---
+# Additional Topics
+
+- structural econometric modeling
+
+---
+# Theory is Important Always
+
+- important even in the more simple applied micro setting
+- useful sometimes when it's impossible to create a quasi-experimental setting
+
+---
+# Case Study: Gentzkow (AER, 2011)
+
+- Effect of new goods on demand for existing goods? 
+  - e.g., online news effect on existing physical newspaper demands? how would charging for online content affect physical sales?
+  - e.g., radio airplay on record sales?
+  - e.g., file-sharing and live concert revenues?
+  - e.g., benefit of free-samples?
+
+---
+# Existing Structural Models
+
+- discrete-choice demand models (&lt;- utility choice theory)
+  - assumes that individuals can only choose one good though
+- Gentzkow demand model to allow "consumers to choose multiple goods simultaneously and allows the demand-side relationship between each pair of products to be freely estimated from the data"
+
+---
+# Walk Through Simple Structural Model
+
+
+---
+# Sources
+
+- Mostly Harmless Econometrics
+- Osea Giuntella, slides
+- Todd Gormley, slides
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
