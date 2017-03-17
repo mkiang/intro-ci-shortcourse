@@ -431,6 +431,7 @@ NJ/PA Min Wage Data (Card, Kreuger 1993): <https://www.dropbox.com/s/j6efjp030zn
 ---
 # Sources
 
-- Mostly Harmless Econometrics
-- Osea Giuntella, slides
-- Todd Gormley, slides
+- Mostly Harmless Econometrics, book
+- Mastering Metrics, book
+- Todd Gormley, online slides
+- Abhishek Nagaraj, "The Private Impact of Public Maps— Landsat Satellite Imagery and Gold Exploration"

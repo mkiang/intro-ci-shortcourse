@@ -65,6 +65,8 @@ The CEF is a prediction concept. First we'll discuss the prediction properties. 
 
 - What does the above line mean to us? Interpretation?
 
+.footnote[Mostly Harmless Econometrics]
+
 ???
 In this example, we have years of education on the x-axis and wage earnings on the y-axis.
 The grey areas represent the distribution of data from each person with that wage.
@@ -75,7 +77,7 @@ Instead, we're looking at the systematic pattern between education and wages.
 ---
 # Recreate Graphic
 
-Data: <http://goo.gl/fGVelu>
+Data: <https://www.dropbox.com/s/gkpyivx06n9etda/ak_91_iv_qob.rds?dl=0>
 
 ```{r, message=F, error=FALSE, warning=F}
 library(tidyverse)
@@ -93,6 +95,8 @@ g_CEF <- ggplot(year_df, aes(x = s, y = mean_log_wage)) +
   ggtitle("CEF between education & log-wage 
           (with both complex & simple fit)")
 ```
+
+.footnote[Data provided by Mastering Metrics]
 
 ---
 class: center
@@ -218,6 +222,8 @@ Consider the treatment effect of different years of schooling.
 Linearity assumption again simplifies things:  
 *each year of schooling has a constant, additive effect.*
 $$CIA \equiv \left\{ Y_{t_1,i}, Y_{t_2,i} \right\} \bot t|\mathbf{X_i} \quad \forall t$$
+
+.footnote[Mostly Harmless Econometrics]
 
 ---
 # What about non-binary treatments?
@@ -354,6 +360,8 @@ Estimated relationship between schooling and wages:
 
 ![ovb_education](./assets/ovb_estimates.png)
 
+.footnote[Mostly Harmless Econometrics]
+
 ---
 # OVB Synthetic Example
 
@@ -451,6 +459,8 @@ g_CEF <- ggplot(year_df, aes(x = s, y = mean_wage)) +
   ggtitle("CEF between education & weekly wage (with both complex & simple fit)")
 ```
 
+.footnote[Data provided by Mastering Metrics]
+
 ---
 class: center
 
@@ -517,6 +527,5 @@ plot(bad_fit_lm, which = 5)
 ---
 # Reference Sources
 
-- Cameron & Triveti textbook
 - Mostly Harmless Econometrics
 - Osea Giuntella, slides

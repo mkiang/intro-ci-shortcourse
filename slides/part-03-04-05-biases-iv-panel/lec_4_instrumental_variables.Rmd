@@ -74,6 +74,8 @@ Ultimately, we're often left with omitted variable bias.
 
 ![iv_base](./assets/iv_with_z.png)
 
+.footnote[Source: Cameron Triveti textbook]
+
 ---
 # Instrumental Variable Key Idea
 
@@ -206,6 +208,8 @@ first_stage <- lm(s ~ yob + sob + qob, data = df)
 anova(no_instrument, first_stage)
 ```
 
+.footnote[Data provided by Mastering Metrics]
+
 ---
 # Try 2SLS by Hand
 
@@ -272,6 +276,8 @@ Instruments can take many (creative) forms
 ---
 
 .center[<img src = "./assets/angrist_list_of_iv.png" height = "850">]
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ---
 # Various Types of Instruments
@@ -359,8 +365,10 @@ Effect on Compliers*
 <br/>
 
 Left = comparing treated to the control + never-takers  
-Middle = estimates effect of assignment
+Middle = estimates effect of assignment  
 Right = estimates effect of compliance to treatment
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ???
 On the left is the average Training effect.
@@ -432,6 +440,8 @@ $$P(T_{1i} > T_{0i}|T_i = 1) = \frac{P(Z_i = 1)\left( size_{absolute} \right)}{P
 Column 6 = Additional % of people who have treatment because of instrument
 Column 8 = % of Treated people who are compliers
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ???
 Column 5 = observed treated percent
 Column 6 = Additional percent of people who have treatment because of instrument
@@ -493,6 +503,8 @@ Examples:
 
 .center[<img src = "./assets/rd_example.png" height = "500">]
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ---
 # RD Math
 
@@ -515,6 +527,8 @@ modern RD: semi-parametric local kernel methods around the discontinuity, using 
 
 .center[<img src = "./assets/rd_incumbents.png" height = "500">]
 
+.footnote[Source: Mostly Harmless Econometrics]
+
 ???
 The bottom image reassures us with proof that the discontinutity is essentially random
 
@@ -533,6 +547,8 @@ Options:
 # Fuzzy RD (Popular) Example on Class Size
 
 .center[<img src = "./assets/rd_fuzzy_example.png" height = "500">]
+
+.footnote[Source: Mostly Harmless Econometrics]
 
 ---
 # Sources

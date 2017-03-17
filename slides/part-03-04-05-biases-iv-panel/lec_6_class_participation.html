@@ -41,159 +41,21 @@ Questions:
 # Additional Topics
 
 ---
-# Case Study: Gentzkow (AER, 2011)
+# Papers With Interesting Casual Identification
 
-- Effect of new goods on demand for existing goods? 
-  - e.g., online news effect on existing physical newspaper demands? how would charging for online content affect physical sales?
-  - e.g., radio airplay on record sales?
-  - e.g., file-sharing and live concert revenues?
-  - e.g., benefit of free-samples?
-  
-- Hard to estimate whether goods are complementary, or merely just due to consumer preferences
-  - "two natural sources of variation"
-  - variation in internet access at work or home (shifts only the utility of online)
-  - panel data (24 hr windows)
+*discussed very briefly in class*
 
---- 
-# Impact of Yelp on Restaurant Sales (Luca)
-
-- looks at a regression discontinuity
-- identified by looking at the rounding that Yelp does, round up or round down.
-- gets a lot of detailed data in the Seattle region
-- more interestingly, the effect is driven by independent restaurants, rather than chains
-- chain restaurants have declined in market share as Yelp penetration increased
-
-.center[&lt;img src = "./assets/luca_yelp.png" height = "400"&gt;]
-
----
-# Impact of Tablet Adoption on Product Sales (Xu et al 2017)
-
-- diff-in-diff setup, with panel data
-- identify an effect with the iPad app release (but not Android or iPhone)
-- only for those users who chose to adopt however
-
----
-# Impact of Information on Markets
-
-- "The Digital Provide: Information (Technology), Market Performance, and Welfare in the South Indian Fisheries Sector" (Robert Jensen, QJE 2007)
-
-- Special:
-  - entry of cell phones is arguably exogenous to the fisherman and the fish markets
-  - usual studies of impact of cell phones is macroeconomic and difficult to tease out cause and effect
-  - important to look at the impact of information enabled by technology
-
----
-# Impact of Information on Markets
-
-.center[&lt;img src = "./assets/jensen_phone_adoption.png" height = "550"&gt;]
-
----
-# Impact of Information on Markets
-
-.center[&lt;img src = "./assets/jensen_price_changes.png" height = "550"&gt;]
-
----
-# Urban Agglomeration Impacts
-
-Greenstone, Hornbeck, Moretti (JPE 2010)
-
-- used random variation in manufacturing plant locations to identify agglomeration impacts
-- very long paper, lots of robustness checks and model specification checks
-
----
-# Amazon Q&amp;A Section Impact
-
-- Also fits for Newegg, etc.
-- Product specific controls by comparing two platforms (one with Q&amp;A, one without)
-- Scraped the data, comparing the sales ranks, controls
-- Have to argue that Platform 2 &amp; Amazon have similar time trends (e.g. what about Amazon sales being all on the first day and dropping off after that, while Platform 2 is stable) and track each other similarly
-- Using video games, they can identify "new" product entries and measure uniqueness across platforms.
-
----
-# Wikipedia Effect?
-
-- What is effect of Wikipedia? Hard Question
-
-- Georgia Tech economist used variation in translation into different languages timing
-
----
-# Diff in Diff on Impact of Fake Hotel Reviews
-
-- initial consistent difference between TripAdvisors and Expedia
-- use 2nd variation on nearby value of independent hotels
-
----
-# Reddit Random Voting
-
-(Science paper, Muchnik et al 2013)
-Effects, very diverse
-Do we believe it though? It's not clear that down-voting can be triggered though.
-Also upvotes affect the chance a posting is viewed, difficult.
-
----
-# Marketplace, Platform, Network RCTs
-
-Testing treatment groups can affect availability for the other control group
-Or affecting only a portion of a seller's categories of goods
-
----
-# Impact of Craigslist Ads on Newspapers
-
-- study of platforms and multi-sided competition
-- how do changes in competition affect platform firms? raise prices or lowers prices?
-- use a diff-in-diff setup to study varied entry of Craigslist impacts
-- their theory is robust, because they see less strong effects for newspapers without a classifieds manager increased prices substantially.
-- and there is a larger reduction in display ads for these newspapers too
-- use of Web Archive
-
-
----
-# Impact of Airbnb on Hotel Revenues
-
-Zervas, et al. (2016)
-
-- diff-in-diff strategy
-- high variation in the temporal rate and spatial density of Airbnb in Texas
-- Lots of controls: location-specific demographics, hotel supply capacity, airport passenger counts, and Tripadvisor reviews
-- They further identify that the effect is driven by Austin, TX
-
----
-# Impact of Incentives on Ridesharing Platform Success
-
-Kabra, Belavina, and Girota (2015)
-
-- studies the impact of incentives on the supply and demand side of marketplace platforms
-- uses a structural econometric model, calibrated to observed outcomes
-
----
-# The Impact of Free: Movie Broadcasts on Other Channels
-
-Telang, Smith (2009)
-
-- uses the broadcast of movies on TV as variation in a demand shock
-- measures whether the presence of pirated content affects retail sales
-- find that the presence of pirated content need not hurt sales (sometimess)
-
----
-# Simple Structural Modeling
-
-- built a structural model for coal markets, using fundamentals on demand curves, supply curves, transaction costs.
-- allows us to run simulations on what would happen with changes, with built in agent behavior changes based on theory and utility functions and calibrated latent parameters.
-
-- also used to study regulatory cheating and firm monopoly power
-
-- or looking at situations without explicit identification (lack of price changes, lack of demand changes for example)
-
----
-# Things we Did Not Cover
-
-- structural econometric modeling (identifying latent parameters and counterfactual simulations)
-- GMM estimation
-- ML and Mathematical Philosophy on Searching for Causal Structure
-- more advanced time series techniques (event study methods)
-- quantile regressions
-- heterogenous treatment effects (use of ML techniques, or subset search techniques)
-- standard errors calculation (correlated errors across region or time, standard error corrections)
+- Gentzkow, M. (2007). Valuing new goods in a model with complementarity: Online newspapers. The American Economic Review, 97(3), 713-744.
+- Greenstone, M., Hornbeck, R., &amp; Moretti, E. (2010). Identifying agglomeration spillovers: Evidence from winners and losers of large plant openings. Journal of Political Economy, 118(3), 536-598.
+- Jensen, R. (2007). The digital provide: Information (technology), market performance, and welfare in the South Indian fisheries sector. The quarterly journal of economics, 122(3), 879-924.
+- Kabra, Belavina, and Girota (Working Paper), "The Efficacy of Incentives in Scaling Marketplaces"
+- Khern-am-nuai, Warut and Ghasemkhani, Hossein and Kannan, Karthik Natarajan, How Questions and Answers Shape Online Marketplaces: The Case of Amazon Answer (June 10, 2016). Available at SSRN: https://ssrn.com/abstract=2794149
+- Luca, M. (2016). Reviews, reputation, and revenue: The case of Yelp. com.
+- Muchnik, L., Aral, S., &amp; Taylor, S. J. (2013). Social influence bias: A randomized experiment. Science, 341(6146), 647-651.
+- Seamans, R., &amp; Zhu, F. (2013). Responses to entry in multi-sided markets: The impact of Craigslist on local newspapers. Management Science, 60(2), 476-493.
+- Smith, M. D., &amp; Telang, R. (2009). Competing with free: the impact of movie broadcasts on DVD sales and internet piracy 1. mis Quarterly, 33(2), 321-338.
+- Xu, K., Chan, J., Ghose, A., &amp; Han, S. P. (2016). Battle of the channels: The impact of tablets on digital commerce. Management Science.
+- Zervas, G., Proserpio, D., &amp; Byers, J. W. (2014). The rise of the sharing economy: Estimating the impact of Airbnb on the hotel industry. Journal of Marketing Research.
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
